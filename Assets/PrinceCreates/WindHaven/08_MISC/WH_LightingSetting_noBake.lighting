@@ -7,9 +7,14 @@ LightingSettings:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WH_LightingSetting_noBake
+<<<<<<< Updated upstream
   serializedVersion: 4
   m_GIWorkflowMode: 1
   m_EnableBakedLightmaps: 0
+=======
+  serializedVersion: 10
+  m_EnableBakedLightmaps: 1
+>>>>>>> Stashed changes
   m_EnableRealtimeLightmaps: 0
   m_RealtimeEnvironmentLighting: 1
   m_BounceScale: 1
@@ -18,9 +23,23 @@ LightingSettings:
   m_UsingShadowmask: 1
   m_BakeBackend: 1
   m_LightmapMaxSize: 1024
+<<<<<<< Updated upstream
   m_BakeResolution: 20
   m_Padding: 2
   m_LightmapCompression: 2
+=======
+  m_LightmapSizeFixed: 0
+  m_UseMipmapLimits: 1
+  m_BakeResolution: 20
+  m_Padding: 2
+  m_LightmapCompression: 2
+  m_LightmapPackingMode: 1
+  m_LightmapPackingMethod: 0
+  m_XAtlasPackingAttempts: 16384
+  m_XAtlasBruteForce: 0
+  m_XAtlasBlockAlign: 0
+  m_XAtlasRepackUnderutilizedLightmaps: 1
+>>>>>>> Stashed changes
   m_AO: 1
   m_AOMaxDistance: 1.25
   m_CompAOExponent: 1.25
@@ -31,23 +50,38 @@ LightingSettings:
   m_FilterMode: 1
   m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
   m_ExportTrainingData: 0
+<<<<<<< Updated upstream
+=======
+  m_EnableWorkerProcessBaking: 1
+>>>>>>> Stashed changes
   m_TrainingDataDestination: TrainingData
   m_RealtimeResolution: 2
   m_ForceWhiteAlbedo: 0
   m_ForceUpdates: 0
+<<<<<<< Updated upstream
   m_FinalGather: 0
   m_FinalGatherRayCount: 256
   m_FinalGatherFiltering: 1
   m_PVRCulling: 1
   m_PVRSampling: 1
   m_PVRDirectSampleCount: 24
+=======
+  m_PVRCulling: 1
+  m_PVRSampling: 1
+  m_PVRDirectSampleCount: 32
+>>>>>>> Stashed changes
   m_PVRSampleCount: 256
   m_PVREnvironmentSampleCount: 128
   m_PVREnvironmentReferencePointCount: 2048
   m_LightProbeSampleCountMultiplier: 4
   m_PVRBounces: 2
+<<<<<<< Updated upstream
   m_PVRMinBounces: 1
   m_PVREnvironmentMIS: 1
+=======
+  m_PVRMinBounces: 2
+  m_PVREnvironmentImportanceSampling: 1
+>>>>>>> Stashed changes
   m_PVRFilteringMode: 1
   m_PVRDenoiserTypeDirect: 1
   m_PVRDenoiserTypeIndirect: 1
@@ -61,4 +95,8 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaDirect: 0.5
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
+<<<<<<< Updated upstream
   m_PVRTiledBaking: 0
+=======
+  m_RespectSceneVisibilityWhenBakingGI: 0
+>>>>>>> Stashed changes

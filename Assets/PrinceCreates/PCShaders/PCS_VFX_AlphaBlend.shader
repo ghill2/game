@@ -48,7 +48,11 @@ Shader "PCShaders/VFX_AlphaBlend"
 		
 
 		HLSLINCLUDE
+<<<<<<< Updated upstream
 		#pragma target 4.5
+=======
+		#pragma target 4.0
+>>>>>>> Stashed changes
 		#pragma prefer_hlslcc gles
 		// ensure rendering platforms toggle list is visible
 
