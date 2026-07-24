@@ -107,13 +107,3 @@ InitTestScene*.unity*
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 .DS_Store
-
-# IMPORTANT! everything below here is custom this project
-
-# Ignore everything directly under Assets...
-# Ignore top level assets as these are automatically installed via packages
-/[Aa]ssets/*
-
-# ...except the _Game folder and its .meta
-!/Assets/_Game/
-!/Assets/_Game.meta
