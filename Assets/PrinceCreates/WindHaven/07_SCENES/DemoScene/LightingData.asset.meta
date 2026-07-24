@@ -7,6 +7,7 @@ NativeFormatImporter:
   assetBundleName: 
   assetBundleVariant: 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 AssetOrigin:
   serializedVersion: 1
   productId: 246775
@@ -14,5 +15,7 @@ AssetOrigin:
   packageVersion: 1.0
   assetPath: Assets/PrinceCreates/WindHaven/07_SCENES/DemoScene/LightingData.asset
   uploadId: 595770
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

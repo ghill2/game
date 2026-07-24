@@ -8,9 +8,14 @@ LightingSettings:
   m_PrefabAsset: {fileID: 0}
   m_Name: WH_LightingSetting_noBake
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   serializedVersion: 4
   m_GIWorkflowMode: 1
   m_EnableBakedLightmaps: 0
+=======
+  serializedVersion: 10
+  m_EnableBakedLightmaps: 1
+>>>>>>> Stashed changes
 =======
   serializedVersion: 10
   m_EnableBakedLightmaps: 1
@@ -24,10 +29,13 @@ LightingSettings:
   m_BakeBackend: 1
   m_LightmapMaxSize: 1024
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_BakeResolution: 20
   m_Padding: 2
   m_LightmapCompression: 2
 =======
+=======
+>>>>>>> Stashed changes
   m_LightmapSizeFixed: 0
   m_UseMipmapLimits: 1
   m_BakeResolution: 20
@@ -39,6 +47,9 @@ LightingSettings:
   m_XAtlasBruteForce: 0
   m_XAtlasBlockAlign: 0
   m_XAtlasRepackUnderutilizedLightmaps: 1
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   m_AO: 1
   m_AOMaxDistance: 1.25
@@ -51,6 +62,10 @@ LightingSettings:
   m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
   m_ExportTrainingData: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+  m_EnableWorkerProcessBaking: 1
+>>>>>>> Stashed changes
 =======
   m_EnableWorkerProcessBaking: 1
 >>>>>>> Stashed changes
@@ -58,6 +73,7 @@ LightingSettings:
   m_RealtimeResolution: 2
   m_ForceWhiteAlbedo: 0
   m_ForceUpdates: 0
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   m_FinalGather: 0
   m_FinalGatherRayCount: 256
@@ -70,14 +86,24 @@ LightingSettings:
   m_PVRSampling: 1
   m_PVRDirectSampleCount: 32
 >>>>>>> Stashed changes
+=======
+  m_PVRCulling: 1
+  m_PVRSampling: 1
+  m_PVRDirectSampleCount: 32
+>>>>>>> Stashed changes
   m_PVRSampleCount: 256
   m_PVREnvironmentSampleCount: 128
   m_PVREnvironmentReferencePointCount: 2048
   m_LightProbeSampleCountMultiplier: 4
   m_PVRBounces: 2
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_PVRMinBounces: 1
   m_PVREnvironmentMIS: 1
+=======
+  m_PVRMinBounces: 2
+  m_PVREnvironmentImportanceSampling: 1
+>>>>>>> Stashed changes
 =======
   m_PVRMinBounces: 2
   m_PVREnvironmentImportanceSampling: 1
@@ -96,7 +122,11 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_PVRTiledBaking: 0
+=======
+  m_RespectSceneVisibilityWhenBakingGI: 0
+>>>>>>> Stashed changes
 =======
   m_RespectSceneVisibilityWhenBakingGI: 0
 >>>>>>> Stashed changes
