@@ -11,14 +11,14 @@ public class PlayButton_View : MonoBehaviour
     
     private void OnEnable()
     {
-        button.onClick.AddListener(onPlayButtonClicked);
+        button.onClick.AddListener(OnPlayButtonClicked);
     }
 
     private void OnDisable()
     {
-        button.onClick.RemoveListener(onPlayButtonClicked);
+        button.onClick.RemoveListener(OnPlayButtonClicked);
     }
-    private void onPlayButtonClicked()
+    private void OnPlayButtonClicked()
     {
         PlayButtonClicked?.Invoke();
     }
