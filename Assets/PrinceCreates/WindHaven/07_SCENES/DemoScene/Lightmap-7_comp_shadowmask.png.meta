@@ -4,7 +4,11 @@ TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   serializedVersion: 11
+=======
+  serializedVersion: 13
+>>>>>>> Stashed changes
 =======
   serializedVersion: 13
 >>>>>>> Stashed changes
@@ -25,6 +29,10 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+    flipGreenChannel: 0
+>>>>>>> Stashed changes
 =======
     flipGreenChannel: 0
 >>>>>>> Stashed changes
@@ -33,7 +41,11 @@ TextureImporter:
   streamingMipmapsPriority: 0
   vTOnly: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   ignoreMasterTextureLimit: 0
+=======
+  ignoreMipmapLimit: 0
+>>>>>>> Stashed changes
 =======
   ignoreMipmapLimit: 0
 >>>>>>> Stashed changes
@@ -76,13 +88,19 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   platformSettings:
   - serializedVersion: 3
 =======
+=======
+>>>>>>> Stashed changes
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
@@ -94,7 +112,10 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
@@ -135,6 +156,9 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     ignorePlatformSupport: 0
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
@@ -143,6 +167,10 @@ TextureImporter:
     sprites: []
     outline: []
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+    customData: 
+>>>>>>> Stashed changes
 =======
     customData: 
 >>>>>>> Stashed changes
@@ -155,6 +183,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     nameFileIdTable: {}
   spritePackingTag: 
@@ -171,6 +200,8 @@ AssetOrigin:
   assetPath: Assets/PrinceCreates/WindHaven/07_SCENES/DemoScene/Lightmap-7_comp_shadowmask.png
   uploadId: 595770
 =======
+=======
+>>>>>>> Stashed changes
     spriteCustomMetadata:
       entries: []
     nameFileIdTable: {}
@@ -179,4 +210,7 @@ AssetOrigin:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes

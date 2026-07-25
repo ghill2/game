@@ -49,7 +49,11 @@ Shader "PCShaders/VFX_AlphaBlend"
 
 		HLSLINCLUDE
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		#pragma target 4.5
+=======
+		#pragma target 4.0
+>>>>>>> Stashed changes
 =======
 		#pragma target 4.0
 >>>>>>> Stashed changes
