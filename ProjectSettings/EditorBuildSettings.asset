@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/_Game/Scenes/SCN_Main8.unity
     guid: 868eb0c46494546b4a70dc718dc58838
   - enabled: 1
-    path: Assets/_Game/Scenes/SCN_Menu.unity
+    path: Assets/_Game/Scenes/SCN_Menu_Main.unity
     guid: 516c3ffb7e8110548b08319f8a1fe1d0
   - enabled: 1
     path: Assets/_Game/Scenes/SCN_UI.unity
@@ -18,5 +18,5 @@ EditorBuildSettings:
     path: Assets/_Game/Scenes/SCN_Terrain.unity
     guid: e65ecf12decc646a7ae63f26902134cc
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2e4d7f96520dd467096fe241b4f657f9, type: 3}
   m_UseUCBPForAssetBundles: 0
