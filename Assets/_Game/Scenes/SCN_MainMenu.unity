@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 233274889}
   - component: {fileID: 233274892}
   m_Layer: 5
-  m_Name: Option Button
+  m_Name: '[Main] Option Button'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -250,9 +250,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 233274887}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f26c7e01e5e4154599fef1ff026779a, type: 3}
+  m_Script: {fileID: 11500000, guid: d2440f5cd9012b14e94b2c6cfa7c8ee8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::PlayButton_View
   button: {fileID: 233274889}
 --- !u!1 &259963621
 GameObject:
@@ -264,7 +264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 259963622}
   m_Layer: 0
-  m_Name: Volume
+  m_Name: '[Main] Volume'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1215,7 +1215,7 @@ GameObject:
   - component: {fileID: 918102672}
   - component: {fileID: 918102675}
   m_Layer: 0
-  m_Name: Play Button
+  m_Name: '[Main] Play Button'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1332,7 +1332,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 918102670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 590bf60a69b6b9040a68b46a50e9c993, type: 3}
+  m_Script: {fileID: 11500000, guid: d2440f5cd9012b14e94b2c6cfa7c8ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayButton_View
   button: {fileID: 918102672}
@@ -1350,7 +1350,7 @@ GameObject:
   - component: {fileID: 1082306257}
   - component: {fileID: 1082306261}
   m_Layer: 5
-  m_Name: Main Screen
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1933,7 +1933,7 @@ GameObject:
   - component: {fileID: 1882891138}
   - component: {fileID: 1882891137}
   m_Layer: 5
-  m_Name: Options
+  m_Name: '[Main] Options'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2138,7 +2138,7 @@ GameObject:
   - component: {fileID: 2144317182}
   - component: {fileID: 2144317185}
   m_Layer: 5
-  m_Name: Exit Button
+  m_Name: '[Main] Exit Button'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2255,9 +2255,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2144317180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 349e1184b2a10d545af337fc57841dd6, type: 3}
+  m_Script: {fileID: 11500000, guid: d2440f5cd9012b14e94b2c6cfa7c8ee8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::PlayButton_View
   button: {fileID: 2144317182}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
