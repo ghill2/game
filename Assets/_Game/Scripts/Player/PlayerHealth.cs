@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public sealed class PlayerHealth : MonoBehaviour, IDamageable
 {
@@ -46,6 +47,8 @@ public sealed class PlayerHealth : MonoBehaviour, IDamageable
         {
             defeatEventSent = true;
             Defeated?.Invoke();
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 

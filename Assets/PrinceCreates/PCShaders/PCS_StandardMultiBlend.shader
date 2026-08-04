@@ -77,7 +77,7 @@ Shader "PCShaders/StandardBlend"
 		
 
 		HLSLINCLUDE
-		#pragma target 4.5
+		#pragma target 3.0
 		#pragma prefer_hlslcc gles
 		// ensure rendering platforms toggle list is visible
 

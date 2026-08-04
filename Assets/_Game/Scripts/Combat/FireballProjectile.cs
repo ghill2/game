@@ -35,8 +35,14 @@ public class FireballProjectile : MonoBehaviour
     {
         // Get IDamageable component from the other object
         var damageable = other.GetComponent<IDamageable>();
+
         if (damageable != null)
         {
+            if (!damageable.IsAlive)
+            {
+                return;
+            }
+
             damageable.TakeDamage(damage);
         }
         
