@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b9708e343f2ee8b4cb9316b7d659d81f
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _Maintexture: {fileID: 2800000, guid: d0a3420503139bb408383a9204e66427, type: 3}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 246775
+  packageName: WindHaven - Stylised Fantasy Town - URP
+  packageVersion: 1.0
+  assetPath: Assets/PrinceCreates/PCShaders/PCS_Foliage.shader
+  uploadId: 595770

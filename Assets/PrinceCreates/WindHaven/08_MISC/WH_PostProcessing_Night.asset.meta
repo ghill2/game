@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5bd9162e1cfdf45448f1e46f2586f24f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 246775
+  packageName: WindHaven - Stylised Fantasy Town - URP
+  packageVersion: 1.0
+  assetPath: Assets/PrinceCreates/WindHaven/08_MISC/WH_PostProcessing_Night.asset
+  uploadId: 595770
