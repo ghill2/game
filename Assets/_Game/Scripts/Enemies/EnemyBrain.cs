@@ -269,6 +269,11 @@ public sealed class EnemyBrain : MonoBehaviour
                 motor.DisableMovement();
                 sensor.enabled = false;
                 attack.enabled = false;
+
+                LayerMask playerLayer = LayerMask.GetMask("Player");
+                var collider = GetComponent<Collider>();
+                collider.excludeLayers = playerLayer;
+
                 break;
         }
 

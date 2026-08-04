@@ -3,8 +3,15 @@ using UnityEngine;
 
 public sealed class EnemyHealth : MonoBehaviour, IDamageable
 {
-    [SerializeField] private int maximumHealth;
-    [SerializeField] private int currentHealth;
+    private static readonly int DeathTrigger =  Animator.StringToHash("Death");
+
+    [SerializeField]
+    private int maximumHealth;
+    [SerializeField]
+    private int currentHealth;
+
+    [SerializeField]
+    private Animator animator;
 
     private bool defeatEventSent;
 
@@ -22,6 +29,13 @@ public sealed class EnemyHealth : MonoBehaviour, IDamageable
         defeatEventSent = false;
     }
 
+    private void Awake()
+    {
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
+    }
     public void TakeDamage(int amount)
     {
         if (!IsAlive || amount <= 0)
@@ -36,6 +50,10 @@ public sealed class EnemyHealth : MonoBehaviour, IDamageable
         if (currentHealth == 0 && !defeatEventSent)
         {
             defeatEventSent = true;
+            if (animator != null)
+            {
+                animator.SetTrigger(DeathTrigger);
+            }
             Defeated?.Invoke();
         }
     }

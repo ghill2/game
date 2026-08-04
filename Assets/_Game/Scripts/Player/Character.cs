@@ -28,6 +28,9 @@ public class Character : MonoBehaviour
 
     #endregion
 
+    [SerializeField]
+    private PlayerCollectibles collectibles;
+
     // True when the player is supplying non-negligible movement input
     public bool IsMoving => _input.sqrMagnitude > 0.001f;
 
@@ -37,15 +40,30 @@ public class Character : MonoBehaviour
         _cameraTransform = Camera.main.transform;          // grab the tagged Main Camera
         _controller = GetComponent<CharacterController>(); // movement controller on this GameObject
         _animator = GetComponentInChildren<Animator>();    // animator lives on a child model
+
+        collectibles = GetComponent<PlayerCollectibles>();
     }
 
-    // Per-frame update: order matters — ground check, then move, gravity, finally animation
+    // Per-frame update: order matters - ground check, then move, gravity, finally animation
     void Update()
     {
         _isGrounded = IsGrounded();
         ApplyMovement();
         ApplyGravity();
         ApplyAnimation();
+    }
+
+    public void CollectEgg()
+    {
+        // Temporary mock for celebratory jump
+        _velocity = jumpPower / 2f;
+        _animator.SetTrigger("Jump");
+
+        // Notify the collectibles component
+        if (collectibles != null)
+        {
+            collectibles.EggCollect();
+        }
     }
 
     // Called by the Input System when the Move action fires (Vector2 stick/WASD)

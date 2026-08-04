@@ -168,8 +168,8 @@ MonoBehaviour:
   attackOrigin: {fileID: 7024293163244819690}
   playerLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
-  animator: {fileID: 0}
+    m_Bits: 128
+  animator: {fileID: 189977190322740663}
   useAnimationEvents: 0
 --- !u!114 &1579312201141467007
 MonoBehaviour:
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa0fbbbbc12147b69c16d8b09a86bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBrain
-  data: {fileID: 11400000, guid: f7d64b0dc01364ab88d0a116777815cb, type: 2}
+  data: {fileID: 11400000, guid: 9286541c2881548d0986c46db6334fad, type: 2}
   currentState: 0
   logStateChanges: 1
 --- !u!114 &2456854022177476386
@@ -200,6 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maximumHealth: 0
   currentHealth: 0
+  animator: {fileID: 189977190322740663}
 --- !u!114 &1984282392328379283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,9 +214,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHitResponse
   targetRenderer: {fileID: 3045378558686638366}
-  hitColor: {r: 1, g: 1, b: 1, a: 1}
-  defeatedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  flashDuration: 0.12
+  hitColor: {r: 1, g: 0.3915094, b: 0.5793798, a: 1}
+  defeatedColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+  flashDuration: 0.2
 --- !u!136 &8777422190141825854
 CapsuleCollider:
   m_ObjectHideFlags: 0
