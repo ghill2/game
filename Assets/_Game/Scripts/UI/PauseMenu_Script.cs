@@ -1,11 +1,11 @@
-using UnityEngine;
 using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class Menu_script : MonoBehaviour
+public class PauseMenu_Script : MonoBehaviour
 {
-    [SerializeField] private ButtonView playButtonView;
+    [SerializeField] private ButtonView resumeButtonView;
     [SerializeField] private ButtonView optionButtonView;
     [SerializeField] private ButtonView exitButtonView;
 
@@ -13,9 +13,12 @@ public class Menu_script : MonoBehaviour
     [SerializeField] private GameObject OptionsScreen;
 
     private InputAction Return;
-    private void Start()
+
+    public event Action Unpause;
+    private void Awake()
     {
-        playButtonView.enabled = true;
+        Debug.Log("PauseMenu_Script Awake()");
+        resumeButtonView.enabled = true;
         optionButtonView.enabled = true;
         exitButtonView.enabled = true;
 
@@ -24,35 +27,36 @@ public class Menu_script : MonoBehaviour
         MainMenuScreen.SetActive(true);
         OptionsScreen.SetActive(false);
     }
+
     private void OnEnable()
     {
-        playButtonView.ButtonClicked += OnPlayButtonClicked;
+        Debug.Log("PauseMenu_Script OnEnable()");
+        //Listeners -- LHS : <Listening> += <Action Response> : RHS
+        resumeButtonView.ButtonClicked += OnResumeButtonClicked;
         optionButtonView.ButtonClicked += OnOptionButtonClicked;
         exitButtonView.ButtonClicked += OnExitButtonClicked;
     }
 
     private void OnDisable()
     {
-        playButtonView.ButtonClicked -= OnPlayButtonClicked; //Dehooks
+        //IMPORTANT: Always removes all listener when disabled.
+        resumeButtonView.ButtonClicked -= OnResumeButtonClicked;
         optionButtonView.ButtonClicked -= OnOptionButtonClicked;
         exitButtonView.ButtonClicked -= OnExitButtonClicked;
     }
 
     private void Update()
     {
-        if (Return.IsPressed() == true)
+        if (Return.WasPressedThisFrame() == true)
         {
             OnReturn();
         }
     }
 
-    private void OnPlayButtonClicked() 
+    private void OnResumeButtonClicked()
     {
-        Debug.Log("Play Button Pressed!");
-
-        SceneManager.LoadScene("SCN_Main8");
-        SceneManager.LoadScene("SCN_UI", LoadSceneMode.Additive);
-        SceneManager.LoadScene("SCN_Terrain", LoadSceneMode.Additive);
+        Debug.Log("Resume Button Pressed!");
+        Resume();        
     }
 
     private void OnOptionButtonClicked()
@@ -64,8 +68,18 @@ public class Menu_script : MonoBehaviour
 
     private void OnExitButtonClicked()
     {
-        Debug.Log("Exit Button Pressed!");
-        Application.Quit();
+        Debug.Log("RtMN Button Pressed!");
+
+        //Save progress, logic tbd
+        //stub
+        Save();
+
+        SceneManager.LoadScene("SCN_MainMenu", LoadSceneMode.Single);
+    }
+
+    private void Resume()
+    {
+        Unpause?.Invoke();
     }
 
     private void OnReturn()
@@ -75,5 +89,15 @@ public class Menu_script : MonoBehaviour
             OptionsScreen.SetActive(false);
             MainMenuScreen.SetActive(true);
         }
+        else if (MainMenuScreen.activeSelf == true)
+        {
+            Resume();    
+        }
+    }
+
+    //Saves the current game state (?)
+    private void Save()
+    {
+        //Stub
     }
 }
