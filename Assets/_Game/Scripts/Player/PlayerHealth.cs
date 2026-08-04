@@ -8,7 +8,7 @@ public sealed class PlayerHealth : MonoBehaviour, IDamageable
 
     private bool defeatEventSent;
 
-    public event Action<int, int> HealthChanged;
+    public event Action<int, int> OnHealthChanged;
     public event Action<int> Damaged;
     public event Action Defeated;
 
@@ -38,7 +38,7 @@ public sealed class PlayerHealth : MonoBehaviour, IDamageable
             previousHealth - currentHealth;
 
         Damaged?.Invoke(appliedDamage);
-        HealthChanged?.Invoke(
+        OnHealthChanged?.Invoke(
             currentHealth,
             maximumHealth);
 
@@ -67,7 +67,7 @@ public sealed class PlayerHealth : MonoBehaviour, IDamageable
 
         currentHealth = newHealth;
 
-        HealthChanged?.Invoke(
+        OnHealthChanged?.Invoke(
             currentHealth,
             maximumHealth);
     }
@@ -77,7 +77,7 @@ public sealed class PlayerHealth : MonoBehaviour, IDamageable
         currentHealth = maximumHealth;
         defeatEventSent = false;
 
-        HealthChanged?.Invoke(
+        OnHealthChanged?.Invoke(
             currentHealth,
             maximumHealth);
     }

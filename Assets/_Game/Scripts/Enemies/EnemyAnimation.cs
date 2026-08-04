@@ -6,11 +6,15 @@ public sealed class EnemyAnimation : MonoBehaviour
     private static readonly int SpeedParameter =
         Animator.StringToHash("Speed");
 
-    [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private Animator animator;
+    [SerializeField]
+    private NavMeshAgent agent;
+    
+    [SerializeField]
+    private Animator animator;
 
     [Tooltip("Makes the animation change more smoothly.")]
-    [SerializeField, Min(0f)] private float speedDamping = 0.1f;
+    [SerializeField, Min(0f)]
+    private float speedDamping = 0.1f;
 
     private void Awake()
     {

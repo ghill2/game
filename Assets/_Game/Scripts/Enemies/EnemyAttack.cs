@@ -13,7 +13,7 @@ public sealed class EnemyAttack : MonoBehaviour
     [Header("Target filter")]
     [SerializeField] private LayerMask playerLayers = ~0;
 
-    [Header("Optional animation")]
+    [Header("Animation")]
     [SerializeField] private Animator animator;
 
     [Tooltip(
