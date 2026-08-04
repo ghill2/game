@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class CameraControl : MonoBehaviour
 {
     private Transform character;                  // the player the camera follows/orbits
-    private float rotationSpeed = 500.0f;         // how fast the camera orbits with the mouse
+    public float rotationSpeed = 500.0f;         // how fast the camera orbits with the mouse
     private float distance = 4f;                  // current zoom distance between camera and character
     public float minDistance = 2f;                // closest the camera can zoom in
     public float maxDistance = 10f;               // farthest the camera can zoom out
