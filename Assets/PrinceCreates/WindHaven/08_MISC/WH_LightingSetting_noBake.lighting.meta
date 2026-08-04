@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: af2bbc3fc1e49d24f91821aff6a34909
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 246775
+  packageName: WindHaven - Stylised Fantasy Town - URP
+  packageVersion: 1.0
+  assetPath: Assets/PrinceCreates/WindHaven/08_MISC/WH_LightingSetting_noBake.lighting
+  uploadId: 595770

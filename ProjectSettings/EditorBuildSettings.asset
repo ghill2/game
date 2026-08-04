@@ -5,18 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Game/Scenes/SCN_Main8.unity
     guid: 868eb0c46494546b4a70dc718dc58838
-  - enabled: 1
-    path: Assets/_Game/Scenes/SCN_Menu.unity
+  - enabled: 0
+    path: Assets/_Game/Scenes/SCN_MainMenu.unity
     guid: 516c3ffb7e8110548b08319f8a1fe1d0
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Game/Scenes/SCN_UI.unity
     guid: e49cc7b3321598e49bd4bbd306408e6f
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Game/Scenes/SCN_Terrain.unity
     guid: e65ecf12decc646a7ae63f26902134cc
+  - enabled: 0
+    path: Assets/_Game/Scenes/SCN_PauseMenu.unity
+    guid: 2da80f5eb9a798f4f8fa15d1905c0a87
+  - enabled: 1
+    path: Assets/_Game/Scenes/SCN_MVP.unity
+    guid: cd28660e0009f4691b996a291d77cf16
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2e4d7f96520dd467096fe241b4f657f9, type: 3}
   m_UseUCBPForAssetBundles: 0
