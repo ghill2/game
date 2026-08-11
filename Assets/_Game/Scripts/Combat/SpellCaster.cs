@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class SpellCaster : MonoBehaviour
 {
     [SerializeField] private Transform castPoint;  // the point (e.g. hand) where spells spawn from
+    [SerializeField] private Crosshair crosshair;  // provides the crosshair aim point used to aim spells
 
     private Animator _animator;                               // animator that triggers the cast animation
     private static readonly int CastHash = Animator.StringToHash("Cast"); // cached int hash for the Cast trigger (faster than string lookups)
@@ -49,14 +50,22 @@ public class SpellCaster : MonoBehaviour
         SpawnSpell(prefab);             // create and play the spell effect
     }
 
-    // Instantiate the spell prefab at the cast point and play any particle effects it contains
+    // Instantiate the spell prefab aimed at the crosshair and play any particle effects it contains
     void SpawnSpell(GameObject prefab)
     {
-        // Spawn at the cast point's position and rotation
-        GameObject spell = Instantiate(prefab, castPoint.position, castPoint.rotation);
+        GameObject spell = Instantiate(prefab, castPoint.position, GetSpellRotation());
 
         // Find and start every particle system nested under the spell prefab
         foreach (ParticleSystem ps in spell.GetComponentsInChildren<ParticleSystem>())
             ps.Play();
+    }
+
+    // Rotation that aims the spell from the cast point at the crosshair target (computed here)
+    Quaternion GetSpellRotation()
+    {
+        if (crosshair == null || castPoint == null) return castPoint != null ? castPoint.rotation : transform.rotation; // graceful fallback
+        Vector3 dir = crosshair.GetAimPoint() - castPoint.position; // hand -> crosshair target
+        if (dir.sqrMagnitude <= 0.0001f) return castPoint.rotation;               // avoid zero-direction LookRotation
+        return Quaternion.LookRotation(dir.normalized);
     }
 }
