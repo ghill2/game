@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Ground
+  m_Name: M_Ground_princecreatescopy
   m_Shader: {fileID: 4800000, guid: 2fc66c730e9dd2c4c8911e0fb36635f2, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -131,8 +131,8 @@ Material:
     - _AlphaClip: 0
     - _AlphaCutoff: 0.5
     - _Blend: 0
-    - _BlendAmountG: 0.516
-    - _BlendAmountR: 0.474
+    - _BlendAmountG: 0.376
+    - _BlendAmountR: 0.407
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
