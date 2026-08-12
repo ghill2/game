@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class HUDManager : MonoBehaviour
     private HUDBarController healthBarController;
 
     private HUDCollectiblesController hudCollectiblesController;
+
+    [SerializeField]
+    private PopupController popupController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,13 +32,19 @@ public class HUDManager : MonoBehaviour
         playerHealth = player.GetComponent<PlayerHealth>();
         playerCollectibles = player.GetComponent<PlayerCollectibles>();
 
+        // Event Listener
         playerHealth.OnHealthChanged += UpdateHealthUI;
         playerCollectibles.OnEggCollected += UpdateEggsCount;
+        playerCollectibles.OnEggCollected += UpdatePopup;
+
+        // END
 
         var hpBar = GameObject.Find("HP Bar");
         healthBarController = hpBar.GetComponentInChildren<HUDBarController>();
 
         hudCollectiblesController = GetComponentInChildren<HUDCollectiblesController>();
+
+        popupController = GetComponentInChildren<PopupController>();
     }
 
     private void UpdateHealthUI(int currentHealth, int maxHealth)
@@ -43,11 +53,26 @@ public class HUDManager : MonoBehaviour
         healthBarController.UpdateBar((float)currentHealth / maxHealth);
     }
 
-    private void UpdateEggsCount(int count)
+    private void UpdateEggsCount(object _, CollectiblesEventArgs e)
     {
-        Debug.Log($"Updating eggs count UI: Eggs Collected = {count}");
-        hudCollectiblesController.SetEggsCount(count);
+        Debug.Log($"Updating eggs count UI: Eggs Collected = {e.Eggs}");
+        hudCollectiblesController.SetEggsCount(e.Eggs);
     }
+
+    private void UpdatePopup(Texture icon, string text)
+    {
+        Debug.Log($"Updating Popup Window: Icon = {icon}, text = {text}");
+        popupController.UpdateWindow(icon, text);
+        if (!popupController.showPopup) popupController.ShowPopup(3.0f);
+    }
+
+
+    private void UpdatePopup(object _, CollectiblesEventArgs e)
+    {
+        Debug.Log($"Unpacking EventArgs.");
+        UpdatePopup(e.Icon, e.Text);
+    }
+
 
     // Update is called once per frame
     void Update()
