@@ -13,6 +13,10 @@ public class Menu_script : MonoBehaviour
     [SerializeField] private GameObject OptionsScreen;
 
     private InputAction Return;
+
+    private const string CharacterScene = "SCN_Main8";
+    //Change this if the level to load is different
+    private const string LevelToLoad = "SCN_Level_0_Tutorial-Level";
     private void Start()
     {
         playButtonView.enabled = true;
@@ -46,13 +50,13 @@ public class Menu_script : MonoBehaviour
         }
     }
 
-    private void OnPlayButtonClicked() 
+    private void OnPlayButtonClicked()
     {
         Debug.Log("Play Button Pressed!");
 
-        SceneManager.LoadScene("SCN_Main8");
+        SceneManager.LoadScene(CharacterScene);
+        SceneManager.LoadScene(LevelToLoad, LoadSceneMode.Additive);
         SceneManager.LoadScene("SCN_UI", LoadSceneMode.Additive);
-        SceneManager.LoadScene("SCN_Terrain", LoadSceneMode.Additive);
     }
 
     private void OnOptionButtonClicked()
