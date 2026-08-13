@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -269,9 +270,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 407a16c4275e3403084b540b1480c082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraControl
-  minDistance: 2
-  maxDistance: 10
-  zoomSpeed: 50
+  rotationSpeed: 500
+  distance: 4
+  horizontalOffset: 1.5
+  verticalOffset: 1
+  pitchAngle: 15
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a6752cfec574413ad3ca8b17cb4a84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Crosshair
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +556,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5457233514700338335, guid: b4bb34ec137fe47f7aa24181b07b5c6b, type: 3}
+      propertyPath: crosshair
+      value: 
+      objectReference: {fileID: 330585549}
     - target: {fileID: 5828910583881017406, guid: b4bb34ec137fe47f7aa24181b07b5c6b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.05
@@ -553,6 +572,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6551764449388809571, guid: b4bb34ec137fe47f7aa24181b07b5c6b, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2085226443}
     - target: {fileID: 6631268481863254074, guid: b4bb34ec137fe47f7aa24181b07b5c6b, type: 3}
       propertyPath: m_NotificationBehavior
       value: 0
@@ -560,6 +583,10 @@ PrefabInstance:
     - target: {fileID: 7665511023895265323, guid: b4bb34ec137fe47f7aa24181b07b5c6b, type: 3}
       propertyPath: m_Name
       value: PlayerWizard
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665511023895265323, guid: b4bb34ec137fe47f7aa24181b07b5c6b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8118173139318347680, guid: b4bb34ec137fe47f7aa24181b07b5c6b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -730,6 +757,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!134 &2085226443
+PhysicsMaterial:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 2
+  m_DynamicFriction: 0.6
+  m_StaticFriction: 0.6
+  m_Bounciness: 0
+  m_FrictionCombine: 0
+  m_BounceCombine: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
