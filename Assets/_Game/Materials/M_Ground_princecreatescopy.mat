@@ -131,8 +131,8 @@ Material:
     - _AlphaClip: 0
     - _AlphaCutoff: 0.5
     - _Blend: 0
-    - _BlendAmountG: 0.376
-    - _BlendAmountR: 0.407
+    - _BlendAmountG: 0.233
+    - _BlendAmountR: 0.332
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -144,7 +144,7 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _FalloffG: 0.04
-    - _FalloffR: 0.09
+    - _FalloffR: 0.143
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
