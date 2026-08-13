@@ -66,7 +66,7 @@ public class HUDManager : MonoBehaviour
         if (!popupController.showPopup) popupController.ShowPopup(3.0f);
     }
 
-
+    
     private void UpdatePopup(object _, CollectiblesEventArgs e)
     {
         Debug.Log($"Unpacking EventArgs.");
