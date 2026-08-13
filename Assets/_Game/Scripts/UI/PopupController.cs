@@ -26,12 +26,6 @@ public class PopupController : MonoBehaviour
         ShowPopup(3);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void UpdateWindow(Texture icon, string text)
     {
         windowIcon.texture = icon; 
@@ -46,7 +40,6 @@ public class PopupController : MonoBehaviour
     private IEnumerator FadePopup(float s)
     {
         Debug.Log("ShowPopup starts");
-
 
         showPopup = true;
         // Splits into 3 parts
