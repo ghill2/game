@@ -275,8 +275,6 @@ MonoBehaviour:
   horizontalOffset: 1.5
   verticalOffset: 1
   pitchAngle: 15
-  minPitch: -40
-  maxPitch: 60
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
