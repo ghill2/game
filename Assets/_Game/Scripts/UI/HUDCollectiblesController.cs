@@ -19,6 +19,6 @@ public class HUDCollectiblesController : MonoBehaviour
 
     public void SetEggsCount(int count)
     {
-        eggsCountText.text = $"Eggs: {count}";
+        eggsCountText.text = $"{count}";
     }
 }
