@@ -2965,7 +2965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8489436448903025932, guid: 6e49d76498ae14f38b201959cd110ca2, type: 3}
       propertyPath: masterVolume
-      value: 0.8
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3020,6 +3020,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5958531441349057671, guid: 76a354f8e02484264b5aab34969b9b99, type: 3}
+      propertyPath: rotationSpeed
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 7653373348430011666, guid: 76a354f8e02484264b5aab34969b9b99, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -3037,6 +3041,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6016022908213153535, guid: 14f7b15ce8ab842b9bc600a3c868c370, type: 3}
+      propertyPath: masterVolume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6647142405288049255, guid: 14f7b15ce8ab842b9bc600a3c868c370, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
