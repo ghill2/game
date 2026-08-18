@@ -33,19 +33,20 @@ public class FireballProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Get IDamageable component from the other object
-        var damageable = other.GetComponent<IDamageable>();
+        IDamageable damageable = other.GetComponent<IDamageable>();
 
-        if (damageable != null)
+        if (damageable != null && damageable.IsAlive)
         {
-            if (!damageable.IsAlive)
-            {
-                return;
-            }
-
             damageable.TakeDamage(damage);
         }
-        
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ignore Raycast"))
+        {
+            return;
+        }
+
+        Vector3 hitPosition = other.ClosestPoint(transform.position);
+        AudioManager.Instance?.PlayFireballHit(hitPosition);
         Destroy(gameObject);
     }
 }

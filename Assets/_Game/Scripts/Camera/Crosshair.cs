@@ -8,8 +8,14 @@ public class Crosshair : MonoBehaviour
     // point under the crosshair (always screen center = camera forward)
     public Vector3 GetAimPoint()
     {
+        return GetAimPoint(out _);
+    }
+
+    // also return the physics hit so callers can use its surface data
+    public Vector3 GetAimPoint(out RaycastHit hit)
+    {
         Ray ray = new Ray(transform.position, transform.forward);
-        return Physics.Raycast(ray, out RaycastHit hit, AimRange)
+        return Physics.Raycast(ray, out hit, AimRange)
             ? hit.point
             : ray.origin + ray.direction * AimRange;
     }

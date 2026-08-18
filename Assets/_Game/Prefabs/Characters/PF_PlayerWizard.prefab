@@ -927,7 +927,8 @@ GameObject:
   - component: {fileID: 5457233514700338335}
   - component: {fileID: 2636596376992597757}
   - component: {fileID: 4919822263998282517}
-  m_Layer: 0
+  - component: {fileID: 1986441702741053301}
+  m_Layer: 7
   m_Name: PF_PlayerWizard
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1014,6 +1015,7 @@ MonoBehaviour:
   speed: 5
   gravityMultiplier: 3
   jumpPower: 10
+  collectibles: {fileID: 0}
 --- !u!114 &6631268481863254074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1057,6 +1059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpellCaster
   castPoint: {fileID: 7414144312439054574}
+  crosshair: {fileID: 0}
 --- !u!114 &2636596376992597757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1083,6 +1086,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5773daaeba1540858362b7f2260b767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCollectibles
+  eggsCollected: 0
+  icon: {fileID: 2800000, guid: 37da9d5398075476d96697303c6b923b, type: 3}
+--- !u!114 &1986441702741053301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665511023895265323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d63c533113d0f42d1a50955d5537e467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAudioEvents
 --- !u!1 &8629306553427036206
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,8 +16,8 @@ MonoBehaviour:
   hitStunDuration: 0.2
   moveSpeed: 3.5
   angularSpeed: 1080
-  detectionRange: 15
-  encounterRadius: 30
+  detectionRange: 20
+  encounterRadius: 300
   attackRange: 1.8
   attackHitRadius: 1
   attackDamage: 10

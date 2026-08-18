@@ -214,6 +214,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TOFIX_egg_basic
       objectReference: {fileID: 0}
+    - target: {fileID: 8809169786144696005, guid: 0f2d13d4b386385429a20ced2cc59eb5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.04419899
+      objectReference: {fileID: 0}
+    - target: {fileID: 8809169786144696005, guid: 0f2d13d4b386385429a20ced2cc59eb5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.039175034
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

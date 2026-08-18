@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42383a29acf1c471fb423466bd86a534, type: 3}
+  m_Name: DA_Enemy_Wolf
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  maximumHealth: 150
+  hitStunDuration: 0.2
+  moveSpeed: 2
+  angularSpeed: 540
+  detectionRange: 20
+  encounterRadius: 300
+  attackRange: 1.8
+  attackHitRadius: 1
+  attackDamage: 35
+  attackWindupDuration: 0.3
+  attackWindowDuration: 0.2
+  attackCooldown: 2
+  repathInterval: 0.15

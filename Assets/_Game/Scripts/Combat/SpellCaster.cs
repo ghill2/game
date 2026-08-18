@@ -40,32 +40,70 @@ public class SpellCaster : MonoBehaviour
     // Attempt to cast the named spell; aborts with an error if it isn't mapped
     void CastSpell(string spellName)
     {
-        if (!_spellMap.TryGetValue(spellName, out GameObject prefab)) // look up the prefab by name
+        if (!_spellMap.TryGetValue(spellName, out GameObject prefab))
         {
-            Debug.LogError($"Spell not found: {spellName}"); // missing entry means it wasn't loaded
+            Debug.LogError($"Spell not found: {spellName}");
             return;
         }
 
-        _animator.SetTrigger(CastHash); // trigger the cast animation
-        SpawnSpell(prefab);             // create and play the spell effect
+        if (prefab.GetComponent<FireballProjectile>() != null)
+        {
+            GetComponent<PlayerAudioEvents>()?.PlayFireballCast();
+        }
+
+        _animator.SetTrigger(CastHash);
+        SpawnSpell(prefab);
     }
 
-    // Instantiate the spell prefab aimed at the crosshair and play any particle effects it contains
+    // Instantiate the spell prefab aimed at the crosshair and play its particles
     void SpawnSpell(GameObject prefab)
     {
-        GameObject spell = Instantiate(prefab, castPoint.position, GetSpellRotation());
+        GameObject spell = Instantiate(prefab, castPoint.position, GetSpellRotation(prefab));
+        IgnoreCasterCollisions(spell);
 
-        // Find and start every particle system nested under the spell prefab
         foreach (ParticleSystem ps in spell.GetComponentsInChildren<ParticleSystem>())
             ps.Play();
     }
 
-    // Rotation that aims the spell from the cast point at the crosshair target (computed here)
-    Quaternion GetSpellRotation()
+    // Aim the projectile so its collider touches the surface under the crosshair
+    Quaternion GetSpellRotation(GameObject prefab)
     {
-        if (crosshair == null || castPoint == null) return castPoint != null ? castPoint.rotation : transform.rotation; // graceful fallback
-        Vector3 dir = crosshair.GetAimPoint() - castPoint.position; // hand -> crosshair target
-        if (dir.sqrMagnitude <= 0.0001f) return castPoint.rotation;               // avoid zero-direction LookRotation
+        if (crosshair == null || castPoint == null)
+            return castPoint != null ? castPoint.rotation : transform.rotation;
+
+        Vector3 dir = GetProjectileAimPoint(prefab) - castPoint.position;
+        if (dir.sqrMagnitude <= 0.0001f) return castPoint.rotation;
         return Quaternion.LookRotation(dir.normalized);
+    }
+
+    Vector3 GetProjectileAimPoint(GameObject prefab)
+    {
+        Vector3 aimPoint = crosshair.GetAimPoint(out RaycastHit hit);
+        if (hit.collider == null || prefab.GetComponent<FireballProjectile>() == null)
+            return aimPoint;
+
+        SphereCollider sphere = prefab.GetComponentInChildren<SphereCollider>();
+        if (sphere == null) return aimPoint;
+
+        Vector3 scale = sphere.transform.lossyScale;
+        float worldRadius = sphere.radius * Mathf.Max(
+            Mathf.Abs(scale.x / 2f),
+            Mathf.Abs(scale.y / 2f),
+            Mathf.Abs(scale.z / 2f));
+
+        return aimPoint + hit.normal * worldRadius;
+    }
+
+    // A spell can start inside the caster collider, so ignore only that pair
+    void IgnoreCasterCollisions(GameObject spell)
+    {
+        Collider[] spellColliders = spell.GetComponentsInChildren<Collider>();
+        Collider[] casterColliders = GetComponentsInChildren<Collider>();
+
+        foreach (Collider spellCollider in spellColliders)
+        {
+            foreach (Collider casterCollider in casterColliders)
+                Physics.IgnoreCollision(spellCollider, casterCollider, true);
+        }
     }
 }
