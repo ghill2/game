@@ -21,9 +21,9 @@ public class PopupController : MonoBehaviour
         windowIcon = GetComponentInChildren<RawImage>();
         windowText = GetComponentInChildren<TextMeshProUGUI>();
 
-        Window.canvasRenderer.SetAlpha(0);
-
-        ShowPopup(3);
+        Window.canvasRenderer.SetAlpha(0f);
+        windowIcon.canvasRenderer.SetAlpha(0f);
+        windowText.canvasRenderer.SetAlpha(0f);
     }
 
     public void UpdateWindow(Texture icon, string text)

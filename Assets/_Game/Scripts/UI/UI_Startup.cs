@@ -45,7 +45,7 @@ public class UI_Startup : MonoBehaviour
         if (Square != null)
         {
             RectTransform SquareTransform = Square.transform as RectTransform;
-            SquareTransform.localScale = new Vector3(Screen.width / 2560f, Screen.height / 1440f, 1);
+            SquareTransform.localScale = new Vector3(0.3f, 0.3f, 1);
         }
     }
 
