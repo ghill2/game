@@ -12,10 +12,10 @@ EditorBuildSettings:
     path: Assets/_Game/Scenes/SCN_MainMenu.unity
     guid: 516c3ffb7e8110548b08319f8a1fe1d0
   - enabled: 1
-    path: Assets/_Game/Scenes/SCN_Level_0_Tutorial-Level.unity
+    path: Assets/_Game/Scenes/SCN_Level_0_Tutorial-Cave.unity
     guid: a9274b0ea2662e34eabf20e8c5a70f63
   - enabled: 1
-    path: Assets/_Game/Scenes/SCN_Level_1_Citadel.unity
+    path: Assets/_Game/Scenes/SCN_Level_1_(original)_Citadel.unity
     guid: 69c3fc2b7ec45884ba0f9345b2efb716
   - enabled: 1
     path: Assets/_Game/Scenes/SCN_UI.unity
