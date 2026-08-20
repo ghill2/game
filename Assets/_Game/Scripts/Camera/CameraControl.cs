@@ -13,13 +13,11 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private float maxPitch = 60f;     // furthest the camera can look down (degrees)
     private float yaw;                                 // horizontal orbit angle
     private float pitch;                               // vertical aim angle (degrees, positive is down)
-    private Crosshair crosshair;
 
     // find the player by tag so the camera knows what to follow
     void Awake()
     {
         character = GameObject.FindGameObjectWithTag("Player").transform;
-        crosshair = GetComponent<Crosshair>(); // the crosshair lives on the same camera
         pitch = pitchAngle;
         Vector3 flatForward = transform.forward;
         flatForward.y = 0f;
@@ -38,7 +36,7 @@ public class CameraControl : MonoBehaviour
             - (transform.forward * distance)
             + (transform.right * horizontalOffset)
             + (Vector3.up * verticalOffset);
-        FaceCharacterToCamera(); // rotate the character to face the crosshair target
+        FaceCharacterToCamera(); // rotate the character toward the camera view direction
     }
 
     // orbit the camera around the character using mouse drag (right button held)
@@ -56,13 +54,13 @@ public class CameraControl : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(yaw, Vector3.up) * Quaternion.AngleAxis(pitch, Vector3.right);
     }
 
-    // make the character face the crosshair
+    // make the character face the camera view direction
     void FaceCharacterToCamera()
     {
-        if (character == null || crosshair == null) return;
-        Vector3 dir = crosshair.GetAimPoint() - character.position; // direction from character to crosshair target
-        dir.y = 0f;                                        // flatten so the character stays upright
-        if (dir.sqrMagnitude <= 0.001f) return;            // avoid zero direction
+        if (character == null) return;
+        Vector3 dir = transform.forward; // use camera direction, not a physics hit point
+        dir.y = 0f;                      // flatten so the character stays upright
+        if (dir.sqrMagnitude <= 0.001f) return;
         character.rotation = Quaternion.LookRotation(dir.normalized, Vector3.up);
     }
 }

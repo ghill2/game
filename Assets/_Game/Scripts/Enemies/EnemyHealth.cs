@@ -3,12 +3,22 @@ using UnityEngine;
 
 public sealed class EnemyHealth : MonoBehaviour, IDamageable
 {
-    private static readonly int DeathTrigger =  Animator.StringToHash("Death");
+    private enum DefeatSound
+    {
+        None = 0,
+        Skeleton = 1,
+        Wolf = 2
+    }
+
+    private static readonly int DeathTrigger = Animator.StringToHash("Death");
 
     [SerializeField]
     private int maximumHealth;
     [SerializeField]
     private int currentHealth;
+
+    [SerializeField]
+    private DefeatSound defeatSound;
 
     [SerializeField]
     private Animator animator;
@@ -36,6 +46,7 @@ public sealed class EnemyHealth : MonoBehaviour, IDamageable
             animator = GetComponentInChildren<Animator>();
         }
     }
+
     public void TakeDamage(int amount)
     {
         if (!IsAlive || amount <= 0)
@@ -54,7 +65,29 @@ public sealed class EnemyHealth : MonoBehaviour, IDamageable
             {
                 animator.SetTrigger(DeathTrigger);
             }
+
+            PlayDefeatSound();
             Defeated?.Invoke();
+        }
+    }
+
+    private void PlayDefeatSound()
+    {
+        AudioManager audioManager = AudioManager.Instance;
+        if (audioManager == null)
+        {
+            return;
+        }
+
+        switch (defeatSound)
+        {
+            case DefeatSound.Skeleton:
+                audioManager.PlaySkeletonDefeated(transform.position);
+                break;
+
+            case DefeatSound.Wolf:
+                audioManager.PlayWolfDefeated(transform.position);
+                break;
         }
     }
 }

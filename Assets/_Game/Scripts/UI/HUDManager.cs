@@ -18,6 +18,9 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     private PopupController popupController;
 
+    [SerializeField]
+    private bool showPopupOnStart = true;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,6 +48,11 @@ public class HUDManager : MonoBehaviour
         hudCollectiblesController = GetComponentInChildren<HUDCollectiblesController>();
 
         popupController = GetComponentInChildren<PopupController>();
+
+        if (showPopupOnStart)
+        {
+            popupController.ShowPopup(3.0f);
+        }
     }
 
     private void UpdateHealthUI(int currentHealth, int maxHealth)
