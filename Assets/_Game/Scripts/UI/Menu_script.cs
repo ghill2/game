@@ -5,18 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class Menu_script : MonoBehaviour
 {
-    [SerializeField] private ButtonView playButtonView;
-    [SerializeField] private ButtonView optionButtonView;
-    [SerializeField] private ButtonView exitButtonView;
+    [SerializeField]
+    private ButtonView playButtonView;
 
-    [SerializeField] private GameObject MainMenuScreen;
-    [SerializeField] private GameObject OptionsScreen;
+    [SerializeField]
+    private ButtonView optionButtonView;
+
+    [SerializeField]
+    private ButtonView exitButtonView;
+
+    [SerializeField]
+    private GameObject MainMenuScreen;
+    
+    [SerializeField]
+    private GameObject OptionsScreen;
+
+    [SerializeField]
+    private string StartScene = "SCN_Main8";
 
     private InputAction Return;
 
-    private const string CharacterScene = "SCN_Main8";
-    //Change this if the level to load is different
-    private const string LevelToLoad = "SCN_Level_0_Tutorial-Level";
     private void Start()
     {
         playButtonView.enabled = true;
@@ -54,9 +62,7 @@ public class Menu_script : MonoBehaviour
     {
         Debug.Log("Play Button Pressed!");
 
-        SceneManager.LoadScene(CharacterScene);
-        SceneManager.LoadScene(LevelToLoad, LoadSceneMode.Additive);
-        SceneManager.LoadScene("SCN_UI", LoadSceneMode.Additive);
+        SceneManager.LoadScene(StartScene);
     }
 
     private void OnOptionButtonClicked()
