@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemySensor))]
@@ -19,6 +20,10 @@ public sealed class EnemyBrain : MonoBehaviour
     [SerializeField] private EnemyData data;
     [SerializeField] private EnemyState currentState;
     [SerializeField] private bool logStateChanges = true;
+    private bool reportedCombatEngagement;
+
+    public static event Action<EnemyBrain, bool>
+        CombatEngagementChanged;
 
     private EnemySensor sensor;
     private EnemyMotor motor;
@@ -30,6 +35,8 @@ public sealed class EnemyBrain : MonoBehaviour
     private float hurtEndTime;
 
     public EnemyState CurrentState => currentState;
+    public bool IsEngagedInCombat =>
+        isActiveAndEnabled && IsCombatState(currentState);
 
     private void Awake()
     {
@@ -43,12 +50,14 @@ public sealed class EnemyBrain : MonoBehaviour
     {
         health.Damaged += HandleDamaged;
         health.Defeated += HandleDefeated;
+        UpdateCombatEngagement();
     }
 
     private void OnDisable()
     {
         health.Damaged -= HandleDamaged;
         health.Defeated -= HandleDefeated;
+        SetCombatEngagement(false);
     }
 
     private void Start()
@@ -270,12 +279,16 @@ public sealed class EnemyBrain : MonoBehaviour
                 sensor.enabled = false;
                 attack.enabled = false;
 
-                LayerMask playerLayer = LayerMask.GetMask("Player");
-                var collider = GetComponent<Collider>();
-                collider.excludeLayers = playerLayer;
+                Collider enemyCollider = GetComponent<Collider>();
+                if (enemyCollider != null)
+                {
+                    enemyCollider.enabled = false;
+                }
 
                 break;
         }
+
+        UpdateCombatEngagement();
 
         if (logStateChanges)
         {
@@ -283,6 +296,29 @@ public sealed class EnemyBrain : MonoBehaviour
                 $"{name}: {currentState}",
                 this);
         }
+    }
+
+    private void UpdateCombatEngagement()
+    {
+        SetCombatEngagement(IsCombatState(currentState));
+    }
+
+    private void SetCombatEngagement(bool isEngaged)
+    {
+        if (reportedCombatEngagement == isEngaged)
+        {
+            return;
+        }
+
+        reportedCombatEngagement = isEngaged;
+        CombatEngagementChanged?.Invoke(this, isEngaged);
+    }
+
+    private static bool IsCombatState(EnemyState state)
+    {
+        return state == EnemyState.Chase ||
+               state == EnemyState.Attack ||
+               state == EnemyState.Hurt;
     }
 
     private void OnDrawGizmosSelected()
