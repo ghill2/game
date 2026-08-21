@@ -15,6 +15,8 @@ public class HUDManager : MonoBehaviour
 
     private HUDCollectiblesController hudCollectiblesController;
 
+    private SpellPanelController spellPanelController;
+
     [SerializeField]
     private PopupController popupController;
 
@@ -49,10 +51,16 @@ public class HUDManager : MonoBehaviour
 
         popupController = GetComponentInChildren<PopupController>();
 
+        spellPanelController = GetComponentInChildren<SpellPanelController>();
+
+        // Test Area
+
         if (showPopupOnStart)
         {
             popupController.ShowPopup(3.0f);
         }
+
+        UpdateSpellPanel(3);
     }
 
     private void UpdateHealthUI(int currentHealth, int maxHealth)
@@ -74,17 +82,16 @@ public class HUDManager : MonoBehaviour
         if (!popupController.showPopup) popupController.ShowPopup(3.0f);
     }
 
-    
     private void UpdatePopup(object _, CollectiblesEventArgs e)
     {
         Debug.Log($"Unpacking EventArgs.");
         UpdatePopup(e.Icon, e.Text);
     }
 
-
-    // Update is called once per frame
-    void Update()
+    private void UpdateSpellPanel(int SpellNo)
     {
-        
+        Debug.Log($"Updating Spell Panel: Last Spell Casted = {SpellNo}");
+        spellPanelController.UpdatePanel(SpellNo);
     }
+
 }
