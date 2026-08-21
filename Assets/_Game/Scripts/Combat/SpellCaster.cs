@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
@@ -6,10 +7,15 @@ public class SpellCaster : MonoBehaviour
 {
     [SerializeField] private Transform castPoint;  // the point (e.g. hand) where spells spawn from
     [SerializeField] private Crosshair crosshair;  // provides the crosshair aim point used to aim spells
+    [SerializeField] private float recastDelay = 0.5f; // time (seconds) before any spell can be cast again
 
     private Animator _animator;                               // animator that triggers the cast animation
     private static readonly int CastHash = Animator.StringToHash("Cast"); // cached int hash for the Cast trigger (faster than string lookups)
     private Dictionary<string, GameObject> _spellMap;         // maps spell name -> prefab, loaded from Resources
+    private float _nextCastTime;                              // earliest time casting is allowed again
+
+    // fired once when a cast succeeds, carries the cooldown duration in seconds
+    public event Action<float> OnSpellCast;
 
     // Awake runs once; grab the animator and preload all spell prefabs
     void Awake()
@@ -46,12 +52,17 @@ public class SpellCaster : MonoBehaviour
             return;
         }
 
+        if (Time.time < _nextCastTime) // retimer, block all casts during cooldown
+            return;
+
         if (prefab.GetComponent<FireballProjectile>() != null)
         {
             GetComponent<PlayerAudioEvents>()?.PlayFireballCast();
         }
 
         _animator.SetTrigger(CastHash);
+        _nextCastTime = Time.time + recastDelay; // start the retimer
+        OnSpellCast?.Invoke(recastDelay);        // notify UI with the countdown duration
         SpawnSpell(prefab);
     }
 
