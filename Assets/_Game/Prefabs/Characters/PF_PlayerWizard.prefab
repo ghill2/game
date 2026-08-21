@@ -1060,6 +1060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpellCaster
   castPoint: {fileID: 7414144312439054574}
   crosshair: {fileID: 0}
+  recastDelay: 0.5
 --- !u!114 &2636596376992597757
 MonoBehaviour:
   m_ObjectHideFlags: 0
