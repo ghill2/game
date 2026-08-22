@@ -20,15 +20,6 @@ namespace GameAudio
         public AudioClip combatTrack;
     }
 
-    /// <summary>
-    /// Adaptive music: tracks a current stage (which level/area you're in) and a current
-    /// state (Cautious = no enemies around, Combat = engaged). Crossfades between the two
-    /// tracks that belong to the current stage whenever state or stage changes.
-    ///
-    /// Typical usage: a "combat detector" on the player calls SetState(Combat) when an
-    /// enemy notices the player, and SetState(Cautious) a few seconds after combat ends.
-    /// A level-load script calls SetStage(index) once when entering a new area.
-    /// </summary>
     public class MusicManager : MonoBehaviour
     {
         public static MusicManager Instance { get; private set; }

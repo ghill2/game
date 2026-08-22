@@ -5,18 +5,6 @@ using UnityEngine.Audio;
 
 namespace GameAudio
 {
-    /// <summary>
-    /// A poolable AudioSource wrapper. Handles three playback shapes:
-    ///  - one-shot at a fixed world position (impact, hurt, attack sfx, UI sfx)
-    ///  - one-shot that follows a moving transform (spell projectile in flight)
-    ///  - a loop identified by a string id (environment ambience loops)
-    /// Calls back into the pool when a non-looping sound finishes.
-    ///
-    /// Completion is detected by polling AudioSource.isPlaying rather than scheduling off
-    /// clip length, because AudioResource (which covers both AudioClip and Audio Random
-    /// Container) doesn't expose a reliable length for containers — their effective duration
-    /// depends on which sub-clip and layers get chosen at play time.
-    /// </summary>
     [RequireComponent(typeof(AudioSource))]
     public class PooledAudioSource : MonoBehaviour
     {
@@ -97,11 +85,11 @@ namespace GameAudio
 
         private void Configure(SoundEvent evt)
         {
-            Source.resource = evt.resource;
+            Source.resource = evt.GetClip();
             Source.volume = evt.GetVolume();
             // AudioSource.pitch is ignored (and logs a warning if out of [0.0001..3]) when the
             // resource is an Audio Random Container, which manages its own pitch randomization.
-            Source.pitch = evt.IsRandomContainer ? 1f : evt.GetPitch();
+            //Source.pitch = evt.IsRandomContainer ? 1f : evt.GetPitch();
             Source.loop = evt.loop;
             Source.spatialBlend = evt.spatialBlend;
             Source.minDistance = evt.minDistance;

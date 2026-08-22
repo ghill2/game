@@ -2,16 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace GameAudio
+namespace GameAudioDeprecated
 {
-    /// <summary>
-    /// Central entry point for all non-music audio: spell projectiles, environment loops/RFX,
-    /// NPC sfx, player sfx, and UI sfx. Backed by a pool of AudioSources so we don't
-    /// Instantiate/Destroy constantly during combat.
-    ///
-    /// Music (with its cautious/combat, per-stage state machine) lives in MusicManager instead,
-    /// since it behaves very differently (persistent, crossfaded, not one-shot).
-    /// </summary>
+
     public class AudioManager : MonoBehaviour
     {
         public static AudioManager Instance { get; private set; }
@@ -57,6 +50,7 @@ namespace GameAudio
 
         private void Awake()
         {
+            // initializes AudioManager as a singleton
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
@@ -127,7 +121,7 @@ namespace GameAudio
         /// <summary>One-shot 3D sound at a fixed position (NPC/player hurt-death-attack, spell impact).</summary>
         public void PlaySFX(SoundEvent evt, Vector3 position)
         {
-            if (evt == null || evt.resource == null) return;
+            if (evt == null || evt.GetClip() == null) return;
             EnsureGroup(evt);
             var src = GetFromPool();
             src.Play(evt, position, ReturnToPool);
@@ -136,7 +130,7 @@ namespace GameAudio
         /// <summary>One-shot 3D sound that follows a moving transform (spell projectile in flight).</summary>
         public void PlaySFXFollowing(SoundEvent evt, Transform target)
         {
-            if (evt == null || evt.resource == null || target == null) return;
+            if (evt == null || evt.GetClip() == null || target == null) return;
             EnsureGroup(evt);
             var src = GetFromPool();
             src.PlayFollowing(evt, target, ReturnToPool);
@@ -150,7 +144,7 @@ namespace GameAudio
         /// </summary>
         public void PlayUI(SoundEvent evt)
         {
-            if (evt == null || evt.resource == null) return;
+            if (evt == null || evt.GetClip() == null) return;
             EnsureGroup(evt);
             var src = GetFromPool();
             src.Play(evt, transform.position, ReturnToPool);
@@ -162,7 +156,7 @@ namespace GameAudio
         /// </summary>
         public void PlayRandomAround(SoundEvent evt, Vector3 center, float minRadius, float maxRadius)
         {
-            if (evt == null || evt.resource == null) return;
+            if (evt == null || evt.GetClip() == null) return;
             Vector2 dir = Random.insideUnitCircle.normalized;
             float dist = Random.Range(minRadius, maxRadius);
             Vector3 offset = new Vector3(dir.x, 0f, dir.y) * dist;
@@ -172,7 +166,7 @@ namespace GameAudio
         /// <summary>Starts a looping sound (environment ambience loop) identified by loopId so it can be stopped later.</summary>
         public void PlayLoop(SoundEvent evt, Vector3 position, string loopId)
         {
-            if (evt == null || evt.resource == null || string.IsNullOrEmpty(loopId)) return;
+            if (evt == null || evt.GetClip() == null || string.IsNullOrEmpty(loopId)) return;
             if (_loops.ContainsKey(loopId)) return; // already playing, ignore duplicate start
             EnsureGroup(evt);
             var src = GetFromPool();
@@ -183,7 +177,7 @@ namespace GameAudio
         /// <summary>Same as PlayLoop, but the loop follows a moving transform (e.g. keep ambience centered on the player as they move).</summary>
         public void PlayLoopFollowing(SoundEvent evt, Transform target, string loopId)
         {
-            if (evt == null || evt.resource == null || target == null || string.IsNullOrEmpty(loopId)) return;
+            if (evt == null || evt.GetClip() == null || target == null || string.IsNullOrEmpty(loopId)) return;
             if (_loops.ContainsKey(loopId)) return;
             EnsureGroup(evt);
             var src = GetFromPool();

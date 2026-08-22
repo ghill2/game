@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 [DisallowMultipleComponent]
 [RequireComponent(typeof(PlayerHealth))]
 [RequireComponent(typeof(PlayerCollectibles))]
@@ -28,7 +29,8 @@ public sealed class PlayerAudioEvents : MonoBehaviour
 
     public void PlayFireballCast()
     {
-        AudioManager.Instance?.PlayFireballCast();
+        //AudioManager.Instance?.PlayFireballCast();
+        AudioManager.Instance?.PlayerActionResolver(charAction.FireBall, transform.position);
     }
 
     public void Step1()

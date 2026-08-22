@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
+  m_Name: evt_ui_pickup_generic
+  m_EditorClassIdentifier: Assembly-CSharp::SoundEvent
+  category: 5
+  AudioClips:
+  - {fileID: 8300000, guid: a398425c414faf346be663ec9235d6bc, type: 3}
+  volumeMin: 1
+  volumeMax: 1
+  pitchMin: 1
+  pitchMax: 1
+  probability: 1
+  spatialBlend: 0
+  minDistance: 1
+  maxDistance: 25
+  rolloffMode: 0
+  loop: 0
+  mixerGroup: {fileID: 0}

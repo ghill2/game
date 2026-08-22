@@ -142,7 +142,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a60f871c07a4698b2bc03cb7f9f035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  masterVolume: 1
+  mixer: {fileID: 24100000, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+  categoryBindings:
+  - category: 0
+    mixerGroup: {fileID: -3996776034769663444, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+  - category: 1
+    mixerGroup: {fileID: 6342069100860378707, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+  - category: 3
+    mixerGroup: {fileID: -8769528068031240624, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+  - category: 4
+    mixerGroup: {fileID: -3439353643785790817, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+  - category: 5
+    mixerGroup: {fileID: -3993806765321904845, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+  - category: 2
+    mixerGroup: {fileID: 875570948363908086, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+  snap_shot_stage_00: {fileID: -4250901194953119849, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+  snap_shot_stage_01: {fileID: -6649824796660471019, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+  snap_shot_stage_02: {fileID: -9173781881822046816, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+  snap_shot_transition_time_environment: 2
+  snap_shot_music_cautious: {fileID: 6782229110889489053, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+  snap_shot_music_battle: {fileID: -4828851347733319638, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+  snap_shot_transition_time_music: 2
+  evt_env_stages:
+  - {fileID: 11400000, guid: 82647583185016d4e978b0a6497b501c, type: 2}
+  - {fileID: 11400000, guid: 42b6a8ec224e07f448811ba58dc4a614, type: 2}
+  - {fileID: 11400000, guid: 64aeb7a65bdb099468c1588360e609d4, type: 2}
+  evt_player_footstep_generic: {fileID: 11400000, guid: fd4a6c8b5d0d310419f12103b5bbf9fe, type: 2}
+  evt_player_vox_attack: {fileID: 11400000, guid: e5aa2abbb01427a42b1e7252f028094a, type: 2}
+  evt_player_vox_death: {fileID: 11400000, guid: ee1865fe2caa81d44b52504d5a54425a, type: 2}
+  evt_player_vox_hurt: {fileID: 11400000, guid: 2c4e04920cbef3245bea9d0b34c19829, type: 2}
+  evt_spell_fireball_attack: {fileID: 11400000, guid: c0521c171b3e32e498cde4b1295484c5, type: 2}
+  evt_spell_fireball_impact: {fileID: 11400000, guid: eaa802b1d6408a249a48664bd9404f79, type: 2}
+  evt_spell_ice_attack: {fileID: 11400000, guid: 2027cd51450894748ad2048dd7e44f0f, type: 2}
+  evt_spell_ice_impact: {fileID: 0}
+  evt_spell_lightning_attack: {fileID: 11400000, guid: 1d5e36e878f3ef840a1ac89a5ebeb18c, type: 2}
+  evt_spell_lightning_impact: {fileID: 0}
+  npcActionBinding:
+  - npc: 1
+    evt_npc_attack: {fileID: 11400000, guid: 8b4359d522434ab45b1e1f2d6ca88811, type: 2}
+    evt_npc_death: {fileID: 11400000, guid: 8b4359d522434ab45b1e1f2d6ca88811, type: 2}
+    evt_npc_melee_attack: {fileID: 11400000, guid: 849ce390121878340a11eedc02f131cc, type: 2}
+  - npc: 2
+    evt_npc_attack: {fileID: 11400000, guid: bb536d70aaae80244a3c6334dae125cb, type: 2}
+    evt_npc_death: {fileID: 11400000, guid: bb536d70aaae80244a3c6334dae125cb, type: 2}
+    evt_npc_melee_attack: {fileID: 11400000, guid: 2885077400355ed42a9fefc3eee8aee1, type: 2}
+  evt_props_portal: {fileID: 0}
+  evt_props_windmill: {fileID: 0}
+  evt_ui_cancel: {fileID: 11400000, guid: ad8ff685c43424f4c841b7bbc713b672, type: 2}
+  evt_ui_confirm: {fileID: 11400000, guid: 6d354913afee06f4681edbf508e500f1, type: 2}
+  evt_ui_pickup_egg: {fileID: 11400000, guid: 07a9ec6e1b58f8c4c9431bf0f56e2566, type: 2}
+  evt_ui_pickup_generic: {fileID: 11400000, guid: 4beaa068b27ea6b47a49a4839bea0569, type: 2}
+  evt_ui_select: {fileID: 11400000, guid: ab3993d80c4b6814faaee28327691ac6, type: 2}
+  mixer_master_volume_param: masterVolume
+  mixer_music_volume_param: musicVolume
+  mixer_sfx_volume_param: sfxVolume
+  mixer_ui_volume_param: uiVolume
+  masterVolume: 0.5
   fireballCastClip: {fileID: 8300000, guid: 90e9607f8705443188af9c85b77c6db8, type: 3}
   ouchClips:
   - {fileID: 8300000, guid: c9925f27fa4e54b749ca265b87c4b62b, type: 3}

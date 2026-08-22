@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
+  m_Name: evt_player_footstep_generic
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
+  category: 4
+  AudioClips:
+  - {fileID: 8300000, guid: 2eedc68f45bd8714396a94c15c5174e7, type: 3}
+  - {fileID: 8300000, guid: ecb3a26a8df85954d8b8929fb74183c4, type: 3}
+  - {fileID: 8300000, guid: 209156708f27efa45888ccb9d47b8e0e, type: 3}
+  - {fileID: 8300000, guid: 8d11cc63db3544d42984a2cd2c3beb67, type: 3}
+  - {fileID: 8300000, guid: 6a6b244b9863b4240ae87b28e16fdbec, type: 3}
+  - {fileID: 8300000, guid: 022a44909b905d041aaaea720e00bd11, type: 3}
+  - {fileID: 8300000, guid: 9d3d0414daf13304f9255fecbd0c2d4f, type: 3}
+  - {fileID: 8300000, guid: 6ca8d2f5abb9aab4b8d0671767939c54, type: 3}
+  - {fileID: 8300000, guid: 52df28684ef27f64396dbfffcc653b15, type: 3}
+  - {fileID: 8300000, guid: 6484cecb48abaea4c9fd020fd4f2900e, type: 3}
+  volumeMin: 0.936
+  volumeMax: 1
+  pitchMin: 0.659
+  pitchMax: 1.373
+  probability: 1
+  spatialBlend: 1
+  minDistance: 1
+  maxDistance: 25
+  rolloffMode: 0
+  loop: 0
+  mixerGroup: {fileID: 0}
