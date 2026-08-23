@@ -11,7 +11,7 @@ public sealed class MusicManager : MonoBehaviour
     private float masterVolume = 1f;
 
     [SerializeField, Min(0f)]
-    private float fadeDuration = 1f;
+    private float fadeDuration = 4f;
 
     private readonly HashSet<EnemyBrain> engagedEnemies =
         new HashSet<EnemyBrain>();

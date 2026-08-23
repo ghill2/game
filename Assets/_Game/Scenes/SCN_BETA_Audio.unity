@@ -2127,7 +2127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Portal
   targetSceneName: SCN_BETA_Level_1
-  <CurrentSceneIndex>k__BackingField: 0
 --- !u!65 &1472748369
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2968,14 +2967,6 @@ PrefabInstance:
     - target: {fileID: 2692195275572018380, guid: 6e49d76498ae14f38b201959cd110ca2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8489436448903025932, guid: 6e49d76498ae14f38b201959cd110ca2, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8489436448903025932, guid: 6e49d76498ae14f38b201959cd110ca2, type: 3}
-      propertyPath: masterVolume
-      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
