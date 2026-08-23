@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MusicManager
   inGameSource: {fileID: 2139326129078896716}
   inBattleSource: {fileID: 5858114542544964831}
-  masterVolume: 1
-  crossfadeDuration: 1
+  masterVolume: 0.5
+  fadeDuration: 8
 --- !u!1 &4214519202572080978
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,9 +91,9 @@ AudioSource:
   m_GameObject: {fileID: 4214519202572080978}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7905326909474909443, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 43d130070be8f49869555b8c3eea1d31, type: 3}
+  m_Resource: {fileID: 8300000, guid: 85ab9eecad1156f419c91468912ed6f8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0
   m_Pitch: 1
@@ -220,9 +220,9 @@ AudioSource:
   m_GameObject: {fileID: 7622904703220870297}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4985867928434987487, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: ec2db2c1edde841e1aca8e1f7b2464c2, type: 3}
+  m_Resource: {fileID: 8300000, guid: fce271edaf3baf24099d80f6c3c966d3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
