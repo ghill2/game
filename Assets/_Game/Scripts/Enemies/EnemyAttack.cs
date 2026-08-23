@@ -56,7 +56,7 @@ public sealed class EnemyAttack : MonoBehaviour
         }
     }
 
-    public bool TryStartAttack(Transform target)
+    public bool TryStartAttack(Transform target, NpcType _npcType)
     {
         if (data == null ||
             target == null ||
@@ -78,6 +78,7 @@ public sealed class EnemyAttack : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger(AttackTrigger);
+            AudioManager.Instance?.NPCActionResolver(_npcType,CharAction.Attack, transform.position);
         }
 
         if (useAnimationEvents && animator != null)

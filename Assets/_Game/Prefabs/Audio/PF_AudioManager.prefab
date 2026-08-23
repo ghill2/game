@@ -180,14 +180,16 @@ MonoBehaviour:
   npcActionBinding:
   - npc: 1
     evt_npc_attack: {fileID: 11400000, guid: 8b4359d522434ab45b1e1f2d6ca88811, type: 2}
-    evt_npc_death: {fileID: 11400000, guid: 8b4359d522434ab45b1e1f2d6ca88811, type: 2}
+    evt_npc_death: {fileID: 11400000, guid: f6e472789298bd6498ed6de166c27d26, type: 2}
     evt_npc_melee_attack: {fileID: 11400000, guid: 849ce390121878340a11eedc02f131cc, type: 2}
   - npc: 2
     evt_npc_attack: {fileID: 11400000, guid: bb536d70aaae80244a3c6334dae125cb, type: 2}
     evt_npc_death: {fileID: 11400000, guid: bb536d70aaae80244a3c6334dae125cb, type: 2}
     evt_npc_melee_attack: {fileID: 11400000, guid: 2885077400355ed42a9fefc3eee8aee1, type: 2}
-  evt_props_portal: {fileID: 0}
-  evt_props_windmill: {fileID: 0}
+  evt_props_portal: {fileID: 11400000, guid: e871206a01a7eaa45bc9a48ea1aa0ad2, type: 2}
+  evt_props_portal_enter: {fileID: 11400000, guid: 77e43fda964b4c94eb714d109556d0a8, type: 2}
+  evt_props_windmill: {fileID: 11400000, guid: 916bbfdb4206a0e41917440fab5fd00b, type: 2}
+  evt_props_magic_orb: {fileID: 11400000, guid: 27078b4f11705044eb2f2994b744ed62, type: 2}
   evt_ui_cancel: {fileID: 11400000, guid: ad8ff685c43424f4c841b7bbc713b672, type: 2}
   evt_ui_confirm: {fileID: 11400000, guid: 6d354913afee06f4681edbf508e500f1, type: 2}
   evt_ui_pickup_egg: {fileID: 11400000, guid: 07a9ec6e1b58f8c4c9431bf0f56e2566, type: 2}
@@ -198,14 +200,6 @@ MonoBehaviour:
   mixer_sfx_volume_param: sfxVolume
   mixer_ui_volume_param: uiVolume
   masterVolume: 0.5
-  fireballCastClip: {fileID: 8300000, guid: 90e9607f8705443188af9c85b77c6db8, type: 3}
-  ouchClips:
-  - {fileID: 8300000, guid: c9925f27fa4e54b749ca265b87c4b62b, type: 3}
-  - {fileID: 8300000, guid: 896cf8f9ed89a49f8abaf7207440451f, type: 3}
-  - {fileID: 8300000, guid: a010fca59b16b47bf8acf16bce8edeeb, type: 3}
-  collectedClip: {fileID: 8300000, guid: a5e0a588a8aab4588a8ea15f7f53aaee, type: 3}
-  step1Clip: {fileID: 8300000, guid: e6c03a75d9e8a46bbbd30c662ebd8483, type: 3}
-  step2Clip: {fileID: 8300000, guid: 275c985df56724fbb969294f32785e16, type: 3}
   skeletonDefeatedClip: {fileID: 8300000, guid: ddda0ab7ccf4f4872b2129960002582d, type: 3}
   wolfDefeatedClip: {fileID: 8300000, guid: cf43b05a358b44e8a8eb0707dc735d3f, type: 3}
   fireballHitClip: {fileID: 8300000, guid: ed181ec3f4b814aebafe007884d7b3bf, type: 3}

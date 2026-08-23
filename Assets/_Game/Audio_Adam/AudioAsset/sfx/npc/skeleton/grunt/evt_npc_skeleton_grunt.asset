@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
   m_Name: evt_npc_skeleton_grunt
   m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
-  category: 3
+  category: 4
   AudioClips:
   - {fileID: 8300000, guid: f15e8ff35d73d6547888e387a63e563a, type: 3}
   - {fileID: 8300000, guid: 2d22dc8d3c7760b4a931b210e3967d80, type: 3}
@@ -24,14 +24,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7943a097802a4da46a464d4c5943ebcf, type: 3}
   - {fileID: 8300000, guid: 03f7a7c98251b2d479bb938437c900d7, type: 3}
   - {fileID: 8300000, guid: 34b83278fc9cdf343a55ca8c2a348b2f, type: 3}
-  volumeMin: 0.936
-  volumeMax: 1
+  volume: 0.5
   pitchMin: 0.659
   pitchMax: 1.373
   probability: 1
   spatialBlend: 1
   minDistance: 1
   maxDistance: 25
-  rolloffMode: 0
+  rolloffMode: 2
   loop: 0
+  startRandomTime: 0
   mixerGroup: {fileID: 0}

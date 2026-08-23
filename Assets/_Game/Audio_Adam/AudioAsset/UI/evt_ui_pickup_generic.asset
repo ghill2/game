@@ -15,8 +15,7 @@ MonoBehaviour:
   category: 5
   AudioClips:
   - {fileID: 8300000, guid: a398425c414faf346be663ec9235d6bc, type: 3}
-  volumeMin: 1
-  volumeMax: 1
+  volume: 0.7
   pitchMin: 1
   pitchMax: 1
   probability: 1

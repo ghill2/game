@@ -6,8 +6,10 @@ public class LevelEndPortal : MonoBehaviour
     [SerializeField]
     private string targetSceneName = "SCN_BETA_Level_1";
 
+
     private BoxCollider portalCollider;
     private bool transitionStarted;
+
 
     private void Start()
     {
@@ -38,9 +40,11 @@ public class LevelEndPortal : MonoBehaviour
         if (AudioManager.Instance == null ||
             !AudioManager.Instance.PlayPortalTransition(targetSceneName))
         {
+            
             Debug.LogWarning(
                 "No available AudioManager was found.",
                 this);
+            
             SceneManager.LoadScene(targetSceneName);
         }
     }

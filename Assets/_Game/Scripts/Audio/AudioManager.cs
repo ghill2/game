@@ -9,10 +9,8 @@ using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using static System.Collections.Specialized.BitVector32;
 using static Unity.VisualScripting.Member;
-
-
-
 [DisallowMultipleComponent]
 [RequireComponent(typeof(AudioSource))]
 
@@ -67,12 +65,10 @@ public sealed class AudioManager : MonoBehaviour
     [SerializeField] private SoundEvent evt_spell_lightning_impact;
 
 
-
-
     [System.Serializable]
     public class NPCActionBinding
     {
-        public npcType npc;
+        public NpcType npc;
         public SoundEvent evt_npc_attack;
         public SoundEvent evt_npc_death;
         public SoundEvent evt_npc_melee_attack;
@@ -83,7 +79,10 @@ public sealed class AudioManager : MonoBehaviour
 
     [Header("Props")]
     [SerializeField] private SoundEvent evt_props_portal;
+    [SerializeField] private SoundEvent evt_props_portal_enter;
     [SerializeField] private SoundEvent evt_props_windmill;
+    [SerializeField] private SoundEvent evt_props_magic_orb;
+
 
     [Header("UI SFX")]
     [SerializeField] private SoundEvent evt_ui_cancel;
@@ -104,12 +103,7 @@ public sealed class AudioManager : MonoBehaviour
 
     [SerializeField, Range(0f, 1f)] private float masterVolume = 1f;
 
-    [SerializeField] private AudioClip fireballCastClip;
-    [SerializeField] private AudioClip[] ouchClips;
-    [SerializeField] private AudioClip collectedClip;
-    [SerializeField] private AudioClip step1Clip;
-    [SerializeField] private AudioClip step2Clip;
-
+ 
     [SerializeField] private AudioClip skeletonDefeatedClip;
     [SerializeField] private AudioClip wolfDefeatedClip;
 
@@ -123,8 +117,8 @@ public sealed class AudioManager : MonoBehaviour
     private AudioSource twoDimensionalSource;
     private List<AudioSource> environmentSources;
     private bool portalTransitionStarted;
-
-
+    public AudioSource playerSource { get; set; }
+    [HideInInspector] public int current_level = 0;
 
 
     //---------------------------------Adam's New Audio Code----------------------------
@@ -146,58 +140,84 @@ public sealed class AudioManager : MonoBehaviour
     {
         mixer.SetFloat(mixer_ui_volume_param, _new_vol);
     }
-    public void PlayerActionResolver(charAction _action, Vector3 _pos)
+
+    public void PropsSFXResolver(PropsType _propsType, AudioSource _src)
     {
+        if (_src)
+        {
+            switch (_propsType)
+            {
+                case PropsType.orb:
+                    PlaySoundEvent(evt_props_magic_orb, _src);
+                    break;
+                case PropsType.windmill:
+                    PlaySoundEvent(evt_props_windmill, _src);
+                    break;
+                case PropsType.smoke:
+                    break;
+                case PropsType.portal:
+                    PlaySoundEvent(evt_props_portal, _src);
+                    break;
+                default: break;
+            }
+        }
+    }
+
+    public void PlayerActionResolver(CharAction _action, AudioSource _src)
+    {      
         switch (_action)
         {
-            case charAction.FireBall:
-                PlaySoundEvent(evt_spell_fireball_attack, _pos);
-                //PlaySoundEvent(evt_player_vox_attack, _pos);
+            case CharAction.FireBall:
+                PlaySoundEvent(evt_spell_fireball_attack, _src);
+                PlaySoundEvent(evt_player_vox_attack, _src);
                 break;
-            case charAction.Ice:
-                PlaySoundEvent(evt_spell_ice_attack, _pos);
-                PlaySoundEvent(evt_player_vox_attack, _pos);
+            case CharAction.Ice:
+                PlaySoundEvent(evt_spell_ice_attack, _src);
+                PlaySoundEvent(evt_player_vox_attack, _src);
                 break;
-            case charAction.Lightning:
-                PlaySoundEvent(evt_spell_lightning_attack, _pos);
-                PlaySoundEvent(evt_player_vox_attack, _pos);
+            case CharAction.Lightning:
+                PlaySoundEvent(evt_spell_lightning_attack, _src);
+                PlaySoundEvent(evt_player_vox_attack, _src);
                 break;
-            case charAction.Hurt:
-                PlaySoundEvent(evt_player_vox_hurt, _pos);
+            case CharAction.Hurt:
+                PlaySoundEvent(evt_player_vox_hurt, _src);
                 break;
-            case charAction.Death:
-                PlaySoundEvent(evt_player_vox_death, _pos);
+            case CharAction.Death:
+                PlaySoundEvent(evt_player_vox_death, _src);
                 break;
-            case charAction.Step:
-                PlaySoundEvent(evt_player_footstep_generic, _pos);
+            case CharAction.Step:
+                PlaySoundEvent(evt_player_footstep_generic, _src);
+                break;
+            case CharAction.CollectEgg:
+                PlaySoundEvent(evt_ui_pickup_egg, _src);
+                break;
+            case CharAction.CollectGeneric:
+                PlaySoundEvent(evt_ui_pickup_generic, _src);
                 break;
             default: break;
         }
     }
 
-    public void NPCActionResolver(npcType _npcType, charAction _action, Vector3 _pos)
+    public void NPCActionResolver(NpcType _npcType, CharAction _action, Vector3 _pos)
     {
-        SoundEvent se = null;
-
+        
         foreach (var n in npcActionBinding)
         {
             if (n.npc == _npcType)
             {
                 switch (_action)
                 {
-                    case charAction.Attack:
-                        se = n.evt_npc_attack;
+                    case CharAction.Attack:
+                        PlaySoundEvent(n.evt_npc_attack, _pos);
+                        PlaySoundEvent(n.evt_npc_melee_attack, _pos);
                         break;
-                    case charAction.Death:
-                        se = n.evt_npc_death;
+                    case CharAction.Death:
+                        PlaySoundEvent(n.evt_npc_death, _pos);                        
                         break;
                     default: break;
                 }
             }
         }
-
-        if (se != null) PlaySoundEvent(se, _pos);
-
     }
 
     private AudioMixerGroup GetGroup(SoundCategory category)
@@ -264,35 +284,47 @@ public sealed class AudioManager : MonoBehaviour
         AudioSource source;
         GameObject soundObject = null;
         AudioClip clip = _evt.GetClip();
+        if (clip == null)
+        {
+            Debug.LogWarning("Clip is empty in sound event!!");
+            return null;
+        }
 
         if (_src != null)
         {
+            Debug.Log("***********have source");
             source = _src;
         }
-        else if (_evt.spatialBlend == 0)
+        else if (_evt.spatialBlend == 0 && !_evt.loop)
         {
+            Debug.Log("***********2d sound");
             source = twoDimensionalSource;
         }
         else
         {
+            Debug.Log("**********3d");
             soundObject = new GameObject("One Shot - " + clip.name);
             soundObject.transform.position = _position;
-            source = gameObject.AddComponent<AudioSource>();
+            source = soundObject.AddComponent<AudioSource>();
         }
 
         //configure source
         source.volume = _evt.GetVolume();
         source.pitch = _evt.GetPitch();
         source.loop = _evt.loop;
+        source.dopplerLevel = 0f;
         source.spatialBlend = _evt.spatialBlend;
         source.minDistance = _evt.minDistance;
         source.maxDistance = _evt.maxDistance;
         source.rolloffMode = _evt.rolloffMode;
         source.outputAudioMixerGroup = _evt.mixerGroup ? _evt.mixerGroup : GetGroup(_evt.category);
         source.clip = clip;
+        source.time = _evt.startRandomTime ? UnityEngine.Random.Range(0f, clip.length) : 0f;
 
         if (UnityEngine.Random.Range(0f, 1f) <= _evt.probability)
         {
+            Debug.Log("***************" + source.clip.name);
+
             if (_evt.loop) source.Play();
             else source.PlayOneShot(clip);
         } 
@@ -326,15 +358,15 @@ public sealed class AudioManager : MonoBehaviour
 
 
 
-    public float MasterVolume
-    {
-        get => masterVolume;
-        set
-        {
-            masterVolume = Mathf.Clamp01(value);
-            ApplyMasterVolume();
-        }
-    }
+    //public float MasterVolume
+    //{
+    //    get => masterVolume;
+    //    set
+    //    {
+    //        masterVolume = Mathf.Clamp01(value);
+    //        ApplyMasterVolume();
+    //    }
+    //}
 
     private void Awake()
     {
@@ -358,7 +390,7 @@ public sealed class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        PlayEnvironmentStageSwitch(0);
+
     }
 
     private void OnDestroy()
@@ -382,41 +414,11 @@ public sealed class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayFireballCast()
-    {
-        PlayTwoDimensional(fireballCastClip);
-    }
-
     public void PlayFireballHit(Vector3 position)
     {
-        PlaySpatial(fireballHitClip, position);
+        PlaySoundEvent(evt_spell_fireball_impact, position);
     }
 
-    public void PlayRandomOuch()
-    {
-        if (ouchClips == null || ouchClips.Length == 0)
-        {
-            Debug.LogWarning("AudioManager has no ouch clips assigned.", this);
-            return;
-        }
-
-        //PlayTwoDimensional(ouchClips[Random.Range(0, ouchClips.Length)]);
-    }
-
-    public void PlayCollected()
-    {
-        PlayTwoDimensional(collectedClip);
-    }
-
-    public void PlayStep1()
-    {
-        PlayTwoDimensional(step1Clip);
-    }
-
-    public void PlayStep2()
-    {
-        PlayTwoDimensional(step2Clip);
-    }
 
     public bool PlayPortalTransition(string targetSceneName)
     {
@@ -433,7 +435,7 @@ public sealed class AudioManager : MonoBehaviour
     private IEnumerator PortalTransitionRoutine(string targetSceneName)
     {
         CanvasGroup fadeOverlay = CreateFadeOverlay();
-        PlayTwoDimensional(portalClip);
+        PlaySoundEvent(evt_props_portal_enter, transform.position);
 
         float soundDuration = portalClip != null ? portalClip.length : 0f;
         float transitionDuration = Mathf.Max(portalFadeDuration, soundDuration);
@@ -535,7 +537,7 @@ public sealed class AudioManager : MonoBehaviour
 
     public void PlaySkeletonDefeated(Vector3 position)
     {
-        PlaySpatial(skeletonDefeatedClip, position);
+        //PlaySpatial(skeletonDefeatedClip, position);
     }
 
     public void PlayWolfDefeated(Vector3 position)

@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
   m_Name: evt_props_windmill_lp
   m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
-  category: 4
+  category: 3
   AudioClips:
   - {fileID: 8300000, guid: 2633026022f51c3409043a461f715577, type: 3}
-  volumeMin: 1
-  volumeMax: 1
+  volume: 0.7
   pitchMin: 1
   pitchMax: 1
+  probability: 1
   spatialBlend: 1
   minDistance: 1
-  maxDistance: 25
-  rolloffMode: 0
+  maxDistance: 30
+  rolloffMode: 1
   loop: 1
+  startRandomTime: 1
   mixerGroup: {fileID: 0}

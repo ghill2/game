@@ -15,8 +15,7 @@ MonoBehaviour:
   category: 2
   AudioClips:
   - {fileID: 8300000, guid: 822b32831b581074996b96284f091ba1, type: 3}
-  volumeMin: 1
-  volumeMax: 1
+  volume: 0.8
   pitchMin: 1
   pitchMax: 1
   probability: 1
@@ -25,4 +24,5 @@ MonoBehaviour:
   maxDistance: 25
   rolloffMode: 0
   loop: 1
+  startRandomTime: 0
   mixerGroup: {fileID: -2868616114112098438, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}

@@ -18,6 +18,7 @@ public sealed class EnemyBrain : MonoBehaviour
     }
 
     [SerializeField] private EnemyData data;
+    [SerializeField] private NpcType npcType;
     [SerializeField] private EnemyState currentState;
     [SerializeField] private bool logStateChanges = true;
     private bool reportedCombatEngagement;
@@ -177,7 +178,7 @@ public sealed class EnemyBrain : MonoBehaviour
 
         motor.Face(sensor.Target.position);
 
-        attack.TryStartAttack(sensor.Target);
+        attack.TryStartAttack(sensor.Target, npcType);
     }
 
     private void UpdateDisengage()
@@ -278,6 +279,8 @@ public sealed class EnemyBrain : MonoBehaviour
                 motor.DisableMovement();
                 sensor.enabled = false;
                 attack.enabled = false;
+                AudioManager.Instance?.NPCActionResolver(npcType, CharAction.Death, transform.position);
+
 
                 Collider enemyCollider = GetComponent<Collider>();
                 if (enemyCollider != null)

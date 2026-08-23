@@ -17,13 +17,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c44c63abd80f5f54cb5ffdd1d1a8f894, type: 3}
   - {fileID: 8300000, guid: 0f5cdeeae67282b4ea1ebf13c3ed1b1a, type: 3}
   - {fileID: 8300000, guid: 9caecefd8d759ce44a899048e86bb07d, type: 3}
-  volumeMin: 0.936
-  volumeMax: 1
+  volume: 1
   pitchMin: 0.659
   pitchMax: 1.373
-  spatialBlend: 1
+  probability: 1
+  spatialBlend: 0.6
   minDistance: 1
   maxDistance: 25
-  rolloffMode: 0
+  rolloffMode: 1
   loop: 0
+  startRandomTime: 0
   mixerGroup: {fileID: 0}

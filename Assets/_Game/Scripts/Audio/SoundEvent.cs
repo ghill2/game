@@ -23,9 +23,10 @@ public class SoundEvent : ScriptableObject
     [Header("Playback Source")]
     public List<AudioClip> AudioClips = new List<AudioClip>();
 
-    [Header("Volume (randomized between min/max each play)")]
-    [Range(0f, 1f)] public float volumeMin = 1f;
-    [Range(0f, 1f)] public float volumeMax = 1f;
+    [Header("Volume")]
+    //[Range(0f, 1f)] public float volumeMin = 1f;
+    //[Range(0f, 1f)] public float volumeMax = 1f;
+    [Range(0f, 1f)] public float volume = 1f;
 
     [Header("Pitch (randomized between min/max each play)")]
     [Tooltip("Only applies when Resource is a plain AudioClip. Unity ignores AudioSource.pitch when Resource is an Audio Random Container — configure pitch randomization on the container asset itself instead.")]
@@ -39,16 +40,20 @@ public class SoundEvent : ScriptableObject
     [Range(0f, 1f)] public float spatialBlend = 1f; // 0 = 2D, 1 = fully 3D
     public float minDistance = 1f;
     public float maxDistance = 25f;
-    public AudioRolloffMode rolloffMode = AudioRolloffMode.Logarithmic;
+    public AudioRolloffMode rolloffMode = AudioRolloffMode.Linear;
 
     [Header("Looping")]
     public bool loop = false;
+
+    [Header("Start at random time")]
+    public bool startRandomTime = false;
 
     [Header("Mixer Routing")]
     [Tooltip("Leave empty to fall back to the AudioManager's default group for this category.")]
     public AudioMixerGroup mixerGroup;
 
-    public float GetVolume() =>Random.Range(volumeMin, volumeMax);
+    //public float GetVolume() =>Random.Range(volumeMin, volumeMax);
+    public float GetVolume() => volume;
     public float GetPitch() => Random.Range(pitchMin, pitchMax);
     public AudioClip GetClip() => AudioClips[Random.Range(0, AudioClips.Count)];
 }
