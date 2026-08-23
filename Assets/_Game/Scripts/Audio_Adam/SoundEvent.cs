@@ -8,6 +8,7 @@ public enum SoundCategory
     Music,
     SpellSFX,          // 3D projectile / spell sounds
     Environment,    
+    Props,
     NpcSFX,            // monster hurt / death / attack
     PlayerSFX,         // player hurt / death / attack
     UISFX              // buttons, hover

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
   m_Name: evt_player_footstep_generic
   m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
-  category: 4
+  category: 5
   AudioClips:
   - {fileID: 8300000, guid: 2eedc68f45bd8714396a94c15c5174e7, type: 3}
   - {fileID: 8300000, guid: ecb3a26a8df85954d8b8929fb74183c4, type: 3}

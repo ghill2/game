@@ -152,18 +152,24 @@ public sealed class AudioManager : MonoBehaviour
         {
             case charAction.FireBall:
                 PlaySoundEvent(evt_spell_fireball_attack, _pos);
+                //PlaySoundEvent(evt_player_vox_attack, _pos);
                 break;
             case charAction.Ice:
                 PlaySoundEvent(evt_spell_ice_attack, _pos);
+                PlaySoundEvent(evt_player_vox_attack, _pos);
                 break;
             case charAction.Lightning:
                 PlaySoundEvent(evt_spell_lightning_attack, _pos);
+                PlaySoundEvent(evt_player_vox_attack, _pos);
                 break;
             case charAction.Hurt:
                 PlaySoundEvent(evt_player_vox_hurt, _pos);
                 break;
             case charAction.Death:
                 PlaySoundEvent(evt_player_vox_death, _pos);
+                break;
+            case charAction.Step:
+                PlaySoundEvent(evt_player_footstep_generic, _pos);
                 break;
             default: break;
         }
@@ -202,6 +208,8 @@ public sealed class AudioManager : MonoBehaviour
     }
     private void InitEnvironmentSource()
     {
+        environmentSources = new List<AudioSource>();
+
         foreach (var b in evt_env_stages)
         {
             environmentSources.Add(gameObject.AddComponent<AudioSource>());
@@ -214,18 +222,18 @@ public sealed class AudioManager : MonoBehaviour
         switch (switch_to_stage)
         {
             case 0:
-                PlaySoundEvent(evt_env_stages[0]);
+                PlaySoundEvent(evt_env_stages[0], environmentSources[0]);
                 snap_shot_stage_00.TransitionTo(snap_shot_transition_time_environment);
                 StartCoroutine(StopAfterDelay(environmentSources[1]));
                 StartCoroutine(StopAfterDelay(environmentSources[2]));
                 break;
             case 1:
-                PlaySoundEvent(evt_env_stages[1]);
+                PlaySoundEvent(evt_env_stages[1], environmentSources[1]);
                 snap_shot_stage_01.TransitionTo(snap_shot_transition_time_environment);
                 StartCoroutine(StopAfterDelay(environmentSources[0]));
                 break;
             case 2:
-                PlaySoundEvent(evt_env_stages[2]);
+                PlaySoundEvent(evt_env_stages[2], environmentSources[2]);
                 snap_shot_stage_02.TransitionTo(snap_shot_transition_time_environment);
                 StartCoroutine(StopAfterDelay(environmentSources[1]));
                 break;
@@ -245,21 +253,30 @@ public sealed class AudioManager : MonoBehaviour
         return PlaySoundEvent(_evt, Vector3.zero);
     }
 
+    public AudioSource PlaySoundEvent (SoundEvent _evt, AudioSource _src)
+    {
+        return PlaySoundEvent(_evt, Vector3.zero, _src);
+    }
 
-    public AudioSource PlaySoundEvent(SoundEvent _evt, Vector3 position)
+
+    public AudioSource PlaySoundEvent(SoundEvent _evt, Vector3 _position, AudioSource _src = null)
     {
         AudioSource source;
         GameObject soundObject = null;
         AudioClip clip = _evt.GetClip();
 
-        if (_evt.spatialBlend == 0)
+        if (_src != null)
+        {
+            source = _src;
+        }
+        else if (_evt.spatialBlend == 0)
         {
             source = twoDimensionalSource;
         }
         else
         {
             soundObject = new GameObject("One Shot - " + clip.name);
-            soundObject.transform.position = position;
+            soundObject.transform.position = _position;
             source = gameObject.AddComponent<AudioSource>();
         }
 
@@ -272,8 +289,13 @@ public sealed class AudioManager : MonoBehaviour
         source.maxDistance = _evt.maxDistance;
         source.rolloffMode = _evt.rolloffMode;
         source.outputAudioMixerGroup = _evt.mixerGroup ? _evt.mixerGroup : GetGroup(_evt.category);
+        source.clip = clip;
 
-        if (UnityEngine.Random.Range(0f, 1f) <= _evt.probability) source.PlayOneShot(clip);
+        if (UnityEngine.Random.Range(0f, 1f) <= _evt.probability)
+        {
+            if (_evt.loop) source.Play();
+            else source.PlayOneShot(clip);
+        } 
 
         if (_evt.spatialBlend == 0 && !_evt.loop) { Destroy(soundObject, source.clip.length + 0.1f); }
         return _evt.loop ? source : null;
@@ -332,6 +354,11 @@ public sealed class AudioManager : MonoBehaviour
         ApplyMasterVolume();
 
         InitEnvironmentSource();
+    }
+
+    private void Start()
+    {
+        PlayEnvironmentStageSwitch(0);
     }
 
     private void OnDestroy()

@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
   m_Name: evt_env_stage_00
   m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
-  category: 4
+  category: 2
   AudioClips:
   - {fileID: 8300000, guid: f9a7081f96bdf884bb9afe8a6af840e2, type: 3}
-  volumeMin: 1
-  volumeMax: 1
+  volumeMin: 0.5
+  volumeMax: 0.5
   pitchMin: 1
   pitchMax: 1
+  probability: 1
   spatialBlend: 0
   minDistance: 1
   maxDistance: 25
   rolloffMode: 0
   loop: 1
-  mixerGroup: {fileID: 0}
+  mixerGroup: {fileID: 6814296578972668433, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}

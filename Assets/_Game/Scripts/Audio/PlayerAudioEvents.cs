@@ -35,12 +35,13 @@ public sealed class PlayerAudioEvents : MonoBehaviour
 
     public void Step1()
     {
-        AudioManager.Instance?.PlayStep1();
+        //AudioManager.Instance?.PlayStep1();
+        AudioManager.Instance?.PlayerActionResolver(charAction.Step, transform.position);
     }
 
     public void Step2()
     {
-        AudioManager.Instance?.PlayStep2();
+        AudioManager.Instance?.PlayerActionResolver(charAction.Step, transform.position);
     }
 
     private void HandleDamaged(int amount)
@@ -54,3 +55,5 @@ public sealed class PlayerAudioEvents : MonoBehaviour
         AudioManager.Instance?.PlayCollected();
     }
 }
+
+
