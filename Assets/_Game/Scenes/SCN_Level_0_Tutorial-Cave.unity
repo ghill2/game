@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 19926464}
   - component: {fileID: 19926468}
   m_Layer: 0
-  m_Name: UI_Trigger_NEEDS_TRIGGER_SCRIPT
+  m_Name: TriggerWithGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -226,8 +226,8 @@ Transform:
   m_GameObject: {fileID: 19926463}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.75, y: 2.375, z: 26.5}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalPosition: {x: 4, y: 2.375, z: 30}
+  m_LocalScale: {x: 16, y: 16, z: 16}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 295974090}
@@ -419,33 +419,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 19926467}
     m_Modifications:
+    - target: {fileID: 241909682899964031, guid: 491bd2f8e55e1db45a195465b18740bd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 683182934616091483, guid: 491bd2f8e55e1db45a195465b18740bd, type: 3}
       propertyPath: m_Name
       value: Crystal effect blue
       objectReference: {fileID: 0}
     - target: {fileID: 7150971544766200243, guid: 491bd2f8e55e1db45a195465b18740bd, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.25
+      value: 0.0625
       objectReference: {fileID: 0}
     - target: {fileID: 7150971544766200243, guid: 491bd2f8e55e1db45a195465b18740bd, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.25
+      value: 0.0625
       objectReference: {fileID: 0}
     - target: {fileID: 7150971544766200243, guid: 491bd2f8e55e1db45a195465b18740bd, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.25
+      value: 0.0625
       objectReference: {fileID: 0}
     - target: {fileID: 7150971544766200243, guid: 491bd2f8e55e1db45a195465b18740bd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0625
+      value: -0.03125
       objectReference: {fileID: 0}
     - target: {fileID: 7150971544766200243, guid: 491bd2f8e55e1db45a195465b18740bd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.125
+      value: -0.0078125
       objectReference: {fileID: 0}
     - target: {fileID: 7150971544766200243, guid: 491bd2f8e55e1db45a195465b18740bd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.05020404
+      value: -0.046875
       objectReference: {fileID: 0}
     - target: {fileID: 7150971544766200243, guid: 491bd2f8e55e1db45a195465b18740bd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1080,8 +1084,8 @@ GameObject:
   - component: {fileID: 738349027}
   - component: {fileID: 738349032}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: TestTriggeringCube
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1186,7 +1190,7 @@ Transform:
   m_GameObject: {fileID: 738349026}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.375, y: 0.63751, z: 12.875}
+  m_LocalPosition: {x: 3.375, y: 0.63751, z: 17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1214,7 +1218,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -350035,7 +350039,7 @@ Transform:
   m_GameObject: {fileID: 1682035823}
   serializedVersion: 2
   m_LocalRotation: {x: 0.45451966, y: 0.12278704, z: 0.6963637, w: 0.54167604}
-  m_LocalPosition: {x: 0, y: 3, z: 27.375004}
+  m_LocalPosition: {x: 0, y: 14.625, z: 27.375004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
