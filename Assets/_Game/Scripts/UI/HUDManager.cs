@@ -63,6 +63,13 @@ public class HUDManager : MonoBehaviour
         UpdateSpellPanel(3);
     }
 
+    private void OnDestroy()
+    {
+        playerHealth.OnHealthChanged -= UpdateHealthUI;
+        playerCollectibles.OnEggCollected -= UpdateEggsCount;
+        playerCollectibles.OnEggCollected -= UpdatePopup;
+    }
+
     private void UpdateHealthUI(int currentHealth, int maxHealth)
     {
         Debug.Log($"Updating health UI: Current Health = {currentHealth}, Max Health = {maxHealth}");
