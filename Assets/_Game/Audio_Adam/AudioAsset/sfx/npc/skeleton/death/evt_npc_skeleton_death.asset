@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
+  m_Name: evt_npc_skeleton_death
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
+  category: 4
+  AudioClips:
+  - {fileID: 8300000, guid: bad0e7f7dbdc53b48be86928ddf8b69b, type: 3}
+  - {fileID: 8300000, guid: aa3f119c23e1a044ea711a13d58a9a3d, type: 3}
+  - {fileID: 8300000, guid: af5df80cbb35602428ca2beae95f1662, type: 3}
+  - {fileID: 8300000, guid: c20215ec96c91b04c90095a60e8e32ea, type: 3}
+  - {fileID: 8300000, guid: 93c8fcd238db6e94f9a61ff33fc623c0, type: 3}
+  - {fileID: 8300000, guid: bbace88113bdae048963f639bb400fb2, type: 3}
+  - {fileID: 8300000, guid: 16ff1368a9f7ae4418f527a228e5f0ce, type: 3}
+  - {fileID: 8300000, guid: 600b7014561fc9e4ea4a49a4441b2484, type: 3}
+  - {fileID: 8300000, guid: d638874e6b5209c4495d95ceb28b4c49, type: 3}
+  volume: 1
+  pitchMin: 0.659
+  pitchMax: 1.373
+  probability: 1
+  spatialBlend: 1
+  minDistance: 1
+  maxDistance: 30
+  rolloffMode: 2
+  loop: 0
+  startRandomTime: 0
+  mixerGroup: {fileID: 0}

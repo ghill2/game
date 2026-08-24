@@ -1,14 +1,9 @@
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public sealed class EnemyHealth : MonoBehaviour, IDamageable
 {
-    private enum DefeatSound
-    {
-        None = 0,
-        Skeleton = 1,
-        Wolf = 2
-    }
 
     private static readonly int DeathTrigger = Animator.StringToHash("Death");
 
@@ -17,8 +12,6 @@ public sealed class EnemyHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private int currentHealth;
 
-    [SerializeField]
-    private DefeatSound defeatSound;
 
     [SerializeField]
     private Animator animator;
@@ -66,28 +59,30 @@ public sealed class EnemyHealth : MonoBehaviour, IDamageable
                 animator.SetTrigger(DeathTrigger);
             }
 
-            PlayDefeatSound();
+            //AudioManager.Instance?.NPCActionResolver(npcType, CharAction.Death, transform.position);
+            //PlayDefeatSound();
             Defeated?.Invoke();
         }
     }
 
-    private void PlayDefeatSound()
-    {
-        AudioManager audioManager = AudioManager.Instance;
-        if (audioManager == null)
-        {
-            return;
-        }
+    //private void PlayDefeatSound()
+    //{
+    //    AudioManager audioManager = AudioManager.Instance;
+    //    if (audioManager == null)
+    //    {
+    //        return;
+    //    }
 
-        switch (defeatSound)
-        {
-            case DefeatSound.Skeleton:
-                audioManager.PlaySkeletonDefeated(transform.position);
-                break;
+    //    switch (defeatSound)
+    //    {
+    //        case DefeatSound.Skeleton:
+    //            //audioManager.PlaySkeletonDefeated(transform.position);
+    //            AudioManager.Instance?.NPCActionResolver(NpcType.Skeleton, CharAction.Death, transform.position);
+    //            break;
 
-            case DefeatSound.Wolf:
-                audioManager.PlayWolfDefeated(transform.position);
-                break;
-        }
-    }
+    //        case DefeatSound.Wolf:
+    //            AudioManager.Instance?.NPCActionResolver(NpcType.Wolf, CharAction.Death, transform.position);
+    //            break;
+    //    }
+    //}
 }

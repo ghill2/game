@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
+  m_Name: evt_melee_sword_impact
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
+  category: 4
+  AudioClips:
+  - {fileID: 8300000, guid: 4f9120ea7129e1c42883f27981cf8224, type: 3}
+  - {fileID: 8300000, guid: 943d3f8dfa121b145951a525b8de85ca, type: 3}
+  - {fileID: 8300000, guid: 56469e3dec6a6f945bb5fd65012d5977, type: 3}
+  - {fileID: 8300000, guid: b234662efeb648f49aa305577aad7a5c, type: 3}
+  - {fileID: 8300000, guid: 03cb409af95727842b457a0f99092ee0, type: 3}
+  - {fileID: 8300000, guid: 938d54552a3a08342be50bf35a6c864b, type: 3}
+  - {fileID: 8300000, guid: b52da0bf7fba10a4dad01889e32fb261, type: 3}
+  - {fileID: 8300000, guid: 97df56a06d063414cbcdffe4543fd35a, type: 3}
+  - {fileID: 8300000, guid: f6959656dce025848a64f9db191bdfd4, type: 3}
+  - {fileID: 8300000, guid: b624e44ece151d64784f28dd6ad6d24d, type: 3}
+  volume: 1
+  pitchMin: 0.659
+  pitchMax: 1.373
+  probability: 1
+  spatialBlend: 1
+  minDistance: 1
+  maxDistance: 25
+  rolloffMode: 1
+  loop: 0
+  startRandomTime: 0
+  mixerGroup: {fileID: 0}
