@@ -87,16 +87,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4005468833864491630}
-  m_LocalRotation: {x: -0, y: 0.99807376, z: -0, w: -0.062039636}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1644547}
+  m_LocalRotation: {x: 0.0000000032114467, y: 0.99763286, z: 0.00000022149823, w: 0.06876584}
+  m_LocalPosition: {x: 0, y: 0, z: 0.040783927}
   m_LocalScale: {x: 0.99999976, y: 1, z: 0.99999976}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6439689263523115878}
-  m_LocalEulerAnglesHint: {x: 0, y: 187.114, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 172.114, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.1549829, y: 2.5425985}
+  m_AnchoredPosition: {x: -1.060813, y: 2.6446197}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8788542956661905219
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Windy City
+  m_text: The Windy City
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 66fe2dbe0aabc2e4eaa96d915db0eb67, type: 2}
   m_sharedMaterial: {fileID: 5956328021350814900, guid: 66fe2dbe0aabc2e4eaa96d915db0eb67, type: 2}
@@ -202,8 +202,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 2048
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -270,8 +270,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4098763222704560837}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.74961424, z: -0, w: 0.66187507}
-  m_LocalPosition: {x: 60.520153, y: -0.061424017, z: 39}
+  m_LocalRotation: {x: 0, y: -0.7496145, z: 0, w: 0.6618747}
+  m_LocalPosition: {x: 60.55532, y: -0.061424017, z: 39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
