@@ -14,8 +14,8 @@ public class SpellCaster : MonoBehaviour
     private Dictionary<string, GameObject> _spellMap;         // maps spell name -> prefab, loaded from Resources
     private float _nextCastTime;                              // earliest time casting is allowed again
 
-    // fired once when a cast succeeds, carries the cooldown duration in seconds
-    public event Action<float> OnSpellCast;
+    // fired once when a cast succeeds, carries the spell's prefab name and the cooldown duration in seconds
+    public event Action<string, float> OnSpellCast;
 
     // Awake runs once; grab the animator and preload all spell prefabs
     void Awake()
@@ -62,7 +62,7 @@ public class SpellCaster : MonoBehaviour
 
         _animator.SetTrigger(CastHash);
         _nextCastTime = Time.time + recastDelay; // start the retimer
-        OnSpellCast?.Invoke(recastDelay);        // notify UI with the countdown duration
+        OnSpellCast?.Invoke(spellName, recastDelay); // notify UI with the spell name and countdown duration
         SpawnSpell(prefab);
     }
 
