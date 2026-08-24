@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7441164646098695743}
   - component: {fileID: 8610349101131679076}
+  - component: {fileID: 5959774778045276866}
   m_Layer: 0
   m_Name: C_Tower_2
   m_TagString: Untagged
@@ -58,9 +59,9 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0.07
   MinDistance: 5
-  MaxDistance: 25
+  MaxDistance: 30
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -144,6 +145,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5959774778045276866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7441164646098695736}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac720838169d60a4cab28d0ca85a70b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PropsAudioEvents
+  propsType: 2
 --- !u!1001 &7308852741684024558
 PrefabInstance:
   m_ObjectHideFlags: 0

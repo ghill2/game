@@ -1,22 +1,109 @@
+//using GameAudio;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics.Tracing;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using UnityEngine.UIElements;
+using static System.Collections.Specialized.BitVector32;
+using static Unity.VisualScripting.Member;
 [DisallowMultipleComponent]
 [RequireComponent(typeof(AudioSource))]
+
 public sealed class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
+    [Header("Mixer")]
+    public AudioMixer mixer;
+
+    [System.Serializable]
+    public class CategoryBinding
+    {
+        public SoundCategory category;
+        public AudioMixerGroup mixerGroup;
+        //public string exposedVolumeParam;
+    }
+
+    [Header("Category -> Mixer Group bindings")]
+    public List<CategoryBinding> categoryBindings = new List<CategoryBinding>();
+
+
+    [Header("Mixer Snapshots - Environment")]
+    public AudioMixerSnapshot snap_shot_stage_00;
+    public AudioMixerSnapshot snap_shot_stage_01;
+    public AudioMixerSnapshot snap_shot_stage_02;
+    [SerializeField] private float snap_shot_transition_time_environment = 2f;
+
+
+    [Header("Mixer Snapshots - Music")]
+    public AudioMixerSnapshot snap_shot_music_cautious;
+    public AudioMixerSnapshot snap_shot_music_battle;
+    [SerializeField] private float snap_shot_transition_time_music = 2f;
+
+
+    [Header("Environment Loop")]
+    [SerializeField] private List<SoundEvent> evt_env_stages;
+
+
+    [Header("Player SFX")]
+    [SerializeField] private SoundEvent evt_player_footstep_generic;
+    [SerializeField] private SoundEvent evt_player_vox_attack;
+    [SerializeField] private SoundEvent evt_player_vox_death;
+    [SerializeField] private SoundEvent evt_player_vox_hurt;
+
+    [Header("Spells SFX")]
+    [SerializeField] private SoundEvent evt_spell_fireball_attack;
+    [SerializeField] private SoundEvent evt_spell_fireball_impact;
+    [SerializeField] private SoundEvent evt_spell_ice_attack;
+    [SerializeField] private SoundEvent evt_spell_ice_impact;
+    [SerializeField] private SoundEvent evt_spell_lightning_attack;
+    [SerializeField] private SoundEvent evt_spell_lightning_impact;
+
+
+    [System.Serializable]
+    public class NPCActionBinding
+    {
+        public NpcType npc;
+        public SoundEvent evt_npc_attack;
+        public SoundEvent evt_npc_death;
+        public SoundEvent evt_npc_melee_attack;
+    }
+
+    [Header("NPC Binding")]
+    public List<NPCActionBinding> npcActionBinding = new List<NPCActionBinding>();
+
+    [Header("Props")]
+    [SerializeField] private SoundEvent evt_props_portal;
+    [SerializeField] private SoundEvent evt_props_portal_enter;
+    [SerializeField] private SoundEvent evt_props_windmill;
+    [SerializeField] private SoundEvent evt_props_magic_orb;
+
+
+    [Header("UI SFX")]
+    [SerializeField] private SoundEvent evt_ui_cancel;
+    [SerializeField] private SoundEvent evt_ui_confirm;
+    [SerializeField] private SoundEvent evt_ui_pickup_egg;
+    [SerializeField] private SoundEvent evt_ui_pickup_generic;
+    [SerializeField] private SoundEvent evt_ui_select;
+
+
+    [Header("UI Mixer Faders")]
+    [SerializeField] private String mixer_master_volume_param;
+    [SerializeField] private String mixer_music_volume_param;
+    [SerializeField] private String mixer_sfx_volume_param;
+    [SerializeField] private String mixer_ui_volume_param;
+
+
+
+
     [SerializeField, Range(0f, 1f)] private float masterVolume = 1f;
 
-    [SerializeField] private AudioClip fireballCastClip;
-    [SerializeField] private AudioClip[] ouchClips;
-    [SerializeField] private AudioClip collectedClip;
-    [SerializeField] private AudioClip step1Clip;
-    [SerializeField] private AudioClip step2Clip;
-
+ 
     [SerializeField] private AudioClip skeletonDefeatedClip;
     [SerializeField] private AudioClip wolfDefeatedClip;
 
@@ -28,17 +115,258 @@ public sealed class AudioManager : MonoBehaviour
     [SerializeField, Min(0f)] private float portalFadeDuration = 0.3f;
 
     private AudioSource twoDimensionalSource;
+    private List<AudioSource> environmentSources;
     private bool portalTransitionStarted;
+    public AudioSource playerSource { get; set; }
+    [HideInInspector] public int current_level = 0;
 
-    public float MasterVolume
+
+    //---------------------------------Adam's New Audio Code----------------------------
+    public void SetMasterVolume(float _new_vol)
     {
-        get => masterVolume;
-        set
+        mixer.SetFloat(mixer_master_volume_param, _new_vol);
+    }
+
+    public void SetMusicVolume(float _new_vol)
+    {
+        mixer.SetFloat(mixer_music_volume_param, _new_vol);
+    }
+
+    public void SetSFXVolume(float _new_vol)
+    {
+        mixer.SetFloat(mixer_sfx_volume_param, _new_vol);
+    }
+    public void SetUXVolume(float _new_vol)
+    {
+        mixer.SetFloat(mixer_ui_volume_param, _new_vol);
+    }
+
+    public void PropsSFXResolver(PropsType _propsType, AudioSource _src)
+    {
+        if (_src)
         {
-            masterVolume = Mathf.Clamp01(value);
-            ApplyMasterVolume();
+            switch (_propsType)
+            {
+                case PropsType.orb:
+                    PlaySoundEvent(evt_props_magic_orb, _src);
+                    break;
+                case PropsType.windmill:
+                    PlaySoundEvent(evt_props_windmill, _src);
+                    break;
+                case PropsType.smoke:
+                    break;
+                case PropsType.portal:
+                    PlaySoundEvent(evt_props_portal, _src);
+                    break;
+                default: break;
+            }
         }
     }
+
+    public void PlayerActionResolver(CharAction _action, AudioSource _src)
+    {      
+        switch (_action)
+        {
+            case CharAction.FireBall:
+                PlaySoundEvent(evt_spell_fireball_attack, _src);
+                PlaySoundEvent(evt_player_vox_attack, _src);
+                break;
+            case CharAction.Ice:
+                PlaySoundEvent(evt_spell_ice_attack, _src);
+                PlaySoundEvent(evt_player_vox_attack, _src);
+                break;
+            case CharAction.Lightning:
+                PlaySoundEvent(evt_spell_lightning_attack, _src);
+                PlaySoundEvent(evt_player_vox_attack, _src);
+                break;
+            case CharAction.Hurt:
+                PlaySoundEvent(evt_player_vox_hurt, _src);
+                break;
+            case CharAction.Death:
+                PlaySoundEvent(evt_player_vox_death, _src);
+                break;
+            case CharAction.Step:
+                PlaySoundEvent(evt_player_footstep_generic, _src);
+                break;
+            case CharAction.CollectEgg:
+                PlaySoundEvent(evt_ui_pickup_egg, _src);
+                break;
+            case CharAction.CollectGeneric:
+                PlaySoundEvent(evt_ui_pickup_generic, _src);
+                break;
+            default: break;
+        }
+    }
+
+    public void NPCActionResolver(NpcType _npcType, CharAction _action, Vector3 _pos)
+    {
+        
+        foreach (var n in npcActionBinding)
+        {
+            if (n.npc == _npcType)
+            {
+                switch (_action)
+                {
+                    case CharAction.Attack:
+                        PlaySoundEvent(n.evt_npc_attack, _pos);
+                        PlaySoundEvent(n.evt_npc_melee_attack, _pos);
+                        break;
+                    case CharAction.Death:
+                        PlaySoundEvent(n.evt_npc_death, _pos);                        
+                        break;
+                    default: break;
+                }
+            }
+        }
+    }
+
+    private AudioMixerGroup GetGroup(SoundCategory category)
+    {
+        foreach (var b in categoryBindings)
+            if (b.category == category) return b.mixerGroup;
+        return null;
+    }
+    private void InitEnvironmentSource()
+    {
+        environmentSources = new List<AudioSource>();
+
+        foreach (var b in evt_env_stages)
+        {
+            environmentSources.Add(gameObject.AddComponent<AudioSource>());
+        }
+    }
+
+
+    public void PlayEnvironmentStageSwitch(int switch_to_stage = 0)
+    {
+        switch (switch_to_stage)
+        {
+            case 0:
+                PlaySoundEvent(evt_env_stages[0], environmentSources[0]);
+                snap_shot_stage_00.TransitionTo(snap_shot_transition_time_environment);
+                StartCoroutine(StopAfterDelay(environmentSources[1]));
+                StartCoroutine(StopAfterDelay(environmentSources[2]));
+                break;
+            case 1:
+                PlaySoundEvent(evt_env_stages[1], environmentSources[1]);
+                snap_shot_stage_01.TransitionTo(snap_shot_transition_time_environment);
+                StartCoroutine(StopAfterDelay(environmentSources[0]));
+                break;
+            case 2:
+                PlaySoundEvent(evt_env_stages[2], environmentSources[2]);
+                snap_shot_stage_02.TransitionTo(snap_shot_transition_time_environment);
+                StartCoroutine(StopAfterDelay(environmentSources[1]));
+                break;
+        }
+
+    }
+
+    IEnumerator StopAfterDelay(AudioSource src, float delay = 2f)
+    {
+        yield return new WaitForSeconds(delay);
+        src.Stop();
+    }
+
+    public AudioSource PlaySoundEvent(SoundEvent _evt)
+    {
+
+        return PlaySoundEvent(_evt, Vector3.zero);
+    }
+
+    public AudioSource PlaySoundEvent (SoundEvent _evt, AudioSource _src)
+    {
+        return PlaySoundEvent(_evt, Vector3.zero, _src);
+    }
+
+
+    public AudioSource PlaySoundEvent(SoundEvent _evt, Vector3 _position, AudioSource _src = null)
+    {
+        AudioSource source;
+        GameObject soundObject = null;
+        AudioClip clip = _evt.GetClip();
+        if (clip == null)
+        {
+            Debug.LogWarning("Clip is empty in sound event!!");
+            return null;
+        }
+
+        if (_src != null)
+        {
+            Debug.Log("***********have source");
+            source = _src;
+        }
+        else if (_evt.spatialBlend == 0 && !_evt.loop)
+        {
+            Debug.Log("***********2d sound");
+            source = twoDimensionalSource;
+        }
+        else
+        {
+            Debug.Log("**********3d");
+            soundObject = new GameObject("One Shot - " + clip.name);
+            soundObject.transform.position = _position;
+            source = soundObject.AddComponent<AudioSource>();
+        }
+
+        //configure source
+        source.volume = _evt.GetVolume();
+        source.pitch = _evt.GetPitch();
+        source.loop = _evt.loop;
+        source.dopplerLevel = 0f;
+        source.spatialBlend = _evt.spatialBlend;
+        source.minDistance = _evt.minDistance;
+        source.maxDistance = _evt.maxDistance;
+        source.rolloffMode = _evt.rolloffMode;
+        source.outputAudioMixerGroup = _evt.mixerGroup ? _evt.mixerGroup : GetGroup(_evt.category);
+        source.clip = clip;
+        source.time = _evt.startRandomTime ? UnityEngine.Random.Range(0f, clip.length) : 0f;
+
+        if (UnityEngine.Random.Range(0f, 1f) <= _evt.probability)
+        {
+            Debug.Log("***************" + source.clip.name);
+
+            if (_evt.loop) source.Play();
+            else source.PlayOneShot(clip);
+        } 
+
+        if (_evt.spatialBlend == 0 && !_evt.loop) { Destroy(soundObject, source.clip.length + 0.1f); }
+        return _evt.loop ? source : null;
+    }
+
+    //fading music from battle to cautious
+    public void mixer_fade_to_cautious_music()
+    {
+        snap_shot_music_cautious.TransitionTo(snap_shot_transition_time_music);
+    }
+
+    public void mixer_fade_to_battle_music()
+    {
+        snap_shot_music_battle.TransitionTo(snap_shot_transition_time_music);
+
+    }
+
+
+
+
+
+
+    //-------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+    //public float MasterVolume
+    //{
+    //    get => masterVolume;
+    //    set
+    //    {
+    //        masterVolume = Mathf.Clamp01(value);
+    //        ApplyMasterVolume();
+    //    }
+    //}
 
     private void Awake()
     {
@@ -50,11 +378,19 @@ public sealed class AudioManager : MonoBehaviour
         }
 
         Instance = this;
+
         twoDimensionalSource = GetComponent<AudioSource>();
         twoDimensionalSource.playOnAwake = false;
         twoDimensionalSource.loop = false;
         twoDimensionalSource.spatialBlend = 0f;
         ApplyMasterVolume();
+
+        InitEnvironmentSource();
+    }
+
+    private void Start()
+    {
+
     }
 
     private void OnDestroy()
@@ -78,41 +414,11 @@ public sealed class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayFireballCast()
-    {
-        PlayTwoDimensional(fireballCastClip);
-    }
-
     public void PlayFireballHit(Vector3 position)
     {
-        PlaySpatial(fireballHitClip, position);
+        PlaySoundEvent(evt_spell_fireball_impact, position);
     }
 
-    public void PlayRandomOuch()
-    {
-        if (ouchClips == null || ouchClips.Length == 0)
-        {
-            Debug.LogWarning("AudioManager has no ouch clips assigned.", this);
-            return;
-        }
-
-        PlayTwoDimensional(ouchClips[Random.Range(0, ouchClips.Length)]);
-    }
-
-    public void PlayCollected()
-    {
-        PlayTwoDimensional(collectedClip);
-    }
-
-    public void PlayStep1()
-    {
-        PlayTwoDimensional(step1Clip);
-    }
-
-    public void PlayStep2()
-    {
-        PlayTwoDimensional(step2Clip);
-    }
 
     public bool PlayPortalTransition(string targetSceneName)
     {
@@ -129,7 +435,7 @@ public sealed class AudioManager : MonoBehaviour
     private IEnumerator PortalTransitionRoutine(string targetSceneName)
     {
         CanvasGroup fadeOverlay = CreateFadeOverlay();
-        PlayTwoDimensional(portalClip);
+        PlaySoundEvent(evt_props_portal_enter, transform.position);
 
         float soundDuration = portalClip != null ? portalClip.length : 0f;
         float transitionDuration = Mathf.Max(portalFadeDuration, soundDuration);
@@ -158,6 +464,7 @@ public sealed class AudioManager : MonoBehaviour
 
         twoDimensionalSource.PlayOneShot(clip);
     }
+
 
     private void PlaySpatial(AudioClip clip, Vector3 position)
     {
@@ -205,7 +512,8 @@ public sealed class AudioManager : MonoBehaviour
             "Black",
             typeof(RectTransform),
             typeof(CanvasRenderer),
-            typeof(Image));
+            typeof(UnityEngine.UI.Image)
+            );
 
         imageObject.transform.SetParent(canvasObject.transform, false);
 
@@ -215,7 +523,7 @@ public sealed class AudioManager : MonoBehaviour
         imageTransform.offsetMin = Vector2.zero;
         imageTransform.offsetMax = Vector2.zero;
 
-        Image image = imageObject.GetComponent<Image>();
+        UnityEngine.UI.Image image = imageObject.GetComponent<UnityEngine.UI.Image>();
         image.color = Color.black;
         image.raycastTarget = true;
 
@@ -229,7 +537,7 @@ public sealed class AudioManager : MonoBehaviour
 
     public void PlaySkeletonDefeated(Vector3 position)
     {
-        PlaySpatial(skeletonDefeatedClip, position);
+        //PlaySpatial(skeletonDefeatedClip, position);
     }
 
     public void PlayWolfDefeated(Vector3 position)
@@ -237,3 +545,4 @@ public sealed class AudioManager : MonoBehaviour
         PlaySpatial(wolfDefeatedClip, position);
     }
 }
+

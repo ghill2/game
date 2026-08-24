@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
+  m_Name: evt_player_vox_death
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
+  category: 5
+  AudioClips:
+  - {fileID: 8300000, guid: 725442107675fcb42a8c687466642836, type: 3}
+  - {fileID: 8300000, guid: 78cb9e5172a9bd44d92f92ccfd9f088c, type: 3}
+  - {fileID: 8300000, guid: c6b0c1558e2aa464aa29f015f59f0e4e, type: 3}
+  - {fileID: 8300000, guid: d70d690a9f8fbf14686c5a7232b6879b, type: 3}
+  - {fileID: 8300000, guid: 99afaa46cea8ade469f70e092a3592d4, type: 3}
+  volume: 1
+  pitchMin: 0.659
+  pitchMax: 1.373
+  probability: 0.6
+  spatialBlend: 0.6
+  minDistance: 1
+  maxDistance: 25
+  rolloffMode: 1
+  loop: 0
+  startRandomTime: 0
+  mixerGroup: {fileID: 0}

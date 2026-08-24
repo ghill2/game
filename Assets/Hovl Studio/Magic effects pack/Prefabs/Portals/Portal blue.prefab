@@ -4856,7 +4856,8 @@ GameObject:
   - component: {fileID: 5516487406859467972}
   - component: {fileID: 8445763112410648400}
   - component: {fileID: 3339390747418099020}
-  - component: {fileID: -6288470159323363508}
+  - component: {fileID: 9071429423161021895}
+  - component: {fileID: -6572174467484303632}
   m_Layer: 0
   m_Name: Portal blue
   m_TagString: Untagged
@@ -9743,7 +9744,20 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
---- !u!82 &-6288470159323363508
+--- !u!114 &9071429423161021895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5607819269926399345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac720838169d60a4cab28d0ca85a70b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PropsAudioEvents
+  propsType: 4
+--- !u!82 &-6572174467484303632
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9752,7 +9766,7 @@ AudioSource:
   m_GameObject: {fileID: 5607819269926399345}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 875570948363908086, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+  OutputAudioMixerGroup: {fileID: -7448005732420691774, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: db428ae558a3b414c8cbbc43ee2549a2, type: 3}
   m_PlayOnAwake: 1
@@ -9765,9 +9779,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -9800,7 +9814,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.8
+      value: 0.6
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -9815,7 +9829,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

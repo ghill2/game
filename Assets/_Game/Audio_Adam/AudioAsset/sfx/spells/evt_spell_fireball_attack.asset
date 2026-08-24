@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
+  m_Name: evt_spell_fireball_attack
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
+  category: 1
+  AudioClips:
+  - {fileID: 8300000, guid: c6f157da74351224faf6de4a4bfe56b6, type: 3}
+  - {fileID: 8300000, guid: 0975904461fc68448bc55c0b786b98af, type: 3}
+  - {fileID: 8300000, guid: d8a07416fcdc24546bb7897e8c06d7ab, type: 3}
+  - {fileID: 8300000, guid: ba8bf673a6f61f94bba55309ffd8f4f9, type: 3}
+  - {fileID: 8300000, guid: fac662080e0f4144085ecfe2a75f16d2, type: 3}
+  volume: 1
+  pitchMin: 0.659
+  pitchMax: 1.373
+  probability: 1
+  spatialBlend: 0.438
+  minDistance: 1
+  maxDistance: 25
+  rolloffMode: 1
+  loop: 0
+  startRandomTime: 0
+  mixerGroup: {fileID: 0}

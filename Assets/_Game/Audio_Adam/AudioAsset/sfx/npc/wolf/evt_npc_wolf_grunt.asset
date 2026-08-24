@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
+  m_Name: evt_npc_wolf_grunt
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
+  category: 3
+  AudioClips:
+  - {fileID: 8300000, guid: 69e254a54fda8c948965be3da4c3569b, type: 3}
+  - {fileID: 8300000, guid: ec5b58f96281c5e47be0580512363c12, type: 3}
+  - {fileID: 8300000, guid: 96a75127115b8d246abd7d7781980666, type: 3}
+  - {fileID: 8300000, guid: ba63b92254aa94940ac339308cc97222, type: 3}
+  volume: 1
+  pitchMin: 0.659
+  pitchMax: 1.373
+  probability: 0.6
+  spatialBlend: 1
+  minDistance: 1
+  maxDistance: 25
+  rolloffMode: 1
+  loop: 0
+  startRandomTime: 0
+  mixerGroup: {fileID: 0}
