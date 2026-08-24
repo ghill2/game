@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HintTriggerTester : MonoBehaviour
+public class LevelHintTriggerTester : MonoBehaviour
 {
     [SerializeField] private LevelHintTrigger trigger;
 
