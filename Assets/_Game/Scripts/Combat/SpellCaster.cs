@@ -30,6 +30,7 @@ public class SpellCaster : MonoBehaviour
 
     private Dictionary<SpellId, GameObject> _spellMap;        // maps SpellId -> prefab, loaded from Resources
     private float _nextCastTime;                              // earliest time casting is allowed again
+    private SpellId _lastSpell = SpellId.Fireball;            // most recently cast spell; recast by left mouse button
 
     // fired once when a cast succeeds, carries the spell cast and the cooldown duration in seconds
     public event Action<SpellId, float> OnSpellCast;
@@ -63,6 +64,7 @@ public class SpellCaster : MonoBehaviour
     void OnF(InputValue value) => CastSpell(SpellId.Fireball);      // F = fireball
     void OnR(InputValue value) => CastSpell(SpellId.Frostblast);    // R = frost blast
     void OnE(InputValue value) => CastSpell(SpellId.ElectricStorm); // E = electric storm
+    void OnLastSpell(InputValue value) => CastSpell(_lastSpell);    // left mouse = recast the last spell
 
     // Attempt to cast the spell; aborts with an error if it isn't mapped
     void CastSpell(SpellId spellId)
@@ -83,6 +85,7 @@ public class SpellCaster : MonoBehaviour
 
         _animator.SetTrigger(CastHash);
         _nextCastTime = Time.time + recastDelay; // start the retimer
+        _lastSpell = spellId;                    // remember successful casts for the left-mouse recast
         OnSpellCast?.Invoke(spellId, recastDelay); // notify UI with the spell and countdown duration
         SpawnSpell(prefab);
     }
