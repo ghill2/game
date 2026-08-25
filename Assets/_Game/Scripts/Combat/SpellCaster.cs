@@ -3,6 +3,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
+// unique identifier for each castable spell
+public enum SpellId
+{
+    Fireball,
+    Frostblast,
+    ElectricStorm
+}
+
 public class SpellCaster : MonoBehaviour
 {
     [SerializeField] private Transform castPoint;  // the point (e.g. hand) where spells spawn from
@@ -11,44 +19,57 @@ public class SpellCaster : MonoBehaviour
 
     private Animator _animator;                               // animator that triggers the cast animation
     private static readonly int CastHash = Animator.StringToHash("Cast"); // cached int hash for the Cast trigger (faster than string lookups)
-    private Dictionary<string, GameObject> _spellMap;         // maps spell name -> prefab, loaded from Resources
+
+    // maps each SpellId to the name of its prefab under Resources/Spells
+    private static readonly Dictionary<SpellId, string> SpellPrefabNames = new()
+    {
+        { SpellId.Fireball, "Human_Spell_Fireball_Large" },
+        { SpellId.Frostblast, "Human_Spell_Ice" },
+        { SpellId.ElectricStorm, "Human_Spell_LightningStrike" }
+    };
+
+    private Dictionary<SpellId, GameObject> _spellMap;        // maps SpellId -> prefab, loaded from Resources
     private float _nextCastTime;                              // earliest time casting is allowed again
 
-    // fired once when a cast succeeds, carries the cooldown duration in seconds
-    public event Action<float> OnSpellCast;
+    // fired once when a cast succeeds, carries the spell cast and the cooldown duration in seconds
+    public event Action<SpellId, float> OnSpellCast;
 
     // Awake runs once; grab the animator and preload all spell prefabs
     void Awake()
     {
         _animator = GetComponentInChildren<Animator>(); // animator lives on a child model
-        LoadSpells();                                   // build the name->prefab lookup table
+        LoadSpells();                                   // build the SpellId->prefab lookup table
     }
 
-    // Load every spell prefab stored under Resources/Spells into a dictionary keyed by name
+    // Load each mapped spell prefab from Resources/Spells into a dictionary keyed by SpellId
     void LoadSpells()
     {
-        GameObject[] spells = Resources.LoadAll<GameObject>("Spells"); // load all prefabs in that folder
+        _spellMap = new Dictionary<SpellId, GameObject>();
 
-        _spellMap = new Dictionary<string, GameObject>();
-
-        foreach (GameObject spell in spells)        // index each prefab by its asset name
+        foreach (KeyValuePair<SpellId, string> entry in SpellPrefabNames)
         {
-            _spellMap[spell.name] = spell;
-            Debug.Log("Mapped spell: " + spell.name); // log for debugging/verification
+            GameObject prefab = Resources.Load<GameObject>($"Spells/{entry.Value}");
+            if (prefab == null)                       // abort mapping this spell if the prefab is missing
+            {
+                Debug.LogError($"Spell prefab not found: {entry.Value}");
+                continue;
+            }
+
+            _spellMap[entry.Key] = prefab;
         }
     }
 
-    // Input bindings: each key casts a specific spell by name
-    void OnF(InputValue value) => CastSpell("Human_Spell_Fireball_Large");      // F = fireball
-    void OnR(InputValue value) => CastSpell("Human_Spell_Shockwave_Ground");    // R = ground shockwave
-    void OnE(InputValue value) => CastSpell("Human_Spell_Shockwave_Explosion"); // E = explosion shockwave
+    // Input bindings: each key casts a specific spell
+    void OnF(InputValue value) => CastSpell(SpellId.Fireball);      // F = fireball
+    void OnR(InputValue value) => CastSpell(SpellId.Frostblast);    // R = frost blast
+    void OnE(InputValue value) => CastSpell(SpellId.ElectricStorm); // E = electric storm
 
-    // Attempt to cast the named spell; aborts with an error if it isn't mapped
-    void CastSpell(string spellName)
+    // Attempt to cast the spell; aborts with an error if it isn't mapped
+    void CastSpell(SpellId spellId)
     {
-        if (!_spellMap.TryGetValue(spellName, out GameObject prefab))
+        if (!_spellMap.TryGetValue(spellId, out GameObject prefab))
         {
-            Debug.LogError($"Spell not found: {spellName}");
+            Debug.LogError($"Spell not found: {spellId}");
             return;
         }
 
@@ -62,7 +83,7 @@ public class SpellCaster : MonoBehaviour
 
         _animator.SetTrigger(CastHash);
         _nextCastTime = Time.time + recastDelay; // start the retimer
-        OnSpellCast?.Invoke(recastDelay);        // notify UI with the countdown duration
+        OnSpellCast?.Invoke(spellId, recastDelay); // notify UI with the spell and countdown duration
         SpawnSpell(prefab);
     }
 

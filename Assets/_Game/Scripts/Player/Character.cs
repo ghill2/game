@@ -44,11 +44,11 @@ public class Character : MonoBehaviour
         collectibles = GetComponent<PlayerCollectibles>();
     }
 
-    // Per-frame update: order matters - ground check, then move, gravity, finally animation
+    // move first, then read grounded state, gravity, finally animation
     void Update()
     {
-        _isGrounded = IsGrounded();
         ApplyMovement();
+        _isGrounded = _controller.isGrounded;
         ApplyGravity();
         ApplyAnimation();
     }
@@ -57,7 +57,14 @@ public class Character : MonoBehaviour
     {
         // Temporary mock for celebratory jump
         _velocity = jumpPower / 2f;
-        _animator.SetTrigger("Jump");
+        if (_isGrounded)
+        {
+            _animator.SetTrigger("Jump");
+        }
+        else
+        {
+            _animator.ResetTrigger("Jump"); // clear any stale trigger so no unexpected jump fires after landing
+        }
 
         // Notify the collectibles component
         if (collectibles != null)
@@ -135,32 +142,10 @@ public class Character : MonoBehaviour
         _animator.SetFloat("VerticalSpeed", _velocity);   // drives falling/jumping blend tree
     }
 
-    // Checks for ground by sphere casting downward, ignoring the character's own layer
-    private bool IsGrounded()
-    {
-        Vector3 origin = transform.position + Vector3.up * 1.0f; // start the cast slightly above the feet
-        float radius = 0.3f;        // radius of the sphere used for the cast
-        float distance = 1.1f;      // how far to cast downward
-        int layerMask = ~(1 << gameObject.layer); // ignore the character's own layer to avoid self-hit
-
-        return Physics.SphereCast(
-            origin,
-            radius,
-            Vector3.down,
-            out _,
-            distance,
-            layerMask
-        );
-    }
-
-    // Draws the ground-check sphere in the editor so the cast can be visualized
+    // Draws the ground-check sphere in the editor so the grounded state can be visualized
     void OnDrawGizmos()
     {
-        Vector3 origin = transform.position + Vector3.up * 1.0f;
-        float radius = 0.3f;
-        float distance = 1.1f;
-
         Gizmos.color = _isGrounded ? Color.green : Color.red; // green when grounded, red when not
-        Gizmos.DrawWireSphere(origin + Vector3.down * distance, radius); // draw sphere at the cast endpoint
+        Gizmos.DrawWireSphere(transform.position + Vector3.up * 0.1f, 0.3f); // small sphere just above the feet
     }
 }
