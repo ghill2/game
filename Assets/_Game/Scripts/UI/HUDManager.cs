@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class HUDManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class HUDManager : MonoBehaviour
     private HUDCollectiblesController hudCollectiblesController;
 
     private SpellPanelController spellPanelController;
+
+    private SpellCaster spellCaster;
 
     [SerializeField]
     private PopupController popupController;
@@ -36,11 +39,13 @@ public class HUDManager : MonoBehaviour
         // Get PlayerHealth component from the player
         playerHealth = player.GetComponent<PlayerHealth>();
         playerCollectibles = player.GetComponent<PlayerCollectibles>();
+        spellCaster = player.GetComponent<SpellCaster>();
 
         // Event Listener
         playerHealth.OnHealthChanged += UpdateHealthUI;
         playerCollectibles.OnEggCollected += UpdateEggsCount;
         playerCollectibles.OnEggCollected += UpdatePopup;
+        spellCaster.OnSpellCast += UpdateSpellPanel;
 
         // END
 
@@ -59,8 +64,6 @@ public class HUDManager : MonoBehaviour
         {
             popupController.ShowPopup(3.0f);
         }
-
-        UpdateSpellPanel(3);
     }
 
     private void OnDestroy()
@@ -95,10 +98,9 @@ public class HUDManager : MonoBehaviour
         UpdatePopup(e.Icon, e.Text);
     }
 
-    private void UpdateSpellPanel(int SpellNo)
+    private void UpdateSpellPanel(SpellId SpellNo, float recastDelay)
     {
         Debug.Log($"Updating Spell Panel: Last Spell Casted = {SpellNo}");
-        spellPanelController.UpdatePanel(SpellNo);
+        spellPanelController.UpdatePanel(SpellNo, recastDelay);
     }
-
 }

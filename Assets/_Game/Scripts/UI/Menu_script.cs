@@ -108,10 +108,27 @@ public class Menu_script : MonoBehaviour
         }
     }
 
-    // Handle Volume Change
     private void OnSliderChanged(Slider slider, float value)
     {
-        MainMenuMusicManager.OnSliderChanged(slider, value);
+        switch (slider.name)
+        {
+            case "Master Slider":
+                Debug.Log($"Slider {slider.name} : {value}");
+                AudioManager.Instance?.SetMasterVolume(value);
+                break;
+            case "SFX Slider":
+                Debug.Log($"Slider {slider.name} : {value}");
+                AudioManager.Instance.SetSFXVolume(value);
+                break;
+            case "UX Slider":
+                Debug.Log($"Slider {slider.name} : {value}");
+                AudioManager.Instance.SetUXVolume(value);
+                break;
+            case "Music Slider":
+                Debug.Log($"Slider {slider.name} : {value}");
+                AudioManager.Instance.SetMusicVolume(value);
+                break;
+        }
     }
 
     private void OnPlayButtonClicked()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 
 public class SpellPanelController : MonoBehaviour
@@ -37,10 +38,30 @@ public class SpellPanelController : MonoBehaviour
         // UpdateSelectedArrows(3);
     }
 
-    public void UpdatePanel(int SpellNo)
+    public void UpdatePanel(SpellId SpellId, float recastDelay)
     {
+        int SpellNo = 0;
+        switch (SpellId)
+        {
+            case SpellId.Fireball:
+                SpellNo = 3;
+                break;
+            case SpellId.Frostblast: 
+                SpellNo = 2; 
+                break;
+            case SpellId.ElectricStorm:
+                SpellNo = 1;
+                break;
+        }
+
+        if (SpellNo == 0)
+        {
+            Debug.LogError($"SpellNo has an unexpected value {SpellNo} ");
+            return;
+        }
+            
         UpdateSelectedArrows(SpellNo);
-        UpdateCooldownFill(SpellNo);
+        UpdateCooldownFill(SpellNo, recastDelay);
     }
 
     private void UpdateSelectedArrows(int SpellNo)
@@ -64,15 +85,16 @@ public class SpellPanelController : MonoBehaviour
     }
 
     
-    private void UpdateCooldownFill(int SpellNo)
+    private void UpdateCooldownFill(int SpellNo, float recastDelay)
     {
+        
         if (cooldownFlags[SpellNo])
         {
             Debug.Log($"CooldownFlag {SpellNo} is {cooldownFlags[SpellNo]}");
             return;
         }
 
-        StartCoroutine(CooldownFillAnimation(SpellNo, 5f));
+        StartCoroutine(CooldownFillAnimation(SpellNo, recastDelay));
     }
 
     private IEnumerator CooldownFillAnimation(int SpellNo, float duration = 1f)
