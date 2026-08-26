@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.Splines.ExtrusionShapes;
+using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour
 {
@@ -23,8 +25,7 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     private PopupController popupController;
 
-    [SerializeField]
-    private bool showPopupOnStart = true;
+    private List<LevelHintTrigger> levelHintTriggers;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,16 +37,26 @@ public class HUDManager : MonoBehaviour
             Debug.LogError("Player not found in the scene.");
         }
 
-        // Get PlayerHealth component from the player
+        // Get components from the player
         playerHealth = player.GetComponent<PlayerHealth>();
         playerCollectibles = player.GetComponent<PlayerCollectibles>();
         spellCaster = player.GetComponent<SpellCaster>();
+
+        // Get Triggers from level
+        levelHintTriggers = new List<LevelHintTrigger>();
+        foreach (var trigger in FindObjectsByType<LevelHintTrigger>(FindObjectsSortMode.None))
+        {
+            levelHintTriggers.Add(trigger);
+        }
+
 
         // Event Listener
         playerHealth.OnHealthChanged += UpdateHealthUI;
         playerCollectibles.OnEggCollected += UpdateEggsCount;
         playerCollectibles.OnEggCollected += UpdatePopup;
         spellCaster.OnSpellCast += UpdateSpellPanel;
+
+        levelHintTriggers.ForEach(trigger => trigger.OnHintTriggerEntered += OnTriggerEntered);
 
         // END
 
@@ -60,10 +71,6 @@ public class HUDManager : MonoBehaviour
 
         // Test Area
 
-        if (showPopupOnStart)
-        {
-            popupController.ShowPopup(3.0f);
-        }
     }
 
     private void OnDestroy()
@@ -89,7 +96,6 @@ public class HUDManager : MonoBehaviour
     {
         Debug.Log($"Updating Popup Window: Icon = {icon}, text = {text}");
         popupController.UpdateWindow(icon, text);
-        if (!popupController.showPopup) popupController.ShowPopup(3.0f);
     }
 
     private void UpdatePopup(object _, CollectiblesEventArgs e)
@@ -102,5 +108,38 @@ public class HUDManager : MonoBehaviour
     {
         Debug.Log($"Updating Spell Panel: Last Spell Casted = {SpellNo}");
         spellPanelController.UpdatePanel(SpellNo, recastDelay);
+    }
+
+    private void OnTriggerEntered(int hintId)
+    {
+        Texture icon;
+        string text;
+        switch (hintId)
+        {
+            case 0:
+                // Chained = true
+                // Popup 1
+                Debug.Log($"Level Trigger invoked, hintId = {hintId}");
+                icon = Resources.Load<Texture2D>("Popup/wasd-square");
+                text = "Move";
+
+                UpdatePopup(icon, text);
+
+                // Popup 2
+                icon = Resources.Load<Texture2D>("Popup/spacebar-key");
+                text = "Jump";
+
+                UpdatePopup(icon, text);
+                break;
+
+            case 1:
+
+                break;
+
+            default:
+                Debug.Log($"Level Trigger invoked, hintId = {hintId}");
+                Debug.Log($"No Icon/Text provided for Trigger hintId = {hintId}");
+                break;
+        }   
     }
 }

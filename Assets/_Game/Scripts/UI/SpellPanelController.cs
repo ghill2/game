@@ -40,21 +40,21 @@ public class SpellPanelController : MonoBehaviour
 
     public void UpdatePanel(SpellId SpellId, float recastDelay)
     {
-        int SpellNo = 0;
+        int SpellNo = -1;
         switch (SpellId)
         {
             case SpellId.Fireball:
-                SpellNo = 3;
+                SpellNo = 2;
                 break;
             case SpellId.Frostblast: 
-                SpellNo = 2; 
+                SpellNo = 1; 
                 break;
             case SpellId.ElectricStorm:
-                SpellNo = 1;
+                SpellNo = 0;
                 break;
         }
 
-        if (SpellNo == 0)
+        if (SpellNo == -1)
         {
             Debug.LogError($"SpellNo has an unexpected value {SpellNo} ");
             return;
@@ -80,8 +80,7 @@ public class SpellPanelController : MonoBehaviour
         }
 
         Transform currentPos = Selected_arrows.transform;
-        Debug.Log(-444 + (296 * SpellNo));
-        Selected_arrows.transform.localPosition = new Vector2(-444 + (296 * SpellNo), currentPos.localPosition.y);
+        Selected_arrows.transform.localPosition = new Vector2(-360 + (360 * SpellNo), currentPos.localPosition.y);
     }
 
     
