@@ -4,6 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
+public class PopupData
+{
+    public Texture icon;
+    public string text;
+
+    public PopupData(Texture icon, string text)
+    {
+        this.icon = icon;
+        this.text = text;
+    }
+}
+
 public class PopupController : MonoBehaviour
 {
     [SerializeField]
@@ -14,8 +26,7 @@ public class PopupController : MonoBehaviour
     private TextMeshProUGUI windowText;
 
     // Next Popup Storage
-    private Queue<Texture> Icon_Queue;
-    private Queue<string> Text_Queue;
+    private Queue<PopupData> popup_Queue;
 
     private bool showingPopup = false;
 
@@ -26,8 +37,7 @@ public class PopupController : MonoBehaviour
         windowIcon = GetComponentInChildren<RawImage>();
         windowText = GetComponentInChildren<TextMeshProUGUI>();
 
-        Icon_Queue = new Queue<Texture>();
-        Text_Queue = new Queue<string>();
+        popup_Queue = new Queue<PopupData>();
 
         Window.canvasRenderer.SetAlpha(0f);
         windowIcon.canvasRenderer.SetAlpha(0f);
@@ -35,16 +45,12 @@ public class PopupController : MonoBehaviour
     }
 
     public void UpdateWindow(Texture icon, string text)
-    {
-        if (showingPopup) // There's an Ongoing popup
+    { 
+        popup_Queue.Enqueue(new PopupData(icon, text));
+        if (!showingPopup && popup_Queue.TryDequeue(out PopupData data))
         {
-            Icon_Queue.Enqueue(icon);
-            Text_Queue.Enqueue(text);
-        }
-        else //Show popup instantly
-        {
-            windowIcon.texture = icon;
-            windowText.text = text;
+            windowIcon.texture = data.icon;
+            windowText.text = data.text;
             ShowPopup();
         }
     }
@@ -91,12 +97,12 @@ public class PopupController : MonoBehaviour
         Debug.Log("ShowPopup ends");
 
         // Call itself again if there's Popup queued
-        if (!showingPopup && Icon_Queue.Count > 0)
+        if (!showingPopup && popup_Queue.Count > 0)
         {
-            if (Icon_Queue.TryDequeue(out Texture NextIcon) && Text_Queue.TryDequeue(out string NextText))
+            if (popup_Queue.TryDequeue(out PopupData data))
             {
-                Debug.Log($"NextIcon: {NextIcon}, NextText: {NextText}");
-                UpdateWindow(NextIcon, NextText);
+                Debug.Log($"NextIcon: {data.icon}, NextText: {data.text}");
+                UpdateWindow(data.icon, data.text);
                 ShowPopup();
             }
             else
