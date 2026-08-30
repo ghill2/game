@@ -1,7 +1,10 @@
-using UnityEngine;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu_script : MonoBehaviour
 {
@@ -21,9 +24,23 @@ public class Menu_script : MonoBehaviour
     private GameObject OptionsScreen;
 
     [SerializeField]
-    private string StartScene = "SCN_Main8";
+    private string StartScene = "SCN_Level_0_Tutorial-Cave";
 
     private InputAction Return;
+
+    [SerializeField]
+    private Slider MasterVolume;
+    [SerializeField]
+    private Slider SFXVolume;
+    [SerializeField]
+    private Slider UIVolume;
+    [SerializeField]
+    private Slider MusicVolume;
+
+    private List<Slider> VolumeSliders;
+
+    [SerializeField]
+    private MainMenuMusicManager MainMenuMusicManager;
 
     private void Start()
     {
@@ -33,8 +50,35 @@ public class Menu_script : MonoBehaviour
 
         Return = InputSystem.actions.FindAction("Return");
 
+        MasterVolume = GameObject.Find("Master Slider").GetComponent<Slider>();
+        SFXVolume = GameObject.Find("SFX Slider").GetComponent<Slider>();
+        UIVolume = GameObject.Find("UI Slider").GetComponent<Slider>();
+        MusicVolume = GameObject.Find("Music Slider").GetComponent<Slider>();
+
+        VolumeSliders = new List<Slider>
+        {
+            MasterVolume,
+            SFXVolume,
+            UIVolume,
+            MusicVolume
+        };
+
+        // Slider's Listeners 
+        VolumeSliders.ForEach(
+            slider =>
+            {
+                slider.onValueChanged.AddListener(value => OnSliderChanged(slider, value));
+
+                Debug.Log(slider.name);
+            }
+        );
+
+        MainMenuMusicManager = GameObject.Find("PF_MainMenuMusicManager").GetComponent<MainMenuMusicManager>();
+        
+
         MainMenuScreen.SetActive(true);
         OptionsScreen.SetActive(false);
+
     }
     private void OnEnable()
     {
@@ -49,12 +93,41 @@ public class Menu_script : MonoBehaviour
         optionButtonView.ButtonClicked -= OnOptionButtonClicked;
         exitButtonView.ButtonClicked -= OnExitButtonClicked;
     }
+    private void OnDestroy()
+    {
+        VolumeSliders.ForEach(
+            s => s.onValueChanged.RemoveAllListeners()
+        );
+    }
 
     private void Update()
     {
         if (Return.IsPressed() == true)
         {
             OnReturn();
+        }
+    }
+
+    private void OnSliderChanged(Slider slider, float value)
+    {
+        switch (slider.name)
+        {
+            case "Master Slider":
+                Debug.Log($"Slider {slider.name} : {value}");
+                AudioManager.Instance?.SetMasterVolume(value);
+                break;
+            case "SFX Slider":
+                Debug.Log($"Slider {slider.name} : {value}");
+                AudioManager.Instance.SetSFXVolume(value);
+                break;
+            case "UX Slider":
+                Debug.Log($"Slider {slider.name} : {value}");
+                AudioManager.Instance.SetUXVolume(value);
+                break;
+            case "Music Slider":
+                Debug.Log($"Slider {slider.name} : {value}");
+                AudioManager.Instance.SetMusicVolume(value);
+                break;
         }
     }
 
