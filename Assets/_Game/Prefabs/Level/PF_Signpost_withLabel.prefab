@@ -87,17 +87,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4005468833864491630}
-  m_LocalRotation: {x: 0.0000000032114467, y: 0.99763286, z: 0.00000022149823, w: 0.06876584}
-  m_LocalPosition: {x: 0, y: 0, z: 0.040783927}
+  m_LocalRotation: {x: 0.000000015068727, y: 0.99988383, z: 0.00000022100849, w: 0.015241025}
+  m_LocalPosition: {x: 0, y: 0, z: 0.06908631}
   m_LocalScale: {x: 0.99999976, y: 1, z: 0.99999976}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6439689263523115878}
-  m_LocalEulerAnglesHint: {x: 0, y: 172.114, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 178.253, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.060813, y: 2.6446197}
-  m_SizeDelta: {x: 20, y: 5}
+  m_AnchoredPosition: {x: -1.0564387, y: 2.653}
+  m_SizeDelta: {x: 20.1523, y: 4.8717}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8788542956661905219
 MeshRenderer:
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Thee Windy City
+  m_text: Ye Olde Windy City
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 66fe2dbe0aabc2e4eaa96d915db0eb67, type: 2}
   m_sharedMaterial: {fileID: 5956328021350814900, guid: 66fe2dbe0aabc2e4eaa96d915db0eb67, type: 2}
