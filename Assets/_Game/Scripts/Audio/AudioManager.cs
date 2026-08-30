@@ -116,29 +116,40 @@ public sealed class AudioManager : MonoBehaviour
 
     private AudioSource twoDimensionalSource;
     private List<AudioSource> environmentSources;
-    private bool portalTransitionStarted;
+    private bool portalTransitionStarted;    
     public AudioSource playerSource { get; set; }
     [HideInInspector] public int current_level = 0;
+    private GameObject player;
+    private SpellCaster spellCaster;
+    private PlayerCollectibles playerCollectibles;
 
 
     //---------------------------------Adam's New Audio Code----------------------------
+    public float GetDecibleVal(float _sliderVal)
+    {
+        float clampedValue = Mathf.Clamp(_sliderVal, 0.0001f, 1f);
+
+        float decibelValue = Mathf.Log10(clampedValue) * 20;
+
+        return decibelValue;
+    }
     public void SetMasterVolume(float _new_vol)
     {
-        mixer.SetFloat(mixer_master_volume_param, _new_vol);
+        mixer.SetFloat(mixer_master_volume_param, GetDecibleVal(_new_vol));
     }
 
     public void SetMusicVolume(float _new_vol)
     {
-        mixer.SetFloat(mixer_music_volume_param, _new_vol);
+        mixer.SetFloat(mixer_music_volume_param, GetDecibleVal(_new_vol));
     }
 
     public void SetSFXVolume(float _new_vol)
     {
-        mixer.SetFloat(mixer_sfx_volume_param, _new_vol);
+        mixer.SetFloat(mixer_sfx_volume_param, GetDecibleVal(_new_vol));
     }
     public void SetUXVolume(float _new_vol)
     {
-        mixer.SetFloat(mixer_ui_volume_param, _new_vol);
+        mixer.SetFloat(mixer_ui_volume_param, GetDecibleVal(_new_vol));
     }
 
     public void PropsSFXResolver(PropsType _propsType, AudioSource _src)
@@ -166,19 +177,7 @@ public sealed class AudioManager : MonoBehaviour
     public void PlayerActionResolver(CharAction _action, AudioSource _src)
     {      
         switch (_action)
-        {
-            case CharAction.FireBall:
-                PlaySoundEvent(evt_spell_fireball_attack, _src);
-                PlaySoundEvent(evt_player_vox_attack, _src);
-                break;
-            case CharAction.Ice:
-                PlaySoundEvent(evt_spell_ice_attack, _src);
-                PlaySoundEvent(evt_player_vox_attack, _src);
-                break;
-            case CharAction.Lightning:
-                PlaySoundEvent(evt_spell_lightning_attack, _src);
-                PlaySoundEvent(evt_player_vox_attack, _src);
-                break;
+        {           
             case CharAction.Hurt:
                 PlaySoundEvent(evt_player_vox_hurt, _src);
                 break;
@@ -197,6 +196,28 @@ public sealed class AudioManager : MonoBehaviour
             default: break;
         }
     }
+
+    
+    public void SpellCastResolver(SpellId _spellID, float recastDelay)
+    {
+        switch (_spellID)
+        {
+            case SpellId.Fireball:
+                PlaySoundEvent(evt_spell_fireball_attack,playerSource);
+                PlaySoundEvent(evt_player_vox_attack, playerSource);
+                break;
+            case SpellId.Frostblast:
+                PlaySoundEvent(evt_spell_ice_attack, playerSource);
+                PlaySoundEvent(evt_player_vox_attack, playerSource);
+                break;
+            case SpellId.ElectricStorm:
+                PlaySoundEvent(evt_spell_lightning_attack, playerSource);
+                PlaySoundEvent(evt_player_vox_attack, playerSource);
+                break;
+            default: break;
+        }        
+    }
+
 
     public void NPCActionResolver(NpcType _npcType, CharAction _action, Vector3 _pos)
     {
@@ -348,14 +369,7 @@ public sealed class AudioManager : MonoBehaviour
 
 
 
-
-
     //-------------------------------------------------------------------------------------
-
-
-
-
-
 
 
     //public float MasterVolume
@@ -383,14 +397,24 @@ public sealed class AudioManager : MonoBehaviour
         twoDimensionalSource.playOnAwake = false;
         twoDimensionalSource.loop = false;
         twoDimensionalSource.spatialBlend = 0f;
-        ApplyMasterVolume();
-
         InitEnvironmentSource();
     }
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
 
+        if (player == null)
+        {
+            Debug.LogError("Player not found in the scene.");
+        }
+
+        spellCaster = player.GetComponent<SpellCaster>();
+        playerCollectibles = player.GetComponent<PlayerCollectibles>();
+
+        //Event Listener
+        spellCaster.OnSpellCast += SpellCastResolver;
+        //playerCollectibles.OnEggCollected += 
     }
 
     private void OnDestroy()
@@ -399,6 +423,8 @@ public sealed class AudioManager : MonoBehaviour
         {
             Instance = null;
         }
+
+        spellCaster.OnSpellCast -= SpellCastResolver;
     }
 
     private void OnValidate()

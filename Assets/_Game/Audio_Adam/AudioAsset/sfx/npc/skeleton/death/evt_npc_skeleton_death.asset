@@ -27,7 +27,7 @@ MonoBehaviour:
   pitchMin: 0.659
   pitchMax: 1.373
   probability: 1
-  spatialBlend: 1
+  spatialBlend: 0.8
   minDistance: 1
   maxDistance: 30
   rolloffMode: 2

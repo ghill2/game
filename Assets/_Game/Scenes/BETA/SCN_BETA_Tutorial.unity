@@ -2547,7 +2547,7 @@ PrefabInstance:
     - target: {fileID: 5457233514700338335, guid: b4bb34ec137fe47f7aa24181b07b5c6b, type: 3}
       propertyPath: crosshair
       value: 
-      objectReference: {fileID: 1768810554}
+      objectReference: {fileID: 0}
     - target: {fileID: 6551764449388809571, guid: b4bb34ec137fe47f7aa24181b07b5c6b, type: 3}
       propertyPath: m_Material
       value: 
@@ -2569,17 +2569,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4bb34ec137fe47f7aa24181b07b5c6b, type: 3}
---- !u!114 &1768810554 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4264162707882337210, guid: 76a354f8e02484264b5aab34969b9b99, type: 3}
-  m_PrefabInstance: {fileID: 5964182735983124377}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a6752cfec574413ad3ca8b17cb4a84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Crosshair
 --- !u!1001 &1982272950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3039,7 +3028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8489436448903025932, guid: 6e49d76498ae14f38b201959cd110ca2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8489436448903025932, guid: 6e49d76498ae14f38b201959cd110ca2, type: 3}
       propertyPath: masterVolume
@@ -3072,11 +3061,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3235702845517652682, guid: 76a354f8e02484264b5aab34969b9b99, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9914449
       objectReference: {fileID: 0}
     - target: {fileID: 3235702845517652682, guid: 76a354f8e02484264b5aab34969b9b99, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.1305262
       objectReference: {fileID: 0}
     - target: {fileID: 3235702845517652682, guid: 76a354f8e02484264b5aab34969b9b99, type: 3}
       propertyPath: m_LocalRotation.y
@@ -3101,6 +3090,18 @@ PrefabInstance:
     - target: {fileID: 5958531441349057671, guid: 76a354f8e02484264b5aab34969b9b99, type: 3}
       propertyPath: rotationSpeed
       value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916971581708339446, guid: 76a354f8e02484264b5aab34969b9b99, type: 3}
+      propertyPath: far clip plane
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916971581708339446, guid: 76a354f8e02484264b5aab34969b9b99, type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916971581708339446, guid: 76a354f8e02484264b5aab34969b9b99, type: 3}
+      propertyPath: orthographic size
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7653373348430011666, guid: 76a354f8e02484264b5aab34969b9b99, type: 3}
       propertyPath: m_Name
