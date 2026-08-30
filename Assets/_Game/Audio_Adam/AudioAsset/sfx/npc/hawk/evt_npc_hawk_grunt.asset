@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
-  m_Name: evt_npc_wolf_grunt
+  m_Name: evt_npc_hawk_grunt
   m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
   category: 4
   AudioClips:
-  - {fileID: 8300000, guid: 69e254a54fda8c948965be3da4c3569b, type: 3}
-  - {fileID: 8300000, guid: ec5b58f96281c5e47be0580512363c12, type: 3}
-  - {fileID: 8300000, guid: 96a75127115b8d246abd7d7781980666, type: 3}
-  - {fileID: 8300000, guid: ba63b92254aa94940ac339308cc97222, type: 3}
+  - {fileID: 8300000, guid: 3e8733b3c7462a74bb12f5bfccfbff78, type: 3}
+  - {fileID: 8300000, guid: 8100127af1d486d478e2a1fbab143827, type: 3}
+  - {fileID: 8300000, guid: c4a3910b9c021f9488249c2bf2ddc03d, type: 3}
+  - {fileID: 8300000, guid: 1e7cd5b0a4736fa40b24680e22c74b8a, type: 3}
+  - {fileID: 8300000, guid: 4714c3bfbc21cbf47bf174eb56afe470, type: 3}
   volume: 1
   pitchMin: 0.659
   pitchMax: 1.373
