@@ -6,18 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class Pausing : MonoBehaviour
 {
+    private GameObject player;
     private InputAction pause;
     [SerializeField] private PlayerInput playerInput;
     private PauseMenu_Script PauseMenu;
 
-    //Debug use
-    private InputAction move;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerInput = player.GetComponent<PlayerInput>();
         //Variable Initialize
         pause = InputSystem.actions.FindAction("Pause");
-        move = InputSystem.actions.FindAction("Move");
         //Sets Player Input Scheme
         playerInput.SwitchCurrentActionMap("Player");
         Debug.Log(playerInput.currentActionMap);

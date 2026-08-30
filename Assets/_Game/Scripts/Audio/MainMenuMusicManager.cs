@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 public sealed class MainMenuMusicManager : MonoBehaviour
@@ -94,4 +95,6 @@ public sealed class MainMenuMusicManager : MonoBehaviour
             ConfigureSource();
         }
     }
+
+    
 }
