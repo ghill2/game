@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
   m_Name: evt_npc_wolf_grunt
   m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
-  category: 3
+  category: 4
   AudioClips:
   - {fileID: 8300000, guid: 69e254a54fda8c948965be3da4c3569b, type: 3}
   - {fileID: 8300000, guid: ec5b58f96281c5e47be0580512363c12, type: 3}

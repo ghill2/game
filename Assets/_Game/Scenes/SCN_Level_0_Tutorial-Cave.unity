@@ -1496,6 +1496,7 @@ GameObject:
   - component: {fileID: 745253727}
   - component: {fileID: 745253726}
   - component: {fileID: 745253729}
+  - component: {fileID: 745253730}
   m_Layer: 6
   m_Name: tutorial_cave_terrain
   m_TagString: Untagged
@@ -1597,6 +1598,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 2a3cee1cd70d0ff4ba16fabf0c1beb49, type: 2}
+--- !u!114 &745253730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745253725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fe1f404b89d5b43ae3332e4c87a8e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CurrentLevel
+  currentLevel: 0
 --- !u!4 &764179908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7705516103930639856, guid: fc8431f587d452643b6ec4405c7de40c, type: 3}

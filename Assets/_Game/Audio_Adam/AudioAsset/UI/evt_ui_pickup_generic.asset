@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
   m_Name: evt_ui_pickup_generic
   m_EditorClassIdentifier: Assembly-CSharp::SoundEvent
-  category: 5
+  category: 6
   AudioClips:
   - {fileID: 8300000, guid: a398425c414faf346be663ec9235d6bc, type: 3}
-  volume: 0.7
+  volume: 0.9
   pitchMin: 1
   pitchMax: 1
   probability: 1
@@ -24,4 +24,5 @@ MonoBehaviour:
   maxDistance: 25
   rolloffMode: 0
   loop: 0
+  startRandomTime: 0
   mixerGroup: {fileID: 0}

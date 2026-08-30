@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
+  m_Name: evt_npc_hawk_grunt
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
+  category: 4
+  AudioClips:
+  - {fileID: 8300000, guid: 3e8733b3c7462a74bb12f5bfccfbff78, type: 3}
+  - {fileID: 8300000, guid: 8100127af1d486d478e2a1fbab143827, type: 3}
+  - {fileID: 8300000, guid: c4a3910b9c021f9488249c2bf2ddc03d, type: 3}
+  - {fileID: 8300000, guid: 1e7cd5b0a4736fa40b24680e22c74b8a, type: 3}
+  - {fileID: 8300000, guid: 4714c3bfbc21cbf47bf174eb56afe470, type: 3}
+  volume: 1
+  pitchMin: 0.659
+  pitchMax: 1.373
+  probability: 0.6
+  spatialBlend: 1
+  minDistance: 1
+  maxDistance: 25
+  rolloffMode: 1
+  loop: 0
+  startRandomTime: 0
+  mixerGroup: {fileID: 0}

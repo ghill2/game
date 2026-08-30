@@ -40,7 +40,7 @@ public sealed class PlayerAudioEvents : MonoBehaviour
     public void PlayFireballCast()
     {
         //AudioManager.Instance?.PlayFireballCast();
-        AudioManager.Instance?.PlayerActionResolver(CharAction.FireBall, audioSource);
+        //AudioManager.Instance?.PlayerActionResolver(CharAction.FireBall, audioSource);
     }
 
     public void Step1()

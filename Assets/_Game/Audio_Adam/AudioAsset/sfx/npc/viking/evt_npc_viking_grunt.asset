@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
+  m_Name: evt_npc_viking_grunt
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
+  category: 4
+  AudioClips:
+  - {fileID: 8300000, guid: 52fdf87fc859cfb45aefd937457fbefa, type: 3}
+  - {fileID: 8300000, guid: 66143c9a5a7283c4f93402972d63e858, type: 3}
+  - {fileID: 8300000, guid: 4aeb9ea8c5dc3784d9e3f4682b41ff93, type: 3}
+  - {fileID: 8300000, guid: 11eca7c57000e1047b9e1d9d6ce1d4db, type: 3}
+  - {fileID: 8300000, guid: 0b6ee681c27789b49908ef0db07548e3, type: 3}
+  volume: 1
+  pitchMin: 0.659
+  pitchMax: 1.373
+  probability: 0.6
+  spatialBlend: 1
+  minDistance: 1
+  maxDistance: 25
+  rolloffMode: 1
+  loop: 0
+  startRandomTime: 0
+  mixerGroup: {fileID: 0}
