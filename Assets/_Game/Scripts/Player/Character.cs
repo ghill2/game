@@ -6,6 +6,9 @@ public class Character : MonoBehaviour
     #region Variables: Movement
 
     [SerializeField] private float speed = 5f;   // horizontal movement speed in units/sec
+    [SerializeField] private float bootsSpeedMultiplier = 2f;  // speed multiplier while the boots boost is active
+    [SerializeField] private float bootsBoostDuration = 10f;   // how long the boots boost lasts in seconds
+    private float _speedBoostEndTime;                          // timestamp when the boots boost expires
     private Vector2 _input;                       // latest move input from the player (x = strafe, y = forward/back)
     private CharacterController _controller;      // Unity component used to move the character with collision
     private Animator _animator;                   // animator driving the character's animation state machine
@@ -31,6 +34,11 @@ public class Character : MonoBehaviour
     [SerializeField]
     private PlayerCollectibles collectibles;
 
+    [SerializeField]
+    private int potionHealAmount = 50;              // how much health the potion restores
+
+    private PlayerHealth _health;                   // health component, used by the potion collectible
+
     // True when the player is supplying non-negligible movement input
     public bool IsMoving => _input.sqrMagnitude > 0.001f;
 
@@ -42,6 +50,7 @@ public class Character : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();    // animator lives on a child model
 
         collectibles = GetComponent<PlayerCollectibles>();
+        _health = GetComponent<PlayerHealth>();
     }
 
     // move first, then read grounded state, gravity, finally animation
@@ -70,6 +79,30 @@ public class Character : MonoBehaviour
         if (collectibles != null)
         {
             collectibles.EggCollect();
+        }
+    }
+
+    // called by the SpeedBoots collectible, starts the speed boost
+    public void CollectBoots()
+    {
+        _speedBoostEndTime = Time.time + bootsBoostDuration;
+        if (collectibles != null)
+        {
+            collectibles.BootsCollect(bootsSpeedMultiplier, bootsBoostDuration);
+        }
+    }
+
+    // called by the HealthPotion collectible to restore health
+    public void CollectHealthPotion()
+    {
+        if (_health != null)
+        {
+            _health.RestoreHealth(potionHealAmount);
+        }
+
+        if (collectibles != null)
+        {
+            collectibles.PotionCollect(potionHealAmount);
         }
     }
 
@@ -103,8 +136,10 @@ public class Character : MonoBehaviour
 
         // Combine strafe (x) and forward (y) input into a single horizontal direction
         Vector3 horizontalMovement = (right * _input.x + forward * _input.y).normalized;
+        // boots boost, increase the speed while the boost timer is running
+        float boostMultiplier = Time.time < _speedBoostEndTime ? bootsSpeedMultiplier : 1f;
         // Add the vertical velocity so gravity/jumping are applied in the same Move call
-        Vector3 movement = horizontalMovement * speed + Vector3.up * _velocity;
+        Vector3 movement = horizontalMovement * speed * boostMultiplier + Vector3.up * _velocity;
 
         // Time.deltaTime makes movement frame-rate independent
         _controller.Move(movement * Time.deltaTime);
