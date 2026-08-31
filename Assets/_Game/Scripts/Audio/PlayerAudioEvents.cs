@@ -60,7 +60,7 @@ public sealed class PlayerAudioEvents : MonoBehaviour
         AudioManager.Instance?.PlayerActionResolver(CharAction.Hurt, audioSource);
     }
 
-    private void HandleEggCollected(object sender, CollectiblesEventArgs eventArgs)
+    private void HandleEggCollected(object sender, EggCollectedEventArgs eventArgs)
     {
         //AudioManager.Instance?.PlayCollected();
         AudioManager.Instance?.PlayerActionResolver(CharAction.CollectEgg, audioSource);

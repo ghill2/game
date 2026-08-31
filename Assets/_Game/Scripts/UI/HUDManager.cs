@@ -87,7 +87,7 @@ public class HUDManager : MonoBehaviour
         healthBarController.UpdateBar((float)currentHealth / maxHealth);
     }
 
-    private void UpdateEggsCount(object _, CollectiblesEventArgs e)
+    private void UpdateEggsCount(object _, EggCollectedEventArgs e)
     {
         Debug.Log($"Updating eggs count UI: Eggs Collected = {e.Eggs}");
         hudCollectiblesController.SetEggsCount(e.Eggs);
@@ -99,7 +99,7 @@ public class HUDManager : MonoBehaviour
         popupController.UpdateWindow(icon, text, duration);
     }
 
-    private void UpdatePopup(object _, CollectiblesEventArgs e)
+    private void UpdatePopup(object _, EggCollectedEventArgs e)
     {
         Debug.Log($"Unpacking EventArgs.");
         UpdatePopup(e.Icon, e.Text);
