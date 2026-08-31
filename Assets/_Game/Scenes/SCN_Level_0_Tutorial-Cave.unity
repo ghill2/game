@@ -148,8 +148,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 697912789}
   - {fileID: 1929432544}
+  - {fileID: 697912789}
   - {fileID: 1863153243}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1251,9 +1251,17 @@ PrefabInstance:
       propertyPath: TriggerModule.enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5655564522302685879, guid: e60a627ffaf99814b94c76237ea52e6b, type: 3}
+      propertyPath: hintId
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5834845769943336006, guid: e60a627ffaf99814b94c76237ea52e6b, type: 3}
       propertyPath: m_Name
-      value: PF_TriggerTutorialMessage (1)
+      value: PF_TriggerTutorialMessage
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834845769943336006, guid: e60a627ffaf99814b94c76237ea52e6b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5901715968442633246, guid: e60a627ffaf99814b94c76237ea52e6b, type: 3}
       propertyPath: m_IsActive
@@ -3690,6 +3698,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.08640626
       objectReference: {fileID: 0}
+    - target: {fileID: 5655564522302685879, guid: e60a627ffaf99814b94c76237ea52e6b, type: 3}
+      propertyPath: hintId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5834845769943336006, guid: e60a627ffaf99814b94c76237ea52e6b, type: 3}
       propertyPath: m_Name
       value: PF_TriggerTutorialMessage (2)
@@ -5697,9 +5709,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 34873501}
     m_Modifications:
+    - target: {fileID: 5655564522302685879, guid: e60a627ffaf99814b94c76237ea52e6b, type: 3}
+      propertyPath: hintId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5834845769943336006, guid: e60a627ffaf99814b94c76237ea52e6b, type: 3}
       propertyPath: m_Name
-      value: PF_TriggerTutorialMessage
+      value: PF_TriggerTutorialMessage (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834845769943336006, guid: e60a627ffaf99814b94c76237ea52e6b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8688107670135046449, guid: e60a627ffaf99814b94c76237ea52e6b, type: 3}
       propertyPath: m_LocalPosition.x

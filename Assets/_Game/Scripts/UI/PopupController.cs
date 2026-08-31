@@ -44,14 +44,14 @@ public class PopupController : MonoBehaviour
         windowText.canvasRenderer.SetAlpha(0f);
     }
 
-    public void UpdateWindow(Texture icon, string text)
+    public void UpdateWindow(Texture icon, string text, float duration = 3f)
     { 
         popup_Queue.Enqueue(new PopupData(icon, text));
         if (!showingPopup && popup_Queue.TryDequeue(out PopupData data))
         {
             windowIcon.texture = data.icon;
             windowText.text = data.text;
-            ShowPopup();
+            ShowPopup(duration);
         }
     }
 
@@ -68,8 +68,8 @@ public class PopupController : MonoBehaviour
         Debug.Log("ShowPopup starts");
 
         showingPopup = true;
-        // Splits into 3 parts
-        float part = s / 3f;
+        // Splits into 3 parts, Guarantee popup shows for 1 sec.
+        float part = s < 3f ? (s - 1f) / 2 : s / 3f;
 
         Window.canvasRenderer.SetAlpha(0f);
         windowIcon.canvasRenderer.SetAlpha(0f);
@@ -82,8 +82,9 @@ public class PopupController : MonoBehaviour
 
         yield return new WaitForSeconds(part);
 
-        // Show for (s / 3) seconds;
-        yield return new WaitForSeconds(part); 
+        // Show for (s / 3) seconds -- s >= 3f
+        // Show for 1 second        -- s < 3f
+        yield return new WaitForSeconds(part > 1f ? 1f : part); 
 
         // Fade out
         Window.CrossFadeAlpha(0f, part, false);

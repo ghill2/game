@@ -78,6 +78,7 @@ public class HUDManager : MonoBehaviour
         playerHealth.OnHealthChanged -= UpdateHealthUI;
         playerCollectibles.OnEggCollected -= UpdateEggsCount;
         playerCollectibles.OnEggCollected -= UpdatePopup;
+        spellCaster.OnSpellCast -= UpdateSpellPanel;
     }
 
     private void UpdateHealthUI(int currentHealth, int maxHealth)
@@ -92,10 +93,10 @@ public class HUDManager : MonoBehaviour
         hudCollectiblesController.SetEggsCount(e.Eggs);
     }
 
-    private void UpdatePopup(Texture icon, string text)
+    private void UpdatePopup(Texture icon, string text, float duration = 3f)
     {
         Debug.Log($"Updating Popup Window: Icon = {icon}, text = {text}");
-        popupController.UpdateWindow(icon, text);
+        popupController.UpdateWindow(icon, text, duration);
     }
 
     private void UpdatePopup(object _, CollectiblesEventArgs e)
@@ -117,23 +118,66 @@ public class HUDManager : MonoBehaviour
         switch (hintId)
         {
             case 0:
+                // -- Movement Tutorial --
                 // Chained = true
                 // Popup 1
                 Debug.Log($"Level Trigger invoked, hintId = {hintId}");
                 icon = Resources.Load<Texture2D>("Popup/wasd-square");
                 text = "Move";
 
-                UpdatePopup(icon, text);
+                UpdatePopup(icon, text, 2.5f);
 
                 // Popup 2
                 icon = Resources.Load<Texture2D>("Popup/spacebar-key");
                 text = "Jump";
 
-                UpdatePopup(icon, text);
+                UpdatePopup(icon, text, 2.5f);
+
+                // Popup 3
+                icon = Resources.Load<Texture2D>("Popup/mouse-click-right-sexybody");
+                text = "Look Around";
+
+                UpdatePopup(icon, text, 2.5f);
                 break;
 
             case 1:
+                // -- Spells Tutorial --
+                // Chained = true
+                // Popup 1
+                Debug.Log($"Level Trigger invoked, hintId = {hintId}");
+                icon = Resources.Load<Texture2D>("Popup/f-key-tight");
+                text = "Fireball";
+                
+                UpdatePopup(icon, text, 2f);
 
+                // Popup 2
+                icon = Resources.Load<Texture2D>("Popup/r-key-tight");
+                text = "Frost Blast";
+
+                UpdatePopup(icon, text, 2f);
+
+                // Popup 3
+                icon = Resources.Load<Texture2D>("Popup/e-key-tight");
+                text = "Electric Storm";
+
+                UpdatePopup(icon, text, 2f);
+
+                // Popup 4
+                icon = Resources.Load<Texture2D>("Popup/mouse-click-left-sexybody");
+                text = "Last Spell";
+
+                UpdatePopup(icon, text, 2f);
+                break;
+
+            case 2:
+                // -- Egg Open Portal Tutorial --
+                // Chained = true
+                // Popup 1
+                Debug.Log($"Level Trigger invoked, hintId = {hintId}");
+                icon = Resources.Load<Texture>("Popup/dragon-egg-render");
+                text = "Dragon Egg Open Portal";
+
+                UpdatePopup(icon, text, 3f);
                 break;
 
             default:
