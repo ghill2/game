@@ -19,7 +19,7 @@ public class PopupData
 public class PopupController : MonoBehaviour
 {
     [SerializeField]
-    private Image Window;
+    private RawImage Window;
     [SerializeField]
     private RawImage windowIcon;
     [SerializeField]
@@ -33,8 +33,8 @@ public class PopupController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Window = GetComponent<Image>();
-        windowIcon = GetComponentInChildren<RawImage>();
+        Window = GetComponent<RawImage>();
+        windowIcon = GameObject.Find("Popup Icon").GetComponent<RawImage>();
         windowText = GetComponentInChildren<TextMeshProUGUI>();
 
         popup_Queue = new Queue<PopupData>();
