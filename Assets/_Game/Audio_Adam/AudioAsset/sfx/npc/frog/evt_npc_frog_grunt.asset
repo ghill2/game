@@ -10,19 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
-  m_Name: evt_props_magic_orb_lp
+  m_Name: evt_npc_frog_grunt
   m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
-  category: 3
+  category: 4
   AudioClips:
-  - {fileID: 8300000, guid: d35f098f73dd89546ba1adcbd6ee419e, type: 3}
+  - {fileID: 8300000, guid: 89a83e0c4f5677547942cfa0322bfd48, type: 3}
+  - {fileID: 8300000, guid: 1d742051082e52f489da1530b923bd7e, type: 3}
+  - {fileID: 8300000, guid: be7ff87e207a7b648aa0b930d14bbe31, type: 3}
+  - {fileID: 8300000, guid: bdcdfe611b6602b468de00baf5d3b5aa, type: 3}
   volume: 0.5
-  pitchMin: 0.7
-  pitchMax: 0.8
+  pitchMin: 0.85
+  pitchMax: 0.9
   probability: 1
   spatialBlend: 1
   minDistance: 1
   maxDistance: 25
-  rolloffMode: 1
-  loop: 1
-  startRandomTime: 1
+  rolloffMode: 2
+  loop: 0
+  startRandomTime: 0
   mixerGroup: {fileID: 0}

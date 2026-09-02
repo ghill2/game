@@ -55,6 +55,7 @@ public sealed class AudioManager : MonoBehaviour
     [SerializeField] private SoundEvent evt_player_vox_attack;
     [SerializeField] private SoundEvent evt_player_vox_death;
     [SerializeField] private SoundEvent evt_player_vox_hurt;
+    [SerializeField] private SoundEvent evt_player_jump;
 
     [Header("Spells SFX")]
     [SerializeField] private SoundEvent evt_spell_fireball_attack;
@@ -88,8 +89,11 @@ public sealed class AudioManager : MonoBehaviour
     [SerializeField] private SoundEvent evt_ui_cancel;
     [SerializeField] private SoundEvent evt_ui_confirm;
     [SerializeField] private SoundEvent evt_ui_pickup_egg;
+    [SerializeField] private SoundEvent evt_ui_pickup_boot;
+    [SerializeField] private SoundEvent evt_ui_pickup_potion;
     [SerializeField] private SoundEvent evt_ui_pickup_generic;
     [SerializeField] private SoundEvent evt_ui_select;
+    [SerializeField] private SoundEvent evt_ui_speedup_effect;
 
 
     [Header("UI Mixer Faders")]
@@ -174,24 +178,35 @@ public sealed class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayerActionResolver(CharAction _action, AudioSource _src)
+    public void PlayerActionResolver(CharAction _action)
     {      
         switch (_action)
         {           
             case CharAction.Hurt:
-                PlaySoundEvent(evt_player_vox_hurt, _src);
+                PlaySoundEvent(evt_player_vox_hurt, playerSource);
+                break;
+            case CharAction.Jump:
+                PlaySoundEvent(evt_player_jump, playerSource);
                 break;
             case CharAction.Death:
-                PlaySoundEvent(evt_player_vox_death, _src);
+                PlaySoundEvent(evt_player_vox_death, playerSource);
                 break;
             case CharAction.Step:
-                PlaySoundEvent(evt_player_footstep_generic, _src);
+                PlaySoundEvent(evt_player_footstep_generic, playerSource);
                 break;
             case CharAction.CollectEgg:
-                PlaySoundEvent(evt_ui_pickup_egg, _src);
+                PlaySoundEvent(evt_ui_pickup_egg, playerSource);
+                break;
+            case CharAction.CollectBoot:
+                PlaySoundEvent(evt_ui_pickup_boot, playerSource);
+                PlaySoundEvent(evt_ui_speedup_effect);
+
+                break;
+            case CharAction.CollectPotion:
+                PlaySoundEvent(evt_ui_pickup_potion, playerSource);
                 break;
             case CharAction.CollectGeneric:
-                PlaySoundEvent(evt_ui_pickup_generic, _src);
+                PlaySoundEvent(evt_ui_pickup_generic, playerSource);
                 break;
             default: break;
         }
@@ -233,7 +248,10 @@ public sealed class AudioManager : MonoBehaviour
                         PlaySoundEvent(n.evt_npc_melee_attack, _pos);
                         break;
                     case CharAction.Death:
-                        PlaySoundEvent(n.evt_npc_death, _pos);                        
+                        SoundEvent deathEvent = n.evt_npc_death;
+                        //Always play sound when npc dies
+                        deathEvent.probability = 1;
+                        PlaySoundEvent(deathEvent, _pos);                        
                         break;
                     default: break;
                 }
@@ -344,7 +362,7 @@ public sealed class AudioManager : MonoBehaviour
 
         if (UnityEngine.Random.Range(0f, 1f) <= _evt.probability)
         {
-            Debug.Log("***************" + source.clip.name);
+            Debug.Log("***************Playing " + source.clip.name);
 
             if (_evt.loop) source.Play();
             else source.PlayOneShot(clip);
@@ -410,11 +428,9 @@ public sealed class AudioManager : MonoBehaviour
         }
 
         spellCaster = player.GetComponent<SpellCaster>();
-        playerCollectibles = player.GetComponent<PlayerCollectibles>();
 
         //Event Listener
         spellCaster.OnSpellCast += SpellCastResolver;
-        //playerCollectibles.OnEggCollected += 
     }
 
     private void OnDestroy()

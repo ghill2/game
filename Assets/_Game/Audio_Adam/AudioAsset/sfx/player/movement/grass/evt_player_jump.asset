@@ -10,19 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e550096c7cc2a7c41a17f51e1ef179f7, type: 3}
-  m_Name: evt_melee_sword_attack
+  m_Name: evt_player_jump
   m_EditorClassIdentifier: Assembly-CSharp::GameAudio.SoundEvent
-  category: 4
+  category: 5
   AudioClips:
-  - {fileID: 8300000, guid: bfca8720fc4d07748b8cab7e04d295ce, type: 3}
-  - {fileID: 8300000, guid: 5be6b138ad3ffb742bd7a38d458cc6f2, type: 3}
-  - {fileID: 8300000, guid: 9ae477b4c812412488b8e2972433e912, type: 3}
-  - {fileID: 8300000, guid: fc34f8a83c69c6c44a7b2625b08094d6, type: 3}
-  volume: 1
-  pitchMin: 0.8
-  pitchMax: 0.9
+  - {fileID: 8300000, guid: 800621b311f9efc42ab00ab8ee99508b, type: 3}
+  - {fileID: 8300000, guid: 21d59d3600bbe9442aa5f722c550b106, type: 3}
+  - {fileID: 8300000, guid: 87757628a532aab48b660e6e723c78c9, type: 3}
+  - {fileID: 8300000, guid: ba6b5598532288943a814d7b473fea51, type: 3}
+  - {fileID: 8300000, guid: b7fdd46446806094982719f0e127ccf4, type: 3}
+  - {fileID: 8300000, guid: edb19f4579dbb2f4cb4dfedf0fa3d1fa, type: 3}
+  volume: 0.5
+  pitchMin: 0.4
+  pitchMax: 0.4
   probability: 1
-  spatialBlend: 1
+  spatialBlend: 0
   minDistance: 1
   maxDistance: 25
   rolloffMode: 1

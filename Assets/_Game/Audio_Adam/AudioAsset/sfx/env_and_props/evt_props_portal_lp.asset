@@ -16,8 +16,8 @@ MonoBehaviour:
   AudioClips:
   - {fileID: 8300000, guid: db428ae558a3b414c8cbbc43ee2549a2, type: 3}
   volume: 1
-  pitchMin: -0.96
-  pitchMax: 1
+  pitchMin: 0.9
+  pitchMax: 1.2
   probability: 1
   spatialBlend: 1
   minDistance: 1

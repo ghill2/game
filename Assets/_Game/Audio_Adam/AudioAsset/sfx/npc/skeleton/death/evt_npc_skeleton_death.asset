@@ -24,12 +24,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 600b7014561fc9e4ea4a49a4441b2484, type: 3}
   - {fileID: 8300000, guid: d638874e6b5209c4495d95ceb28b4c49, type: 3}
   volume: 1
-  pitchMin: 0.659
-  pitchMax: 1.373
+  pitchMin: 0.9
+  pitchMax: 1
   probability: 1
-  spatialBlend: 0.8
+  spatialBlend: 0.2
   minDistance: 1
-  maxDistance: 30
+  maxDistance: 25
   rolloffMode: 2
   loop: 0
   startRandomTime: 0

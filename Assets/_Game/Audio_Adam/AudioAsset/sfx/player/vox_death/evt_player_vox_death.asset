@@ -20,8 +20,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d70d690a9f8fbf14686c5a7232b6879b, type: 3}
   - {fileID: 8300000, guid: 99afaa46cea8ade469f70e092a3592d4, type: 3}
   volume: 1
-  pitchMin: 0.659
-  pitchMax: 1.373
+  pitchMin: 0.85
+  pitchMax: 0.9
   probability: 0.6
   spatialBlend: 0.6
   minDistance: 1
