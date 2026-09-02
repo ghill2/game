@@ -56,6 +56,12 @@ public class PlayerCollectibles : MonoBehaviour
     [SerializeField]
     private Texture icon;
 
+    //Test
+    private float multiplier = 1.5f;
+    private float duration = 15f;
+
+    private int healAmount = 30;
+
     public event EventHandler<EggCollectedEventArgs> OnEggCollected;
     public event EventHandler<BootsCollectedEventArgs> OnBootsCollected;
     public event EventHandler<PotionCollectedEventArgs> OnPotionCollected;
