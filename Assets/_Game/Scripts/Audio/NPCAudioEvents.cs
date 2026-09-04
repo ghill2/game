@@ -4,7 +4,10 @@ public enum NpcType
 { 
     None = 0,
     Skeleton = 1,
-    Wolf = 2
+    Wolf = 2,
+    Golem =3,
+    Hawk = 4,
+    Viking = 5
 }
 
 public enum CharAction
@@ -17,7 +20,11 @@ public enum CharAction
     Ice = 5,
     Lightning = 6,
     CollectEgg =7,
-    CollectGeneric=8
+    CollectBoot = 8,
+    CollectPotion = 9,
+    CollectGeneric=10,
+    Jump =11
+
 
 }
 

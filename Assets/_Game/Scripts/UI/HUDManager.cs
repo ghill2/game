@@ -55,6 +55,7 @@ public class HUDManager : MonoBehaviour
         playerCollectibles.OnEggCollected += UpdateEggsCount;
         playerCollectibles.OnEggCollected += UpdatePopup;
         spellCaster.OnSpellCast += UpdateSpellPanel;
+        playerCollectibles.OnBootsCollected += UpdateBootTimer;
 
         levelHintTriggers.ForEach(trigger => trigger.OnHintTriggerEntered += OnTriggerEntered);
 
@@ -103,6 +104,11 @@ public class HUDManager : MonoBehaviour
     {
         Debug.Log($"Unpacking EventArgs.");
         UpdatePopup(e.Icon, e.Text);
+    }
+
+    private void UpdateBootTimer(object _, BootsCollectedEventArgs e)
+    {
+        hudCollectiblesController.UpdateBootsTimer(e.Duration);
     }
 
     private void UpdateSpellPanel(SpellId SpellNo, float recastDelay)

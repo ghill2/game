@@ -53,11 +53,11 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -105,7 +105,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -149,13 +149,15 @@ MonoBehaviour:
   - category: 1
     mixerGroup: {fileID: 6342069100860378707, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
   - category: 3
-    mixerGroup: {fileID: -8769528068031240624, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+    mixerGroup: {fileID: -7448005732420691774, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
   - category: 4
-    mixerGroup: {fileID: -3439353643785790817, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+    mixerGroup: {fileID: -8769528068031240624, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
   - category: 5
-    mixerGroup: {fileID: -3993806765321904845, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+    mixerGroup: {fileID: -3439353643785790817, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
   - category: 2
     mixerGroup: {fileID: 875570948363908086, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
+  - category: 6
+    mixerGroup: {fileID: -3993806765321904845, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
   snap_shot_stage_00: {fileID: -4250901194953119849, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
   snap_shot_stage_01: {fileID: -6649824796660471019, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
   snap_shot_stage_02: {fileID: -9173781881822046816, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}
@@ -171,6 +173,7 @@ MonoBehaviour:
   evt_player_vox_attack: {fileID: 11400000, guid: e5aa2abbb01427a42b1e7252f028094a, type: 2}
   evt_player_vox_death: {fileID: 11400000, guid: ee1865fe2caa81d44b52504d5a54425a, type: 2}
   evt_player_vox_hurt: {fileID: 11400000, guid: 2c4e04920cbef3245bea9d0b34c19829, type: 2}
+  evt_player_jump: {fileID: 11400000, guid: 79d8162112137b14fba4b20769158214, type: 2}
   evt_spell_fireball_attack: {fileID: 11400000, guid: c0521c171b3e32e498cde4b1295484c5, type: 2}
   evt_spell_fireball_impact: {fileID: 11400000, guid: eaa802b1d6408a249a48664bd9404f79, type: 2}
   evt_spell_ice_attack: {fileID: 11400000, guid: 2027cd51450894748ad2048dd7e44f0f, type: 2}
@@ -186,6 +189,18 @@ MonoBehaviour:
     evt_npc_attack: {fileID: 11400000, guid: bb536d70aaae80244a3c6334dae125cb, type: 2}
     evt_npc_death: {fileID: 11400000, guid: bb536d70aaae80244a3c6334dae125cb, type: 2}
     evt_npc_melee_attack: {fileID: 11400000, guid: 2885077400355ed42a9fefc3eee8aee1, type: 2}
+  - npc: 3
+    evt_npc_attack: {fileID: 11400000, guid: 186f588f8347f2b46b58ec17c5cc6419, type: 2}
+    evt_npc_death: {fileID: 11400000, guid: 186f588f8347f2b46b58ec17c5cc6419, type: 2}
+    evt_npc_melee_attack: {fileID: 11400000, guid: 2885077400355ed42a9fefc3eee8aee1, type: 2}
+  - npc: 4
+    evt_npc_attack: {fileID: 11400000, guid: 695b8822199ebb246811377110e85127, type: 2}
+    evt_npc_death: {fileID: 11400000, guid: 695b8822199ebb246811377110e85127, type: 2}
+    evt_npc_melee_attack: {fileID: 11400000, guid: 2885077400355ed42a9fefc3eee8aee1, type: 2}
+  - npc: 5
+    evt_npc_attack: {fileID: 11400000, guid: 7cc586269f8d8a647a801e7a7bb3d87e, type: 2}
+    evt_npc_death: {fileID: 11400000, guid: 7cc586269f8d8a647a801e7a7bb3d87e, type: 2}
+    evt_npc_melee_attack: {fileID: 11400000, guid: 2885077400355ed42a9fefc3eee8aee1, type: 2}
   evt_props_portal: {fileID: 11400000, guid: e871206a01a7eaa45bc9a48ea1aa0ad2, type: 2}
   evt_props_portal_enter: {fileID: 11400000, guid: 77e43fda964b4c94eb714d109556d0a8, type: 2}
   evt_props_windmill: {fileID: 11400000, guid: 916bbfdb4206a0e41917440fab5fd00b, type: 2}
@@ -193,8 +208,11 @@ MonoBehaviour:
   evt_ui_cancel: {fileID: 11400000, guid: ad8ff685c43424f4c841b7bbc713b672, type: 2}
   evt_ui_confirm: {fileID: 11400000, guid: 6d354913afee06f4681edbf508e500f1, type: 2}
   evt_ui_pickup_egg: {fileID: 11400000, guid: 07a9ec6e1b58f8c4c9431bf0f56e2566, type: 2}
+  evt_ui_pickup_boot: {fileID: 11400000, guid: fb6f4838ddfd4554aa9442b4d5c9238f, type: 2}
+  evt_ui_pickup_potion: {fileID: 11400000, guid: d5dad80108779414fa2ec03327080bf7, type: 2}
   evt_ui_pickup_generic: {fileID: 11400000, guid: 4beaa068b27ea6b47a49a4839bea0569, type: 2}
   evt_ui_select: {fileID: 11400000, guid: ab3993d80c4b6814faaee28327691ac6, type: 2}
+  evt_ui_speedup_effect: {fileID: 11400000, guid: 8daf7ff272430964cb6ae10c23d1517a, type: 2}
   mixer_master_volume_param: masterVolume
   mixer_music_volume_param: musicVolume
   mixer_sfx_volume_param: sfxVolume
@@ -207,3 +225,4 @@ MonoBehaviour:
   spatialMaxDistance: 35
   portalClip: {fileID: 8300000, guid: c5cc993b1202c423c9b63bca8b371c36, type: 3}
   portalFadeDuration: 0.5
+  current_level: 0

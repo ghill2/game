@@ -118,6 +118,7 @@ public class Character : MonoBehaviour
         if (_isGrounded) {              // only allow jumping while grounded to prevent double-jumps
             _velocity = jumpPower;      // set an immediate upward velocity
             _animator.SetTrigger("Jump"); // tell the animator to play the jump transition
+            AudioManager.Instance?.PlayerActionResolver(CharAction.Jump);
         }
     }
 

@@ -25,4 +25,4 @@ MonoBehaviour:
   rolloffMode: 0
   loop: 0
   startRandomTime: 0
-  mixerGroup: {fileID: 0}
+  mixerGroup: {fileID: 118796833707442575, guid: f3fa5e917d522a04baf492dd4064425a, type: 2}

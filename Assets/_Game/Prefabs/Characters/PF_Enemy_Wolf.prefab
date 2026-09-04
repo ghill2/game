@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBrain
   data: {fileID: 11400000, guid: eda0c9f2d893445f39bdfcf5f978441a, type: 2}
+  npcType: 2
   currentState: 0
   logStateChanges: 1
 --- !u!114 &2456854022177476386
@@ -136,7 +137,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maximumHealth: 0
   currentHealth: 0
-  defeatSound: 2
   animator: {fileID: 3068686181125899561}
 --- !u!114 &1984282392328379283
 MonoBehaviour:

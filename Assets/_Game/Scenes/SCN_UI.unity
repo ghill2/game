@@ -119,6 +119,38 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1328050401 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 311539395697533111, guid: 6be0495ae51af403eb47c72b27fcb4e4, type: 3}
+  m_PrefabInstance: {fileID: 3634511774423272060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1328050403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328050401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.8588236, g: 0.8588236, b: 0.8588236, a: 0.19607843}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 6192944022281365145, guid: ec5241dbcdede934a9d2b8e34669625a, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &1340268423
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,10 +515,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8411521785408579089, guid: 6be0495ae51af403eb47c72b27fcb4e4, type: 3}
+      propertyPath: m_Name
+      value: Popup Icon
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7421385533394752132, guid: 6be0495ae51af403eb47c72b27fcb4e4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 311539395697533111, guid: 6be0495ae51af403eb47c72b27fcb4e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1328050403}
   m_SourcePrefab: {fileID: 100100000, guid: 6be0495ae51af403eb47c72b27fcb4e4, type: 3}
 --- !u!1001 &4961004481921530611
 PrefabInstance:
