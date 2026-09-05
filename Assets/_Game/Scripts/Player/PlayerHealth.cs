@@ -48,7 +48,7 @@ public sealed class PlayerHealth : MonoBehaviour, IDamageable
             defeatEventSent = true;
             Defeated?.Invoke();
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("SCN_RetryMenu", LoadSceneMode.Additive);
         }
     }
 
