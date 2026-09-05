@@ -67,6 +67,7 @@ public class Menu_script : MonoBehaviour
         VolumeSliders.ForEach(
             slider =>
             {
+                slider.value = 1;
                 slider.onValueChanged.AddListener(value => OnSliderChanged(slider, value));
 
                 Debug.Log(slider.name);
