@@ -365,7 +365,7 @@ public sealed class AudioManager : MonoBehaviour
 
         if (UnityEngine.Random.Range(0f, 1f) <= _evt.probability)
         {
-            Debug.Log("***************Playing " + source.clip.name);
+            //Debug.Log("***************Playing " + source.clip.name);
 
             if (_evt.loop) source.Play();
             else source.PlayOneShot(clip);
