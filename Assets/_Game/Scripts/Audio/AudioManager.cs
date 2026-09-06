@@ -345,6 +345,7 @@ public sealed class AudioManager : MonoBehaviour
             soundObject = new GameObject("One Shot - " + clip.name);
             soundObject.transform.position = _position;
             source = soundObject.AddComponent<AudioSource>();
+            Destroy(soundObject, clip.length + 0.1f);
         }
 
         //configure source
