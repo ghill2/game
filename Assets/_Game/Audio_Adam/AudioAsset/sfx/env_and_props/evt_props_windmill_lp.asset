@@ -15,11 +15,11 @@ MonoBehaviour:
   category: 3
   AudioClips:
   - {fileID: 8300000, guid: 2633026022f51c3409043a461f715577, type: 3}
-  volume: 0.7
+  volume: 1
   pitchMin: 1
   pitchMax: 1
   probability: 1
-  spatialBlend: 1
+  spatialBlend: 0.3
   minDistance: 1
   maxDistance: 30
   rolloffMode: 1
