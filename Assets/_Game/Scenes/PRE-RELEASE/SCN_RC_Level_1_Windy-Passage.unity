@@ -17994,6 +17994,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2389737252207734470, guid: 3b27990349379234fbc9f5a387abc14e, type: 3}
   m_PrefabInstance: {fileID: 6965325520994276605}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1877515174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686297867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568959f2af8e443faa82d971aad95188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelEndPortal
+  targetSceneName: SCN_RC_EndGame
 --- !u!1001 &1885443509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21315,7 +21328,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2339185309039181683, guid: 3b27990349379234fbc9f5a387abc14e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1877515174}
   m_SourcePrefab: {fileID: 100100000, guid: 3b27990349379234fbc9f5a387abc14e, type: 3}
 --- !u!33 &7014123327350748472
 MeshFilter:
