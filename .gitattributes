@@ -170,3 +170,6 @@ Packages/packages-lock.json linguist-generated
 # Exceptions for .asset files such as lightning pre-baking
 LightingData.asset     binary
 .DS_Store              binary
+
+# TerrainData must be treated as binary
+Assets/_Game/TerrainData/**/*.asset binary !eol !unity-yaml !linguist-language
