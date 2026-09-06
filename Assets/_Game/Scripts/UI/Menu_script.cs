@@ -136,8 +136,9 @@ public class Menu_script : MonoBehaviour
     {
         Debug.Log("Play Button Pressed!");
 
+        GameStateManager.Instance?.StartNewGame();
         SceneManager.LoadScene(StartScene);
-        SceneManager.LoadScene("SCN_UI", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("SCN_UI", LoadSceneMode.Additive);
     }
 
     private void OnOptionButtonClicked()

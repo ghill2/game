@@ -28,7 +28,15 @@ public class LevelEndPortal : MonoBehaviour
             return;
         }
 
+        // Vlidate player health due to possible bug with player death and portal transition
+        PlayerHealth health = other.GetComponentInParent<PlayerHealth>();
+        if (health != null && !health.IsAlive)
+        {
+            return;
+        }
+
         transitionStarted = true;
+        GameStateManager.Instance?.CompleteCurrentLevel();
 
         if (portalCollider != null)
         {

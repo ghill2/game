@@ -66,21 +66,16 @@ public class PlayerCollectibles : MonoBehaviour
     public event EventHandler<BootsCollectedEventArgs> OnBootsCollected;
     public event EventHandler<PotionCollectedEventArgs> OnPotionCollected;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        eggsCollected = 0;
+        GameStateManager.Instance?.ResetCurrentLevel();
     }
 
     public void EggCollect()
     {
         eggsCollected++;
+        GameStateManager.Instance?.AddEggScore();
         EggCollectedEventArgs args = new(eggsCollected, icon, "Collected");
         OnEggCollected?.Invoke(this, args);
         Debug.Log($"Egg collected! Total eggs: {eggsCollected}");
