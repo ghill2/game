@@ -221,15 +221,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 906911007830527910, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1109648546966719699, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1227366693133394787, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2118357597053815900, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
       propertyPath: m_Pivot.x
@@ -313,46 +309,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2912408071661606690, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3143440295942996115, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3183090294598429855, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3747394436397556379, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4046635729189474520, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4897856022256988620, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5982001146985746462, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
       propertyPath: m_Name
       value: PF_UI_MainMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 7543677500250730732, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
-      propertyPath: StartScene
-      value: SCN_Level_0_Tutorial-Cave
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543677500250730732, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
-      propertyPath: CharacterScene
-      value: BETA/SCN_BETA_Tutorial
-      objectReference: {fileID: 0}
     - target: {fileID: 9016239927801830139, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2644110913060400872, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b88def1ee72749b5825815ab22fc13a, type: 3}

@@ -17,6 +17,9 @@ public class Menu_script : MonoBehaviour
     [SerializeField] private Slider UIVolume;
     [SerializeField] private Slider MusicVolume;
 
+    [SerializeField]
+    private ButtonView returnButtonView;
+
     private InputAction Return;
 
     private void Awake()
@@ -50,6 +53,8 @@ public class Menu_script : MonoBehaviour
         if (playButtonView != null) playButtonView.ButtonClicked += OnPlayButtonClicked;
         if (optionButtonView != null) optionButtonView.ButtonClicked += OnOptionButtonClicked;
         if (exitButtonView != null) exitButtonView.ButtonClicked += OnExitButtonClicked;
+
+        if (returnButtonView != null) returnButtonView.ButtonClicked += OnReturn;
 
         if (MasterVolume != null) MasterVolume.onValueChanged.AddListener(OnMasterVolumeChanged);
         if (SFXVolume != null) SFXVolume.onValueChanged.AddListener(OnSFXVolumeChanged);
