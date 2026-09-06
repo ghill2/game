@@ -1,163 +1,156 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Menu_script : MonoBehaviour
 {
-    [SerializeField]
-    private ButtonView playButtonView;
+    [SerializeField] private ButtonView playButtonView;
+    [SerializeField] private ButtonView optionButtonView;
+    [SerializeField] private ButtonView exitButtonView;
+    [SerializeField] private GameObject MainMenuScreen;
+    [SerializeField] private GameObject OptionsScreen;
+    [SerializeField] private string StartScene = "SCN_Level_0_Tutorial-Cave";
 
-    [SerializeField]
-    private ButtonView optionButtonView;
-
-    [SerializeField]
-    private ButtonView exitButtonView;
-
-    [SerializeField]
-    private GameObject MainMenuScreen;
-    
-    [SerializeField]
-    private GameObject OptionsScreen;
-
-    [SerializeField]
-    private string StartScene = "SCN_Level_0_Tutorial-Cave";
+    [SerializeField] private Slider MasterVolume;
+    [SerializeField] private Slider SFXVolume;
+    [SerializeField] private Slider UIVolume;
+    [SerializeField] private Slider MusicVolume;
 
     private InputAction Return;
 
-    [SerializeField]
-    private Slider MasterVolume;
-    [SerializeField]
-    private Slider SFXVolume;
-    [SerializeField]
-    private Slider UIVolume;
-    [SerializeField]
-    private Slider MusicVolume;
-
-    private List<Slider> VolumeSliders;
-
-    [SerializeField]
-    private MainMenuMusicManager MainMenuMusicManager;
+    private void Awake()
+    {
+        // Older menu prefabs may not have slider references yet.
+        Slider[] sliders = GetComponentsInChildren<Slider>(true);
+        MasterVolume = FindSlider(MasterVolume, sliders, "Master Slider");
+        SFXVolume = FindSlider(SFXVolume, sliders, "SFX Slider");
+        UIVolume = FindSlider(UIVolume, sliders, "UI Slider");
+        MusicVolume = FindSlider(MusicVolume, sliders, "Music Slider");
+    }
 
     private void Start()
     {
-        playButtonView.enabled = true;
-        optionButtonView.enabled = true;
-        exitButtonView.enabled = true;
-
-        Return = InputSystem.actions.FindAction("Return");
-
-        MasterVolume = GameObject.Find("Master Slider").GetComponent<Slider>();
-        SFXVolume = GameObject.Find("SFX Slider").GetComponent<Slider>();
-        UIVolume = GameObject.Find("UI Slider").GetComponent<Slider>();
-        MusicVolume = GameObject.Find("Music Slider").GetComponent<Slider>();
-
-        VolumeSliders = new List<Slider>
+        if (playButtonView != null) playButtonView.enabled = true;
+        if (optionButtonView != null) optionButtonView.enabled = true;
+        if (exitButtonView != null)
         {
-            MasterVolume,
-            SFXVolume,
-            UIVolume,
-            MusicVolume
-        };
+            exitButtonView.enabled = false;
+            exitButtonView.gameObject.SetActive(false);
+        }
 
-        // Slider's Listeners 
-        VolumeSliders.ForEach(
-            slider =>
-            {
-                slider.onValueChanged.AddListener(value => OnSliderChanged(slider, value));
-
-                Debug.Log(slider.name);
-            }
-        );
-
-        MainMenuMusicManager = GameObject.Find("PF_MainMenuMusicManager").GetComponent<MainMenuMusicManager>();
-        
-
-        MainMenuScreen.SetActive(true);
-        OptionsScreen.SetActive(false);
-
+        Return = InputSystem.actions?.FindAction("Return");
+        if (MainMenuScreen != null) MainMenuScreen.SetActive(true);
+        if (OptionsScreen != null) OptionsScreen.SetActive(false);
+        RefreshVolumeSliders();
     }
+
     private void OnEnable()
     {
-        playButtonView.ButtonClicked += OnPlayButtonClicked;
-        optionButtonView.ButtonClicked += OnOptionButtonClicked;
-        exitButtonView.ButtonClicked += OnExitButtonClicked;
+        if (playButtonView != null) playButtonView.ButtonClicked += OnPlayButtonClicked;
+        if (optionButtonView != null) optionButtonView.ButtonClicked += OnOptionButtonClicked;
+        if (exitButtonView != null) exitButtonView.ButtonClicked += OnExitButtonClicked;
+
+        if (MasterVolume != null) MasterVolume.onValueChanged.AddListener(OnMasterVolumeChanged);
+        if (SFXVolume != null) SFXVolume.onValueChanged.AddListener(OnSFXVolumeChanged);
+        if (UIVolume != null) UIVolume.onValueChanged.AddListener(OnUIVolumeChanged);
+        if (MusicVolume != null) MusicVolume.onValueChanged.AddListener(OnMusicVolumeChanged);
+
+        GameStateManager.AudioSettingsChanged += RefreshVolumeSliders;
+        RefreshVolumeSliders();
     }
 
     private void OnDisable()
     {
-        playButtonView.ButtonClicked -= OnPlayButtonClicked; //Dehooks
-        optionButtonView.ButtonClicked -= OnOptionButtonClicked;
-        exitButtonView.ButtonClicked -= OnExitButtonClicked;
+        if (playButtonView != null) playButtonView.ButtonClicked -= OnPlayButtonClicked;
+        if (optionButtonView != null) optionButtonView.ButtonClicked -= OnOptionButtonClicked;
+        if (exitButtonView != null) exitButtonView.ButtonClicked -= OnExitButtonClicked;
+
+        if (MasterVolume != null) MasterVolume.onValueChanged.RemoveListener(OnMasterVolumeChanged);
+        if (SFXVolume != null) SFXVolume.onValueChanged.RemoveListener(OnSFXVolumeChanged);
+        if (UIVolume != null) UIVolume.onValueChanged.RemoveListener(OnUIVolumeChanged);
+        if (MusicVolume != null) MusicVolume.onValueChanged.RemoveListener(OnMusicVolumeChanged);
+
+        GameStateManager.AudioSettingsChanged -= RefreshVolumeSliders;
     }
-    private void OnDestroy()
+
+    private static Slider FindSlider(Slider assigned, Slider[] sliders, string sliderName)
     {
-        VolumeSliders.ForEach(
-            s => s.onValueChanged.RemoveAllListeners()
-        );
+        if (assigned != null) return assigned;
+
+        foreach (Slider slider in sliders)
+        {
+            if (slider.name == sliderName) return slider;
+        }
+
+        return null;
+    }
+
+    private void RefreshVolumeSliders()
+    {
+        GameStateManager state = GameStateManager.Instance;
+        if (state == null) return;
+
+        // Update the controls without sending their change events back.
+        if (MasterVolume != null) MasterVolume.SetValueWithoutNotify(state.MasterVolume);
+        if (SFXVolume != null) SFXVolume.SetValueWithoutNotify(state.SFXVolume);
+        if (UIVolume != null) UIVolume.SetValueWithoutNotify(state.UIVolume);
+        if (MusicVolume != null) MusicVolume.SetValueWithoutNotify(state.MusicVolume);
+    }
+
+    private void OnMasterVolumeChanged(float value)
+    {
+        if (GameStateManager.Instance != null) GameStateManager.Instance.MasterVolume = value;
+    }
+
+    private void OnSFXVolumeChanged(float value)
+    {
+        if (GameStateManager.Instance != null) GameStateManager.Instance.SFXVolume = value;
+    }
+
+    private void OnUIVolumeChanged(float value)
+    {
+        if (GameStateManager.Instance != null) GameStateManager.Instance.UIVolume = value;
+    }
+
+    private void OnMusicVolumeChanged(float value)
+    {
+        if (GameStateManager.Instance != null) GameStateManager.Instance.MusicVolume = value;
     }
 
     private void Update()
     {
-        if (Return.IsPressed() == true)
+        if (Return != null && Return.WasPressedThisFrame())
         {
             OnReturn();
-        }
-    }
-
-    private void OnSliderChanged(Slider slider, float value)
-    {
-        switch (slider.name)
-        {
-            case "Master Slider":
-                Debug.Log($"Slider {slider.name} : {value}");
-                AudioManager.Instance?.SetMasterVolume(value);
-                break;
-            case "SFX Slider":
-                Debug.Log($"Slider {slider.name} : {value}");
-                AudioManager.Instance.SetSFXVolume(value);
-                break;
-            case "UX Slider":
-                Debug.Log($"Slider {slider.name} : {value}");
-                AudioManager.Instance.SetUXVolume(value);
-                break;
-            case "Music Slider":
-                Debug.Log($"Slider {slider.name} : {value}");
-                AudioManager.Instance.SetMusicVolume(value);
-                break;
         }
     }
 
     private void OnPlayButtonClicked()
     {
         Debug.Log("Play Button Pressed!");
-
         SceneManager.LoadScene(StartScene);
-        SceneManager.LoadScene("SCN_UI", LoadSceneMode.Additive);
+        // SceneManager.LoadScene("SCN_UI", LoadSceneMode.Additive);
     }
 
     private void OnOptionButtonClicked()
     {
-        Debug.Log("Option Button Pressed!");
-        OptionsScreen.SetActive(true);
-        MainMenuScreen.SetActive(false);
+        if (OptionsScreen != null) OptionsScreen.SetActive(true);
+        if (MainMenuScreen != null) MainMenuScreen.SetActive(false);
+        RefreshVolumeSliders();
     }
 
     private void OnExitButtonClicked()
     {
-        Debug.Log("Exit Button Pressed!");
         Application.Quit();
     }
 
     private void OnReturn()
     {
-        if (OptionsScreen.activeSelf == true)
+        if (OptionsScreen != null && OptionsScreen.activeSelf)
         {
             OptionsScreen.SetActive(false);
-            MainMenuScreen.SetActive(true);
+            if (MainMenuScreen != null) MainMenuScreen.SetActive(true);
         }
     }
 }

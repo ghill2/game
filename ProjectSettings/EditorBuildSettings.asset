@@ -41,6 +41,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/SCN_RetryMenu.unity
     guid: 9491b18b5cc884b4c8955646ab6f4cfb
+  - enabled: 1
+    path: Assets/_Game/Scenes/PRE-RELEASE/SCN_RC_MainMenu.unity
+    guid: f846af20e68044be9bdf9afd3beb2343
+  - enabled: 1
+    path: Assets/_Game/Scenes/PRE-RELEASE/SCN_RC_Level_0_Tutorial-Cave.unity
+    guid: 8c52d0b14e9234a6ca6a89d8f8106333
+  - enabled: 1
+    path: Assets/_Game/Scenes/PRE-RELEASE/SCN_RC_Level_1_Windy-Passage.unity
+    guid: 4449dcb802662429887d435456fcb44e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2e4d7f96520dd467096fe241b4f657f9, type: 3}
   m_UseUCBPForAssetBundles: 0

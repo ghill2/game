@@ -127,6 +127,8 @@ public sealed class AudioManager : MonoBehaviour
     private SpellCaster spellCaster;
     private PlayerCollectibles playerCollectibles;
 
+    private bool hasStarted;
+
 
     //---------------------------------Adam's New Audio Code----------------------------
     public float GetDecibleVal(float _sliderVal)
@@ -419,8 +421,37 @@ public sealed class AudioManager : MonoBehaviour
         InitEnvironmentSource();
     }
 
+    private void OnEnable()
+    {
+        GameStateManager.AudioSettingsChanged += ApplyGameStateVolumes;
+        if (hasStarted) ApplyGameStateVolumes();
+    }
+
+    private void OnDisable()
+    {
+        GameStateManager.AudioSettingsChanged -= ApplyGameStateVolumes;
+    }
+
+    private void ApplyGameStateVolumes()
+    {
+        GameStateManager state = GameStateManager.Instance;
+        if (!hasStarted || Instance != this || state == null || mixer == null)
+        {
+            return;
+        }
+
+        SetMasterVolume(state.MasterVolume);
+        SetMusicVolume(state.MusicVolume);
+        SetSFXVolume(state.SFXVolume);
+        SetUXVolume(state.UIVolume);
+    }
+
     private void Start()
     {
+        // Apply mixer settings in Start, after all audio objects have loaded.
+        hasStarted = true;
+        ApplyGameStateVolumes();
+
         player = GameObject.FindGameObjectWithTag("Player");
 
         if (player == null)
