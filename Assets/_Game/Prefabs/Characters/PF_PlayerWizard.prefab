@@ -1013,9 +1013,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
   speed: 5
+  bootsSpeedMultiplier: 2
+  bootsBoostDuration: 10
   gravityMultiplier: 3
   jumpPower: 10
   collectibles: {fileID: 0}
+  potionHealAmount: 50
 --- !u!114 &6631268481863254074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1060,7 +1063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpellCaster
   castPoint: {fileID: 7414144312439054574}
   crosshair: {fileID: 0}
-  recastDelay: 0.5
+  recastDelay: 0.7
 --- !u!114 &2636596376992597757
 MonoBehaviour:
   m_ObjectHideFlags: 0
