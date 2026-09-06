@@ -12,6 +12,8 @@ public class PauseMenu_Script : MonoBehaviour
     [SerializeField] private GameObject MainMenuScreen;
     [SerializeField] private GameObject OptionsScreen;
 
+    [SerializeField] private string mainMenuSceneName = "SCN_MainMenu";
+
     private InputAction Return;
 
     public event Action Unpause;
@@ -74,7 +76,7 @@ public class PauseMenu_Script : MonoBehaviour
         //stub
         Save();
 
-        SceneManager.LoadScene("SCN_MainMenu", LoadSceneMode.Single);
+        SceneManager.LoadScene(mainMenuSceneName, LoadSceneMode.Single);
     }
 
     private void Resume()

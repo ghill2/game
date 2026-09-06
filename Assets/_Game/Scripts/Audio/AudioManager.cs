@@ -461,8 +461,14 @@ public sealed class AudioManager : MonoBehaviour
 
         spellCaster = player.GetComponent<SpellCaster>();
 
-        //Event Listener
-        spellCaster.OnSpellCast += SpellCastResolver;
+        if (spellCaster != null)
+        {
+            spellCaster.OnSpellCast += SpellCastResolver;
+        }
+        else
+        {
+            Debug.LogError("SpellCaster component not found on the player.");
+        }
     }
 
     private void OnDestroy()
@@ -472,7 +478,10 @@ public sealed class AudioManager : MonoBehaviour
             Instance = null;
         }
 
-        spellCaster.OnSpellCast -= SpellCastResolver;
+        if (spellCaster != null)
+        {
+            spellCaster.OnSpellCast -= SpellCastResolver;
+        }
     }
 
     private void OnValidate()
