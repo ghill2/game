@@ -6,6 +6,10 @@ public sealed class EnemyHitResponse : MonoBehaviour
 {
     private static readonly int BaseColorProperty =
         Shader.PropertyToID("_BaseColor");
+    private static readonly int GltfBaseColorProperty =
+        Shader.PropertyToID("baseColorFactor");
+    private static readonly int GltfEmissionProperty =
+        Shader.PropertyToID("emissiveFactor");
 
     [SerializeField] private Renderer targetRenderer;
     [SerializeField] private Color hitColor = Color.white;
@@ -14,7 +18,10 @@ public sealed class EnemyHitResponse : MonoBehaviour
 
     private EnemyHealth health;
     private MaterialPropertyBlock propertyBlock;
+    private int colorProperty = -1;
+    private bool hasGltfEmission;
     private Color normalColor = Color.white;
+    private Color normalEmissionColor = Color.black;
     private Coroutine flashRoutine;
 
     private void Awake()
@@ -34,11 +41,31 @@ public sealed class EnemyHitResponse : MonoBehaviour
 
         Material material = targetRenderer.sharedMaterial;
 
-        if (material != null &&
-            material.HasProperty(BaseColorProperty))
+        if (material == null)
         {
-            normalColor =
-                material.GetColor(BaseColorProperty);
+            return;
+        }
+
+        // Determine which color property to use based on the shader.
+        if (material.HasProperty(BaseColorProperty))
+        {
+            colorProperty = BaseColorProperty;
+        }
+        else if (material.HasProperty(GltfBaseColorProperty))
+        {
+            colorProperty = GltfBaseColorProperty;
+        }
+        else
+        {
+            return;
+        }
+
+        normalColor = material.GetColor(colorProperty);
+        hasGltfEmission = material.HasProperty(GltfEmissionProperty);
+
+        if (hasGltfEmission)
+        {
+            normalEmissionColor = material.GetColor(GltfEmissionProperty);
         }
     }
 
@@ -52,13 +79,20 @@ public sealed class EnemyHitResponse : MonoBehaviour
     {
         health.Damaged -= HandleDamaged;
         health.Defeated -= HandleDefeated;
+
+        if (flashRoutine != null)
+        {
+            StopCoroutine(flashRoutine);
+            flashRoutine = null;
+            SetColors(normalColor, normalEmissionColor);
+        }
     }
 
     private void HandleDamaged(
         int currentHealth,
         int maximumHealth)
     {
-        if (targetRenderer == null)
+        if (targetRenderer == null || colorProperty == -1)
         {
             return;
         }
@@ -79,28 +113,41 @@ public sealed class EnemyHitResponse : MonoBehaviour
             flashRoutine = null;
         }
 
-        SetColor(defeatedColor);
+        SetColors(defeatedColor, normalEmissionColor * defeatedColor);
     }
 
     private IEnumerator Flash()
     {
-        SetColor(hitColor);
+        // Tint emission, so it does not hide the hit colour.
+        SetColors(hitColor, normalEmissionColor * hitColor);
 
         yield return new WaitForSeconds(flashDuration);
 
-        SetColor(normalColor);
+        SetColors(normalColor, normalEmissionColor);
         flashRoutine = null;
     }
 
-    private void SetColor(Color color)
+    private void SetColors(Color color, Color emissionColor)
     {
-        if (targetRenderer == null)
+        if (targetRenderer == null || colorProperty == -1)
         {
             return;
         }
 
+        // A script reload in the Editor can clear this block.
+        if (propertyBlock == null)
+        {
+            propertyBlock = new MaterialPropertyBlock();
+        }
+
         targetRenderer.GetPropertyBlock(propertyBlock);
-        propertyBlock.SetColor(BaseColorProperty, color);
+        propertyBlock.SetColor(colorProperty, color);
+
+        if (hasGltfEmission)
+        {
+            propertyBlock.SetColor(GltfEmissionProperty, emissionColor);
+        }
+
         targetRenderer.SetPropertyBlock(propertyBlock);
     }
 }

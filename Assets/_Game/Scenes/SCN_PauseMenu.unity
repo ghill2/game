@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF_UI_PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 8838056993740833270, guid: dbbcc24e4f631354fb8af6c5ccea54c4, type: 3}
+      propertyPath: mainMenuSceneName
+      value: SCN_RC_MainMenu
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

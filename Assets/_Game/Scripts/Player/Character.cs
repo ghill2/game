@@ -153,6 +153,7 @@ public class Character : MonoBehaviour
         if (_isGrounded && _velocity < 0f)
         {
             _velocity = -2f;  // common trick to keep the character firmly grounded
+            _animator.ResetTrigger("Jump"); // clear any stale trigger so no unexpected jump fires after landing
             return;            // already on the ground, no need to accumulate gravity
         }
 
