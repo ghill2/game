@@ -23,7 +23,13 @@ public class Crosshair : MonoBehaviour
     // draw the crosshair at the center of the screen
     void OnGUI()
     {
-        if (Event.current.type != EventType.Repaint) return;
+        // The pause menu sets timeScale to zero, so we can skip drawing the crosshair
+        // when the game is paused.
+        if (Time.timeScale == 0f || Event.current.type != EventType.Repaint)
+        {
+            return;
+        }
+        
         float cx = Screen.width * 0.5f, cy = Screen.height * 0.5f;
         GUI.DrawTexture(new Rect(cx - 1f, cy - 8f, 2f, 5f), Texture2D.whiteTexture); // top
         GUI.DrawTexture(new Rect(cx - 1f, cy + 3f, 2f, 5f), Texture2D.whiteTexture); // bottom

@@ -119,6 +119,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &1709939731
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1439762879987228876, guid: 72c12ce6dabb746f9a61dd8fb5cfcb6c, type: 3}
+      propertyPath: m_Name
+      value: PF_GameStateManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198543820331190979, guid: 72c12ce6dabb746f9a61dd8fb5cfcb6c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198543820331190979, guid: 72c12ce6dabb746f9a61dd8fb5cfcb6c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198543820331190979, guid: 72c12ce6dabb746f9a61dd8fb5cfcb6c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198543820331190979, guid: 72c12ce6dabb746f9a61dd8fb5cfcb6c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198543820331190979, guid: 72c12ce6dabb746f9a61dd8fb5cfcb6c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198543820331190979, guid: 72c12ce6dabb746f9a61dd8fb5cfcb6c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198543820331190979, guid: 72c12ce6dabb746f9a61dd8fb5cfcb6c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198543820331190979, guid: 72c12ce6dabb746f9a61dd8fb5cfcb6c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198543820331190979, guid: 72c12ce6dabb746f9a61dd8fb5cfcb6c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198543820331190979, guid: 72c12ce6dabb746f9a61dd8fb5cfcb6c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 72c12ce6dabb746f9a61dd8fb5cfcb6c, type: 3}
 --- !u!1001 &4793416698717107964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -207,9 +264,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1109625176509428474, guid: dbbcc24e4f631354fb8af6c5ccea54c4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1907544125037610870, guid: dbbcc24e4f631354fb8af6c5ccea54c4, type: 3}
       propertyPath: m_Name
       value: PF_UI_PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961802859172757146, guid: dbbcc24e4f631354fb8af6c5ccea54c4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946003061451703431, guid: dbbcc24e4f631354fb8af6c5ccea54c4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3691538551048147640, guid: dbbcc24e4f631354fb8af6c5ccea54c4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939024722866986692, guid: dbbcc24e4f631354fb8af6c5ccea54c4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672984740362150097, guid: dbbcc24e4f631354fb8af6c5ccea54c4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760798067034151135, guid: dbbcc24e4f631354fb8af6c5ccea54c4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797510953253228103, guid: dbbcc24e4f631354fb8af6c5ccea54c4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8838056993740833270, guid: dbbcc24e4f631354fb8af6c5ccea54c4, type: 3}
       propertyPath: mainMenuSceneName
@@ -225,3 +314,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 4793416698717107964}
+  - {fileID: 1709939731}
