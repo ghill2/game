@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 public sealed class MainMenuMusicManager : MonoBehaviour
@@ -33,6 +32,9 @@ public sealed class MainMenuMusicManager : MonoBehaviour
 
     private void OnEnable()
     {
+        GameStateManager.AudioSettingsChanged += ApplyVolume;
+        ApplyVolume();
+
         if (musicSource != null &&
             musicSource.clip != null &&
             !musicSource.isPlaying)
@@ -43,6 +45,8 @@ public sealed class MainMenuMusicManager : MonoBehaviour
 
     private void OnDisable()
     {
+        GameStateManager.AudioSettingsChanged -= ApplyVolume;
+
         if (musicSource != null)
         {
             musicSource.Stop();
@@ -56,7 +60,9 @@ public sealed class MainMenuMusicManager : MonoBehaviour
             return;
         }
 
-        musicSource.volume = Mathf.Clamp01(masterVolume);
+        GameStateManager state = GameStateManager.Instance;
+        float settingsVolume = state != null ? state.EffectiveMusicVolume : 1f;
+        musicSource.volume = Mathf.Clamp01(masterVolume) * settingsVolume;
     }
 
     private bool IsConfigured()

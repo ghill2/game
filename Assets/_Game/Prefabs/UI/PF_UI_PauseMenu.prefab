@@ -883,7 +883,7 @@ MonoBehaviour:
   optionButtonView: {fileID: 485086392890000849}
   exitButtonView: {fileID: 9022060473820861131}
   MainMenuScreen: {fileID: 228684721215054826}
-  OptionsScreen: {fileID: 0}
+  OptionsScreen: {fileID: 718115422723383343}
 --- !u!1 &2247558985348474865
 GameObject:
   m_ObjectHideFlags: 0

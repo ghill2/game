@@ -78,6 +78,9 @@ public class SpellCaster : MonoBehaviour
         if (Time.time < _nextCastTime) // retimer, block all casts during cooldown
             return;
 
+        if (!TryGetSpellTargetDirection(spellId, prefab, out Vector3 position, out Quaternion rotation))
+            return;
+
         if (prefab.GetComponent<FireballProjectile>() != null)
         {
             GetComponent<PlayerAudioEvents>()?.PlayFireballCast();
@@ -87,17 +90,86 @@ public class SpellCaster : MonoBehaviour
         _nextCastTime = Time.time + recastDelay; // start the retimer
         _lastSpell = spellId;                    // remember successful casts for the left-mouse recast
         OnSpellCast?.Invoke(spellId, recastDelay); // notify UI with the spell and countdown duration
-        SpawnSpell(prefab);
+        SpawnSpell(prefab, position, rotation);
     }
 
-    // Instantiate the spell prefab aimed at the crosshair and play its particles
-    void SpawnSpell(GameObject prefab)
+    // Set the damage owner before the new spell starts.
+    void SpawnSpell(GameObject prefab, Vector3 position, Quaternion rotation)
     {
-        GameObject spell = Instantiate(prefab, castPoint.position, GetSpellRotation(prefab));
+        GameObject spell = Instantiate(prefab, position, rotation);
+        spell.GetComponent<AreaSpellDamage>()?.Initialize(transform);
         IgnoreCasterCollisions(spell);
 
         foreach (ParticleSystem ps in spell.GetComponentsInChildren<ParticleSystem>())
             ps.Play();
+    }
+
+    bool TryGetSpellTargetDirection(SpellId spellId, GameObject prefab,
+        out Vector3 position, out Quaternion rotation)
+    {
+        position = transform.position;
+        rotation = Quaternion.identity;
+        if (castPoint == null) return false;
+
+        if (spellId == SpellId.Fireball)
+        {
+            position = castPoint.position;
+            rotation = GetSpellRotation(prefab);
+            return true;
+        }
+
+        // The camera can arrive later when scenes load additively.
+        if (crosshair == null)
+            crosshair = FindFirstObjectByType<Crosshair>();
+
+        if (spellId == SpellId.Frostblast)
+        {
+            if (!TryGetGroundPointForAOEAttack(transform.position, out position))
+                return false;
+
+            Vector3 forward = crosshair != null
+                ? crosshair.transform.forward
+                : transform.forward;
+            forward.y = 0f;
+            if (forward.sqrMagnitude <= 0.0001f)
+                forward = transform.forward;
+
+            rotation = Quaternion.LookRotation(forward.normalized, Vector3.up);
+            return true;
+        }
+
+        if (crosshair == null) return false;
+
+        // Ignore the player, projectiles, and trigger volumes when choosing a strike.
+        int aimLayers = LayerMask.GetMask("Default", "Ground", "Level", "Enemy");
+        if (!Physics.Raycast(crosshair.transform.position, crosshair.transform.forward,
+                out RaycastHit hit, 100f, aimLayers, QueryTriggerInteraction.Ignore))
+            return false;
+
+        if (hit.collider.GetComponentInParent<IDamageable>() != null)
+            return TryGetGroundPointForAOEAttack(hit.point, out position);
+
+        // Skip walls and ceilings. A miss does not use the cooldown.
+        if (Vector3.Dot(hit.normal, Vector3.up) < 0.5f)
+            return false;
+
+        position = hit.point;
+        return true;
+    }
+
+    bool TryGetGroundPointForAOEAttack(Vector3 point, out Vector3 groundPoint)
+    {
+        int groundLayers = LayerMask.GetMask("Default", "Ground", "Level");
+        if (Physics.Raycast(point + Vector3.up * 2f, Vector3.down,
+                out RaycastHit hit, 6f, groundLayers, QueryTriggerInteraction.Ignore) &&
+            Vector3.Dot(hit.normal, Vector3.up) >= 0.5f)
+        {
+            groundPoint = hit.point;
+            return true;
+        }
+
+        groundPoint = point;
+        return false;
     }
 
     // Aim the projectile so its collider touches the surface under the crosshair

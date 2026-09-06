@@ -7,6 +7,8 @@ public class LevelHintTrigger : MonoBehaviour
 
     public event Action<int> OnHintTriggerEntered;
 
+    private bool pendingHint;
+
     private void Reset()
     {
         Collider c = GetComponent<Collider>();
@@ -18,6 +20,17 @@ public class LevelHintTrigger : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        OnHintTriggerEntered?.Invoke(hintId);
+        // Keep the hint while the additive UI scene is loading.
+        pendingHint = true;
+    }
+    private void LateUpdate()
+    {
+        Action<int> listeners = OnHintTriggerEntered;
+        if (!pendingHint || listeners == null)
+            return;
+
+        // UI Start methods must finish before the popup receives the hint.
+        pendingHint = false;
+        listeners.Invoke(hintId);
     }
 }
