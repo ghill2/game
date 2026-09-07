@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,7 +12,7 @@ public class Menu_script : MonoBehaviour
     private ButtonView optionButtonView;
 
     [SerializeField]
-    private ButtonView exitButtonView;
+    private ButtonView returnButtonView;
 
     [SerializeField]
     private GameObject MainMenuScreen;
@@ -37,8 +34,6 @@ public class Menu_script : MonoBehaviour
     [SerializeField]
     private Slider MusicVolume;
 
-    private List<Slider> VolumeSliders;
-
     [SerializeField]
     private MainMenuMusicManager MainMenuMusicManager;
 
@@ -46,36 +41,10 @@ public class Menu_script : MonoBehaviour
     {
         playButtonView.enabled = true;
         optionButtonView.enabled = true;
-        exitButtonView.enabled = true;
 
-        Return = InputSystem.actions.FindAction("Return");
+        Return = InputSystem.actions?.FindAction("Return");
 
-        MasterVolume = GameObject.Find("Master Slider").GetComponent<Slider>();
-        SFXVolume = GameObject.Find("SFX Slider").GetComponent<Slider>();
-        UIVolume = GameObject.Find("UI Slider").GetComponent<Slider>();
-        MusicVolume = GameObject.Find("Music Slider").GetComponent<Slider>();
-
-        VolumeSliders = new List<Slider>
-        {
-            MasterVolume,
-            SFXVolume,
-            UIVolume,
-            MusicVolume
-        };
-
-        // Slider's Listeners 
-        VolumeSliders.ForEach(
-            slider =>
-            {
-                slider.value = 1;
-                slider.onValueChanged.AddListener(value => OnSliderChanged(slider, value));
-
-                Debug.Log(slider.name);
-            }
-        );
-
-        MainMenuMusicManager = GameObject.Find("PF_MainMenuMusicManager").GetComponent<MainMenuMusicManager>();
-        
+        SyncVolumeSliders();
 
         MainMenuScreen.SetActive(true);
         OptionsScreen.SetActive(false);
@@ -85,72 +54,99 @@ public class Menu_script : MonoBehaviour
     {
         playButtonView.ButtonClicked += OnPlayButtonClicked;
         optionButtonView.ButtonClicked += OnOptionButtonClicked;
-        exitButtonView.ButtonClicked += OnExitButtonClicked;
+        if (returnButtonView != null) returnButtonView.ButtonClicked += OnReturn;
+        BindVolumeSliders(true);
+        GameStateManager.AudioSettingsChanged += SyncVolumeSliders;
+        SyncVolumeSliders();
     }
 
     private void OnDisable()
     {
         playButtonView.ButtonClicked -= OnPlayButtonClicked; //Dehooks
         optionButtonView.ButtonClicked -= OnOptionButtonClicked;
-        exitButtonView.ButtonClicked -= OnExitButtonClicked;
+        if (returnButtonView != null) returnButtonView.ButtonClicked -= OnReturn;
+        BindVolumeSliders(false);
+        GameStateManager.AudioSettingsChanged -= SyncVolumeSliders;
     }
-    private void OnDestroy()
-    {
-        VolumeSliders.ForEach(
-            s => s.onValueChanged.RemoveAllListeners()
-        );
-    }
-
     private void Update()
     {
-        if (Return.IsPressed() == true)
+        if (Return?.WasPressedThisFrame() == true)
         {
             OnReturn();
         }
     }
 
-    private void OnSliderChanged(Slider slider, float value)
+
+    private void BindVolumeSliders(bool bind)
     {
-        switch (slider.name)
+        if (MasterVolume != null)
         {
-            case "Master Slider":
-                Debug.Log($"Slider {slider.name} : {value}");
-                AudioManager.Instance?.SetMasterVolume(value);
-                break;
-            case "SFX Slider":
-                Debug.Log($"Slider {slider.name} : {value}");
-                AudioManager.Instance.SetSFXVolume(value);
-                break;
-            case "UX Slider":
-                Debug.Log($"Slider {slider.name} : {value}");
-                AudioManager.Instance.SetUXVolume(value);
-                break;
-            case "Music Slider":
-                Debug.Log($"Slider {slider.name} : {value}");
-                AudioManager.Instance.SetMusicVolume(value);
-                break;
+            if (bind) MasterVolume.onValueChanged.AddListener(OnMasterVolumeChanged);
+            else MasterVolume.onValueChanged.RemoveListener(OnMasterVolumeChanged);
         }
+        if (SFXVolume != null)
+        {
+            if (bind) SFXVolume.onValueChanged.AddListener(OnSFXVolumeChanged);
+            else SFXVolume.onValueChanged.RemoveListener(OnSFXVolumeChanged);
+        }
+        if (UIVolume != null)
+        {
+            if (bind) UIVolume.onValueChanged.AddListener(OnUIVolumeChanged);
+            else UIVolume.onValueChanged.RemoveListener(OnUIVolumeChanged);
+        }
+        if (MusicVolume != null)
+        {
+            if (bind) MusicVolume.onValueChanged.AddListener(OnMusicVolumeChanged);
+            else MusicVolume.onValueChanged.RemoveListener(OnMusicVolumeChanged);
+        }
+    }
+
+    private void SyncVolumeSliders()
+    {
+        GameStateManager state = GameStateManager.Instance;
+        if (state == null) return;
+
+        if (MasterVolume != null) MasterVolume.SetValueWithoutNotify(state.MasterVolume);
+        if (SFXVolume != null) SFXVolume.SetValueWithoutNotify(state.SFXVolume);
+        if (UIVolume != null) UIVolume.SetValueWithoutNotify(state.UIVolume);
+        if (MusicVolume != null) MusicVolume.SetValueWithoutNotify(state.MusicVolume);
+    }
+
+    private void OnMasterVolumeChanged(float value)
+    {
+        GameStateManager.Instance?.SetMasterVolume(value);
+    }
+
+    private void OnSFXVolumeChanged(float value)
+    {
+        GameStateManager.Instance?.SetSFXVolume(value);
+    }
+
+    private void OnUIVolumeChanged(float value)
+    {
+        GameStateManager.Instance?.SetUIVolume(value);
+    }
+
+    private void OnMusicVolumeChanged(float value)
+    {
+        GameStateManager.Instance?.SetMusicVolume(value);
     }
 
     private void OnPlayButtonClicked()
     {
         Debug.Log("Play Button Pressed!");
 
+        GameStateManager.Instance?.StartNewGame();
         SceneManager.LoadScene(StartScene);
-        SceneManager.LoadScene("SCN_UI", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("SCN_UI", LoadSceneMode.Additive);
     }
 
     private void OnOptionButtonClicked()
     {
         Debug.Log("Option Button Pressed!");
+        SyncVolumeSliders();
         OptionsScreen.SetActive(true);
         MainMenuScreen.SetActive(false);
-    }
-
-    private void OnExitButtonClicked()
-    {
-        Debug.Log("Exit Button Pressed!");
-        Application.Quit();
     }
 
     private void OnReturn()

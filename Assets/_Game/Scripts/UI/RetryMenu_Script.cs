@@ -41,9 +41,10 @@ public class RetryMenu_Script : MonoBehaviour
     private void OnRetryButtonClicked()
     {
         Debug.Log("Retry Button Clicked");
+        GameStateManager.Instance?.ResetCurrentLevel();
         playerInput.SwitchCurrentActionMap("Player");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        SceneManager.LoadScene("SCN_UI", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("SCN_UI", LoadSceneMode.Additive);
     }
 
     private void OnExitButtonClicked()

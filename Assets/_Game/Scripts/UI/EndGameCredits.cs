@@ -47,6 +47,15 @@ public sealed class EndGameCredits : MonoBehaviour
             return;
         }
 
+        GameStateManager state = GameStateManager.Instance;
+        state?.FinishGame();
+
+        int totalScore = state != null ? state.TotalScore : 0;
+        double totalSeconds = state != null ? state.TotalGameTimeSeconds : 0d;
+        long seconds = (long)System.Math.Floor(totalSeconds);
+        string totalTime = $"{seconds / 3600:00}:{seconds / 60 % 60:00}:{seconds % 60:00}";
+        creditsText.text = $"Total Score: {totalScore}\nTotal Time: {totalTime}\n\n{creditsText.text}";
+
         creditsRect = creditsText.rectTransform;
         pauseRemaining = openingPause;
         Canvas.ForceUpdateCanvases();

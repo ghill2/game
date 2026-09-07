@@ -51,6 +51,8 @@ public class Character : MonoBehaviour
 
         collectibles = GetComponent<PlayerCollectibles>();
         _health = GetComponent<PlayerHealth>();
+
+        _speedBoostEndTime = Time.time; // No boost activee on start
     }
 
     // move first, then read grounded state, gravity, finally animation

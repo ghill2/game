@@ -10,6 +10,19 @@ public sealed class GameStateManager : MonoBehaviour
     public static event Action AudioSettingsChanged;
     public event Action ProgressChanged;
 
+    public int TotalScore { get; private set; }
+    public int CurrentLevelScore { get; private set; }
+    public bool IsGameRunning { get; private set; }
+
+    private double gameStartTime;
+    private double finishedGameTime;
+    private bool currentLevelCompleted;
+
+    // Real time includes pauses, retry screens, and scene loading.
+    public double TotalGameTimeSeconds => IsGameRunning
+        ? Math.Max(0d, Time.realtimeSinceStartupAsDouble - gameStartTime)
+        : finishedGameTime;
+
     [Header("Audio Settings")]
     [SerializeField, Range(0f, 1f)] private float masterVolume = 1f;
     [SerializeField, Range(0f, 1f)] private float musicVolume = 1f;
@@ -87,8 +100,70 @@ public sealed class GameStateManager : MonoBehaviour
     public void SetSFXVolume(float value) => SFXVolume = value;
     public void SetUIVolume(float value) => UIVolume = value;
 
+    public void StartNewGame()
+    {
+        TotalScore = 0;
+        CurrentLevelScore = 0;
+        currentLevelCompleted = false;
+        finishedGameTime = 0d;
+        gameStartTime = Time.realtimeSinceStartupAsDouble;
+        IsGameRunning = true;
+        ProgressChanged?.Invoke();
+    }
+
+    // Called when the player enters a level or retries it.
+    public void ResetCurrentLevel()
+    {
+        CurrentLevelScore = 0;
+        currentLevelCompleted = false;
+        ProgressChanged?.Invoke();
+    }
+
+    public void AddEggScore(int eggCount = 1)
+    {
+        if (!IsGameRunning || currentLevelCompleted || eggCount <= 0)
+        {
+            return;
+        }
+
+        CurrentLevelScore += eggCount;
+        ProgressChanged?.Invoke();
+    }
+
+    // Only an exit portal can add the level score to the total.
+    public void CompleteCurrentLevel()
+    {
+        if (!IsGameRunning || currentLevelCompleted)
+        {
+            return;
+        }
+
+        TotalScore += CurrentLevelScore;
+        CurrentLevelScore = 0;
+        currentLevelCompleted = true;
+        ProgressChanged?.Invoke();
+    }
+
+    public void FinishGame()
+    {
+        if (!IsGameRunning)
+        {
+            return;
+        }
+
+        finishedGameTime = TotalGameTimeSeconds;
+        IsGameRunning = false;
+        ProgressChanged?.Invoke();
+    }
+
     public void ResetProgress()
     {
+        TotalScore = 0;
+        CurrentLevelScore = 0;
+        currentLevelCompleted = false;
+        gameStartTime = 0d;
+        finishedGameTime = 0d;
+        IsGameRunning = false;
         ProgressChanged?.Invoke();
     }
 

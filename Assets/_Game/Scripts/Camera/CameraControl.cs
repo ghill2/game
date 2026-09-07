@@ -47,7 +47,7 @@ public class CameraControl : MonoBehaviour, AxisState.IInputAxisProvider
         return 0f;
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (_character == null || _brainCamera == null) return;
         Vector3 dir = _brainCamera.forward;

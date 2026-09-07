@@ -19,9 +19,14 @@ public class HUDCollectiblesController : MonoBehaviour
         BootsTimer = GameObject.Find("Boots Timer");
         TimerText = BootsTimer.GetComponentInChildren<TextMeshProUGUI>();
 
-        // Test
-
-        UpdateBootsTimer(10);
+        if (BootsTimer != null)
+        {
+            BootsTimer.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("Boots Timer GameObject not found in the scene.");
+        }
     }
 
     public void SetEggsCount(int count)
