@@ -6146,7 +6146,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4071
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -7982,7 +7982,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3213757617216330899, guid: 76a354f8e02484264b5aab34969b9b99, type: 3}
       propertyPath: rotationSpeed
-      value: 70
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3235702845517652682, guid: 76a354f8e02484264b5aab34969b9b99, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19926,7 +19926,7 @@ GameObject:
   - component: {fileID: 2085341252}
   - component: {fileID: 2085341251}
   - component: {fileID: 2085341250}
-  m_Layer: 6
+  m_Layer: 4
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
