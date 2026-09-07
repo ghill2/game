@@ -127,6 +127,8 @@ public sealed class AudioManager : MonoBehaviour
     private SpellCaster spellCaster;
     private PlayerCollectibles playerCollectibles;
 
+    private bool hasStarted;
+
 
     //---------------------------------Adam's New Audio Code----------------------------
     public float GetDecibleVal(float _sliderVal)
@@ -345,6 +347,7 @@ public sealed class AudioManager : MonoBehaviour
             soundObject = new GameObject("One Shot - " + clip.name);
             soundObject.transform.position = _position;
             source = soundObject.AddComponent<AudioSource>();
+            Destroy(soundObject, clip.length + 0.1f);
         }
 
         //configure source
@@ -362,7 +365,7 @@ public sealed class AudioManager : MonoBehaviour
 
         if (UnityEngine.Random.Range(0f, 1f) <= _evt.probability)
         {
-            Debug.Log("***************Playing " + source.clip.name);
+            //Debug.Log("***************Playing " + source.clip.name);
 
             if (_evt.loop) source.Play();
             else source.PlayOneShot(clip);
@@ -418,8 +421,37 @@ public sealed class AudioManager : MonoBehaviour
         InitEnvironmentSource();
     }
 
+    private void OnEnable()
+    {
+        GameStateManager.AudioSettingsChanged += ApplyGameStateVolumes;
+        if (hasStarted) ApplyGameStateVolumes();
+    }
+
+    private void OnDisable()
+    {
+        GameStateManager.AudioSettingsChanged -= ApplyGameStateVolumes;
+    }
+
+    private void ApplyGameStateVolumes()
+    {
+        GameStateManager state = GameStateManager.Instance;
+        if (!hasStarted || Instance != this || state == null || mixer == null)
+        {
+            return;
+        }
+
+        SetMasterVolume(state.MasterVolume);
+        SetMusicVolume(state.MusicVolume);
+        SetSFXVolume(state.SFXVolume);
+        SetUXVolume(state.UIVolume);
+    }
+
     private void Start()
     {
+        // Apply mixer settings in Start, after all audio objects have loaded.
+        hasStarted = true;
+        ApplyGameStateVolumes();
+
         player = GameObject.FindGameObjectWithTag("Player");
 
         if (player == null)
@@ -429,8 +461,14 @@ public sealed class AudioManager : MonoBehaviour
 
         spellCaster = player.GetComponent<SpellCaster>();
 
-        //Event Listener
-        spellCaster.OnSpellCast += SpellCastResolver;
+        if (spellCaster != null)
+        {
+            spellCaster.OnSpellCast += SpellCastResolver;
+        }
+        else
+        {
+            Debug.LogError("SpellCaster component not found on the player.");
+        }
     }
 
     private void OnDestroy()
@@ -440,7 +478,10 @@ public sealed class AudioManager : MonoBehaviour
             Instance = null;
         }
 
-        spellCaster.OnSpellCast -= SpellCastResolver;
+        if (spellCaster != null)
+        {
+            spellCaster.OnSpellCast -= SpellCastResolver;
+        }
     }
 
     private void OnValidate()
