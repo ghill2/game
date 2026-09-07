@@ -249,10 +249,15 @@ public sealed class AudioManager : MonoBehaviour
                         PlaySoundEvent(n.evt_npc_attack, _pos);
                         PlaySoundEvent(n.evt_npc_melee_attack, _pos);
                         break;
+                    case CharAction.Hurt:
+                        SoundEvent hurtEvent = n.evt_npc_death;
+                        hurtEvent.probability = 0.4f;
+                        PlaySoundEvent(hurtEvent, _pos);
+                        break;
                     case CharAction.Death:
                         SoundEvent deathEvent = n.evt_npc_death;
                         //Always play sound when npc dies
-                        deathEvent.probability = 1;
+                        deathEvent.probability = 1f;
                         PlaySoundEvent(deathEvent, _pos);                        
                         break;
                     default: break;
@@ -387,6 +392,20 @@ public sealed class AudioManager : MonoBehaviour
 
     }
 
+    public void PlayUIConfirmSFX()
+    {
+        PlaySoundEvent(evt_ui_select);
+    }
+
+    public void PlayUISelectSFX()
+    {
+        PlaySoundEvent(evt_ui_select);
+    }
+
+    public void PlayUICancelSFX()
+    {
+        PlaySoundEvent(evt_ui_cancel);
+    }
 
 
 

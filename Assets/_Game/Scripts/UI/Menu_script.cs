@@ -135,7 +135,7 @@ public class Menu_script : MonoBehaviour
     private void OnPlayButtonClicked()
     {
         Debug.Log("Play Button Pressed!");
-
+        AudioManager.Instance?.PlayUIConfirmSFX();
         GameStateManager.Instance?.StartNewGame();
         SceneManager.LoadScene(StartScene);
         //SceneManager.LoadScene("SCN_UI", LoadSceneMode.Additive);
@@ -144,6 +144,7 @@ public class Menu_script : MonoBehaviour
     private void OnOptionButtonClicked()
     {
         Debug.Log("Option Button Pressed!");
+        AudioManager.Instance?.PlayUISelectSFX();
         SyncVolumeSliders();
         OptionsScreen.SetActive(true);
         MainMenuScreen.SetActive(false);
@@ -153,6 +154,7 @@ public class Menu_script : MonoBehaviour
     {
         if (OptionsScreen.activeSelf == true)
         {
+            AudioManager.Instance?.PlayUICancelSFX();
             OptionsScreen.SetActive(false);
             MainMenuScreen.SetActive(true);
         }

@@ -78,12 +78,14 @@ public class PauseMenu_Script : MonoBehaviour
     private void OnResumeButtonClicked()
     {
         Debug.Log("Resume Button Pressed!");
+        AudioManager.Instance?.PlayUIConfirmSFX();
         Resume();        
     }
 
     private void OnOptionButtonClicked()
     {
         Debug.Log("Option Button Pressed!");
+        AudioManager.Instance?.PlayUISelectSFX();
         SyncVolumeSliders();
         OptionsScreen.SetActive(true);
         MainMenuScreen.SetActive(false);
@@ -92,7 +94,7 @@ public class PauseMenu_Script : MonoBehaviour
     private void OnExitButtonClicked()
     {
         Debug.Log("RtMN Button Pressed!");
-
+        AudioManager.Instance?.PlayUICancelSFX();
         //Save progress, logic tbd
         //stub
         Save();

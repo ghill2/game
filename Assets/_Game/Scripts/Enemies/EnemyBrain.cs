@@ -271,6 +271,7 @@ public sealed class EnemyBrain : MonoBehaviour
 
             case EnemyState.Hurt:
                 motor.Stop();
+                AudioManager.Instance?.NPCActionResolver(npcType, CharAction.Hurt, transform.position);
                 hurtEndTime =
                     Time.time + data.hitStunDuration;
                 break;

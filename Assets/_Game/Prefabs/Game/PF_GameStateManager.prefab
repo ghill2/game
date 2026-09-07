@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d04ab0e464b414aa76d92f1a418bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameStateManager
-  masterVolume: 0.5
+  masterVolume: 1
   musicVolume: 1
   sfxVolume: 1
   uiVolume: 1
