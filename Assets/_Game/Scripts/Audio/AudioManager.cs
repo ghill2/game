@@ -394,7 +394,7 @@ public sealed class AudioManager : MonoBehaviour
 
     public void PlayUIConfirmSFX()
     {
-        PlaySoundEvent(evt_ui_select);
+        PlaySoundEvent(evt_ui_confirm);
     }
 
     public void PlayUISelectSFX()
