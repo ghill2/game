@@ -430,6 +430,80 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF_Credits
       objectReference: {fileID: 0}
+    - target: {fileID: 8688467952926917011, guid: f856a0ba5850549c6af09cddcfa8704e, type: 3}
+      propertyPath: m_text
+      value: 'Thank you for playing our game!
+
+
+        CREDITS
+
+
+        -- Game
+        Design --
+
+
+        Joe Tyler
+
+        George Hill
+
+        Adam Tsui
+
+        Joy
+
+        Andrii
+        Krasylnykov
+
+
+        -- Art --
+
+
+        George Hill
+
+        Unity Asset
+        Store
+
+        WindHaven by PrinceCreates
+
+        Magic Effects Pack by
+        HOVL Studio
+
+
+        -- Music & SFX --
+
+
+        Adam Tsui
+
+
+        --
+        Level Design --
+
+
+        Joe Tyler
+
+
+        -- UI --
+
+
+        Joy
+
+
+        --
+        Programming --
+
+
+        George Hill
+
+        Adam Tsui
+
+        Andrii Krasylnykov
+
+
+        ---
+
+
+        Press
+        Escape (Return) to return to the Main Menu'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
