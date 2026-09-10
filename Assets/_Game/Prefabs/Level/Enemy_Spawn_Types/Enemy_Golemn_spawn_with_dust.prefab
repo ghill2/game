@@ -117,7 +117,11 @@ PrefabInstance:
       objectReference: {fileID: 430223396126255441, guid: d2281ad00e0d040db9c47c69e87fcac4, type: 3}
     - target: {fileID: 947408852802308142, guid: 9e89b7fee832240db9ec165537f9df09, type: 3}
       propertyPath: enemiesToSpawn
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 947408852802308142, guid: 9e89b7fee832240db9ec165537f9df09, type: 3}
+      propertyPath: spawnDelayMilliseconds
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3524865956896610806, guid: 9e89b7fee832240db9ec165537f9df09, type: 3}
       propertyPath: m_Name
