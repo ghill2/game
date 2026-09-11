@@ -103,6 +103,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 104750483815739857, guid: 41494896fc96c9748b81d3356632794e, type: 3}
   m_PrefabInstance: {fileID: 3780811981596324273}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5066212826663275556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8230022441722461589, guid: 41494896fc96c9748b81d3356632794e, type: 3}
+  m_PrefabInstance: {fileID: 3780811981596324273}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7344510176448962391
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,6 +124,10 @@ PrefabInstance:
       propertyPath: enemiesToSpawn
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 947408852802308142, guid: 9e89b7fee832240db9ec165537f9df09, type: 3}
+      propertyPath: smokeEffectObject
+      value: 
+      objectReference: {fileID: 5066212826663275556}
     - target: {fileID: 947408852802308142, guid: 9e89b7fee832240db9ec165537f9df09, type: 3}
       propertyPath: spawnDelayMilliseconds
       value: 1000
@@ -165,6 +174,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5405208496907882817, guid: 9e89b7fee832240db9ec165537f9df09, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6103763010906161509, guid: 9e89b7fee832240db9ec165537f9df09, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

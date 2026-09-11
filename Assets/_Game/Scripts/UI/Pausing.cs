@@ -20,7 +20,7 @@ public class Pausing : MonoBehaviour
         pause = InputSystem.actions.FindAction("Pause");
         //Sets Player Input Scheme
         playerInput.SwitchCurrentActionMap("Player");
-        Debug.Log(playerInput.currentActionMap);
+        //Debug.Log(playerInput.currentActionMap);
 
         //Sets Game tick
         Time.timeScale = 1f;

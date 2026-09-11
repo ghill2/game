@@ -127,6 +127,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1031540646087761348, guid: af25fe5856fbe7f47a1c5c9c847b3b9b, type: 3}
+      propertyPath: m_Color.a
+      value: 0.49411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 1031540646087761348, guid: af25fe5856fbe7f47a1c5c9c847b3b9b, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1031540646087761348, guid: af25fe5856fbe7f47a1c5c9c847b3b9b, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1031540646087761348, guid: af25fe5856fbe7f47a1c5c9c847b3b9b, type: 3}
+      propertyPath: m_Color.r
+      value: 0.7169812
+      objectReference: {fileID: 0}
     - target: {fileID: 6270120056893379444, guid: af25fe5856fbe7f47a1c5c9c847b3b9b, type: 3}
       propertyPath: m_Name
       value: PF_RetryMenu

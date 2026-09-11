@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42383a29acf1c471fb423466bd86a534, type: 3}
   m_Name: DA_Enemy_Viking
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  maximumHealth: 150
+  maximumHealth: 200
   hitStunDuration: 0.2
   moveSpeed: 2
   angularSpeed: 540

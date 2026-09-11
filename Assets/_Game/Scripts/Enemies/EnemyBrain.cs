@@ -18,9 +18,18 @@ public sealed class EnemyBrain : MonoBehaviour
     }
 
     [SerializeField] private EnemyData data;
+
     [SerializeField] private NpcType npcType;
     [SerializeField] private EnemyState currentState;
-    [SerializeField] private bool logStateChanges = true;
+    [SerializeField] private bool logStateChanges = false;
+
+    [Header("Data override")]
+    [SerializeField]
+    [Min(0.1f)] public float detectionRangeOverride = 0f;
+
+    private float DetectionRange =>
+        detectionRangeOverride > 0 ? detectionRangeOverride : data.detectionRange;
+
     private bool reportedCombatEngagement;
 
     public static event Action<EnemyBrain, bool>
@@ -126,7 +135,7 @@ public sealed class EnemyBrain : MonoBehaviour
 
         if (sensor.CanDetect(
                 guardPoint,
-                data.detectionRange,
+                DetectionRange,
                 data.encounterRadius))
         {
             SetState(EnemyState.Chase);
@@ -339,7 +348,7 @@ public sealed class EnemyBrain : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(
             transform.position,
-            data.detectionRange);
+            DetectionRange);
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(
