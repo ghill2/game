@@ -131,8 +131,8 @@ Material:
     - _AlphaClip: 0
     - _AlphaCutoff: 0.5
     - _Blend: 0
-    - _BlendAmountG: 0.218
-    - _BlendAmountR: 0.037
+    - _BlendAmountG: 0.181
+    - _BlendAmountR: 0.111
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0

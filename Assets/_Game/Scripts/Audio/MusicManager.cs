@@ -172,7 +172,13 @@ public sealed class MusicManager : MonoBehaviour
 
         if (isBattleMusicActive)
         {
+            // Debug.Log("Battle music start");
             StartBattleTrack();
+        }
+        else
+        {
+            // Debug.Log("Battle music stop.");
+            StartInGameTrack();
         }
     }
 

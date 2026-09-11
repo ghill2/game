@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maximumHealth: 50
   hitStunDuration: 0.2
-  moveSpeed: 3.5
+  moveSpeed: 4
   angularSpeed: 1080
   detectionRange: 20
   encounterRadius: 300

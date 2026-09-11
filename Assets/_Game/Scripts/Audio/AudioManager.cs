@@ -338,17 +338,17 @@ public sealed class AudioManager : MonoBehaviour
 
         if (_src != null)
         {
-            Debug.Log("***********have source");
+            //Debug.Log("***********have source");
             source = _src;
         }
         else if (_evt.spatialBlend == 0 && !_evt.loop)
         {
-            Debug.Log("***********2d sound");
+            //Debug.Log("***********2d sound");
             source = twoDimensionalSource;
         }
         else
         {
-            Debug.Log("**********3d");
+            //Debug.Log("**********3d");
             soundObject = new GameObject("One Shot - " + clip.name);
             soundObject.transform.position = _position;
             source = soundObject.AddComponent<AudioSource>();
@@ -475,18 +475,20 @@ public sealed class AudioManager : MonoBehaviour
 
         if (player == null)
         {
-            Debug.LogError("Player not found in the scene.");
-        }
-
-        spellCaster = player.GetComponent<SpellCaster>();
-
-        if (spellCaster != null)
-        {
-            spellCaster.OnSpellCast += SpellCastResolver;
+            Debug.LogWarning("Player not found in the scene.");
         }
         else
         {
-            Debug.LogError("SpellCaster component not found on the player.");
+            spellCaster = player.GetComponent<SpellCaster>();
+
+            if (spellCaster != null)
+            {
+                spellCaster.OnSpellCast += SpellCastResolver;
+            }
+            else
+            {
+                Debug.LogError("SpellCaster component not found on the player.");
+            }
         }
     }
 

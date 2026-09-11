@@ -596,7 +596,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: f7ee9083b50ec46999aea496e7148fc5, type: 2}
   npcType: 4
   currentState: 0
-  logStateChanges: 1
+  logStateChanges: 0
 --- !u!114 &4091412445470276947
 MonoBehaviour:
   m_ObjectHideFlags: 0

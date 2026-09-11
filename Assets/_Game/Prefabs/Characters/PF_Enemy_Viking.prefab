@@ -839,7 +839,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: fb59dcd27f36543deb3bfb67532c74c8, type: 2}
   npcType: 5
   currentState: 0
-  logStateChanges: 1
+  logStateChanges: 0
 --- !u!114 &3992879891198787508
 MonoBehaviour:
   m_ObjectHideFlags: 0

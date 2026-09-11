@@ -84,25 +84,25 @@ public class HUDManager : MonoBehaviour
 
     private void UpdateHealthUI(int currentHealth, int maxHealth)
     {
-        Debug.Log($"Updating health UI: Current Health = {currentHealth}, Max Health = {maxHealth}");
+        // Debug.Log($"Updating health UI: Current Health = {currentHealth}, Max Health = {maxHealth}");
         healthBarController.UpdateBar((float)currentHealth / maxHealth);
     }
 
     private void UpdateEggsCount(object _, EggCollectedEventArgs e)
     {
-        Debug.Log($"Updating eggs count UI: Eggs Collected = {e.Eggs}");
+        // Debug.Log($"Updating eggs count UI: Eggs Collected = {e.Eggs}");
         hudCollectiblesController.SetEggsCount(e.Eggs);
     }
 
     private void UpdatePopup(Texture icon, string text, float duration = 3f)
     {
-        Debug.Log($"Updating Popup Window: Icon = {icon}, text = {text}");
+        // Debug.Log($"Updating Popup Window: Icon = {icon}, text = {text}");
         popupController.UpdateWindow(icon, text, duration);
     }
 
     private void UpdatePopup(object _, EggCollectedEventArgs e)
     {
-        Debug.Log($"Unpacking EventArgs.");
+        // Debug.Log($"Unpacking EventArgs.");
         UpdatePopup(e.Icon, e.Text);
     }
 
@@ -113,7 +113,7 @@ public class HUDManager : MonoBehaviour
 
     private void UpdateSpellPanel(SpellId SpellNo, float recastDelay)
     {
-        Debug.Log($"Updating Spell Panel: Last Spell Casted = {SpellNo}");
+        // Debug.Log($"Updating Spell Panel: Last Spell Casted = {SpellNo}");
         spellPanelController.UpdatePanel(SpellNo, recastDelay);
     }
 
@@ -127,7 +127,7 @@ public class HUDManager : MonoBehaviour
                 // -- Movement Tutorial --
                 // Chained = true
                 // Popup 1
-                Debug.Log($"Level Trigger invoked, hintId = {hintId}");
+                // Debug.Log($"Level Trigger invoked, hintId = {hintId}");
                 icon = Resources.Load<Texture2D>("Popup/wasd-square");
                 text = "Move";
 
@@ -150,7 +150,7 @@ public class HUDManager : MonoBehaviour
                 // -- Spells Tutorial --
                 // Chained = true
                 // Popup 1
-                Debug.Log($"Level Trigger invoked, hintId = {hintId}");
+                // Debug.Log($"Level Trigger invoked, hintId = {hintId}");
                 icon = Resources.Load<Texture2D>("Popup/f-key-tight");
                 text = "Fireball";
                 
@@ -179,7 +179,7 @@ public class HUDManager : MonoBehaviour
                 // -- Egg Open Portal Tutorial --
                 // Chained = true
                 // Popup 1
-                Debug.Log($"Level Trigger invoked, hintId = {hintId}");
+                // Debug.Log($"Level Trigger invoked, hintId = {hintId}");
                 icon = Resources.Load<Texture>("Popup/dragon-egg-render");
                 text = "Dragon Egg Open Portal";
 
@@ -187,8 +187,8 @@ public class HUDManager : MonoBehaviour
                 break;
 
             default:
-                Debug.Log($"Level Trigger invoked, hintId = {hintId}");
-                Debug.Log($"No Icon/Text provided for Trigger hintId = {hintId}");
+                // Debug.Log($"Level Trigger invoked, hintId = {hintId}");
+                // Debug.Log($"No Icon/Text provided for Trigger hintId = {hintId}");
                 break;
         }   
     }

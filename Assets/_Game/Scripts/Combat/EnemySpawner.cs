@@ -33,6 +33,12 @@ public sealed class EnemySpawner : MonoBehaviour
     [SerializeField, Min(0)]
     private int spawnRetries = 3;
 
+    [SerializeField]
+    private bool enableSmoke = true;
+
+    [SerializeField]
+    private GameObject smokeEffectObject;
+
     private Transform player;
     private Coroutine spawnRoutine;
     private int spawnedEnemyCount;
@@ -78,6 +84,14 @@ public sealed class EnemySpawner : MonoBehaviour
         player = playerObject != null
             ? playerObject.transform
             : null;
+
+        if (!enableSmoke)
+        {
+            if (smokeEffectObject != null)
+            {
+                smokeEffectObject.SetActive(false);
+            }
+        }
     }
 
     private void Update()
@@ -131,6 +145,12 @@ public sealed class EnemySpawner : MonoBehaviour
                 CompleteSpawning();
                 AllEnemiesSpawned?.Invoke(this);
                 spawnRoutine = null;
+
+                if (enableSmoke)
+                {
+                    DisableSmokeEffect();
+                }
+
                 yield break;
             }
 
@@ -345,5 +365,18 @@ public sealed class EnemySpawner : MonoBehaviour
 
         StopCoroutine(spawnRoutine);
         spawnRoutine = null;
+    }
+
+    private void DisableSmokeEffect()
+    {
+        if (enableSmoke)
+        {
+            enableSmoke = false;
+
+            if (smokeEffectObject != null)
+            {
+                smokeEffectObject.SetActive(false);
+            }
+        }
     }
 }

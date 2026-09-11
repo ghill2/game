@@ -134,7 +134,7 @@ public class Menu_script : MonoBehaviour
 
     private void OnPlayButtonClicked()
     {
-        Debug.Log("Play Button Pressed!");
+        // Debug.Log("Play Button Pressed!");
         AudioManager.Instance?.PlayUIConfirmSFX();
         GameStateManager.Instance?.StartNewGame();
         SceneManager.LoadScene(StartScene);
@@ -143,7 +143,7 @@ public class Menu_script : MonoBehaviour
 
     private void OnOptionButtonClicked()
     {
-        Debug.Log("Option Button Pressed!");
+        // Debug.Log("Option Button Pressed!");
         AudioManager.Instance?.PlayUISelectSFX();
         SyncVolumeSliders();
         OptionsScreen.SetActive(true);

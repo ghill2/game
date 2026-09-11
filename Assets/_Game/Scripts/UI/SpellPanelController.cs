@@ -115,6 +115,6 @@ public class SpellPanelController : MonoBehaviour
         overlay.fillAmount = 0f;
         cooldownFlags[SpellNo] = false;
 
-        Debug.Log($"Cooldown Fill Animation Ended on Spell {SpellNo}");
+        //Debug.Log($"Cooldown Fill Animation Ended on Spell {SpellNo}");
     }
 }

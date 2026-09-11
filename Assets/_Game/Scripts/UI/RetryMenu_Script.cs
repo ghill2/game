@@ -10,6 +10,9 @@ public class RetryMenu_Script : MonoBehaviour
     [SerializeField]
     private ButtonView exitButton;
 
+    [SerializeField]
+    private string mainMenuSceneName = "SCN_FINAL_MainMenu";
+
     private PlayerInput playerInput;
     
 
@@ -51,6 +54,6 @@ public class RetryMenu_Script : MonoBehaviour
     {
         Debug.Log("Exit Button Clicked");
         // Loads Main Menu Scene
-        SceneManager.LoadScene("SCN_MainMenu", LoadSceneMode.Single);
+        SceneManager.LoadScene(mainMenuSceneName, LoadSceneMode.Single);
     }
 }
